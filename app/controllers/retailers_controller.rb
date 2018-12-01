@@ -41,14 +41,14 @@ class RetailersController < ApplicationController
 		end
 
 		def set_retailer_attributes(retailer, retailer_data)
-			category = ProductCategory.find_by(name: retailer_data[7])
+			category = ProductCategory.find_by('LOWER(name) = ?', retailer_data[7].downcase)
 			retailer.adhaar_number = retailer_data[1]
 			retailer.pan_number = retailer_data[2]
 			retailer.first_name = retailer_data[3]
 			retailer.last_name = retailer_data[4]
 			retailer.phone = retailer_data[6]
 			retailer.email = retailer_data[5]
-			retailer.product_categories.new(id: category.try(:id))
+			retailer.retailer_product_categories.new(product_category_id: category.try(:id))
 			retailer.address = retailer_data[9]
 			retailer.city = retailer_data[10]
 			retailer.state = retailer_data[11]
