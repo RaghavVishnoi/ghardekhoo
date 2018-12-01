@@ -20,4 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  admin:
+    actions:
+      upload_retailers:
+        menu: 'Upload'
+        breadcrumb: 'Upload'
+        title: 'Upload Retailers'
+
