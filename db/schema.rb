@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181201072309) do
+ActiveRecord::Schema.define(version: 20181202085711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,15 @@ ActiveRecord::Schema.define(version: 20181201072309) do
     t.index ["name"], name: "index_product_categories_on_name", using: :btree
   end
 
+  create_table "retailer_photos", force: :cascade do |t|
+    t.string   "photo_url"
+    t.string   "lat"
+    t.string   "lng"
+    t.integer  "retailer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "retailer_product_categories", force: :cascade do |t|
     t.integer  "retailer_id"
     t.integer  "product_category_id"
@@ -86,7 +95,7 @@ ActiveRecord::Schema.define(version: 20181201072309) do
     t.string   "last_name"
     t.string   "phone"
     t.string   "email"
-    t.string   "address"
+    t.text     "address"
     t.string   "city"
     t.string   "state"
     t.string   "country"
@@ -114,6 +123,7 @@ ActiveRecord::Schema.define(version: 20181201072309) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
   end
 
+  add_foreign_key "retailer_photos", "retailers"
   add_foreign_key "retailer_product_categories", "product_categories"
   add_foreign_key "retailer_product_categories", "retailers"
   add_foreign_key "retailer_products", "retailers"

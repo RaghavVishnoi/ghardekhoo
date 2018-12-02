@@ -26,4 +26,21 @@ en:
         menu: 'Upload'
         breadcrumb: 'Upload'
         title: 'Upload Retailers'
+  authentication:
+    status:
+      failed: 401
+      success: 200
+      create: 201
+      delete: 202
+      unprocessible_entity: 422
+      not_found: 404
+      internal_server: 500
+    message:    
+      failed: 'Authentication Error!'
+      success: 'Successfully logged in!'
+      email_exists: 'Email has already taken!'
+      destroy: 'Successfully deleted!'
+      not_found: 'Record not found!'
+      record_exists: 'Record already exists!'
+      internal_server: 'Something went wrong!'
 

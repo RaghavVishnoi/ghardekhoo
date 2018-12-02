@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+
+  namespace :api do
+      api_version(
+        module: 'V1',
+        header: { name: 'Accept', value: 'application/vnd.ghardekhoo-retailers.com; version=1' },
+        default: { format: :json }
+      ) do
+
+        devise_for :retailers, controllers: {sessions: "sessions", registrations: "api/retailers/v1/registrations"}
+        resources :product_categories, only: [:index]
+
+      end
+  end
+
   devise_for :retailers
   devise_for :employees
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
