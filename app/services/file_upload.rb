@@ -7,7 +7,6 @@ class FileUpload
 			region: ENV['REGION']
 		)
 		Rails.logger.info "Uploading file.."
-		file_path = file_path+"/"+file.original_filename
 		obj = s3.bucket(ENV['BUCKET_NAME']).object(file_path)
 		result = obj.upload_file(file.path, acl:'public-read')
 		Rails.logger.info "Uploaded File"

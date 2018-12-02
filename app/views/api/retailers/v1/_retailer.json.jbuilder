@@ -6,6 +6,7 @@ json.first_name retailer.first_name
 json.last_name retailer.last_name
 json.phone retailer.phone
 json.email retailer.email
+json.photo_url retailer.photo_url
 json.address retailer.address
 json.city retailer.city
 json.state retailer.state

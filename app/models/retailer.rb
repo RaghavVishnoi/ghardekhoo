@@ -7,6 +7,7 @@ class Retailer < ApplicationRecord
   attr_accessor :employee_code
   attr_accessor :category_ids
   attr_accessor :photos
+  attr_accessor :profile_photo
 
   has_many :product_categories, through: :retailer_product_categories
   has_many :retailer_product_categories, dependent: :destroy
@@ -16,7 +17,6 @@ class Retailer < ApplicationRecord
   has_many :retailer_photos, dependent: :destroy
 
   before_create :create_auth_token
-
 
 private
   def create_auth_token

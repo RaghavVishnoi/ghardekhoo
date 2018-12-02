@@ -12,6 +12,7 @@ class Api::Retailers::V1::RegistrationsController < Devise::RegistrationsControl
 				end
 				if resource.save
 					@retailer = resource
+					upload_profile_photo(@retailer)
 					if sign_up_params[:photos].present?
 						upload_photo_response = upload_photo(@retailer)
 					end
@@ -50,6 +51,7 @@ class Api::Retailers::V1::RegistrationsController < Devise::RegistrationsControl
 	    	:lng,
 	    	:employee_code,
 	    	:category_ids,
+	    	:profile_photo,
 	    	:photos => [
 	    		:photo,
 	    		:lat,
@@ -63,6 +65,7 @@ class Api::Retailers::V1::RegistrationsController < Devise::RegistrationsControl
 			files = sign_up_params[:photos]
 			files.values.each do |file|
 				if file[:photo].present?
+					file_path = file_path+"/"+file[:photo].original_filename
 					result = FileUpload.new.upload(file_path, file[:photo])
 					if String(result[:status]) == String(RESPONSE[:success])
 						retailer_photo = retailer.retailer_photos.new(photo_url: result[:file_url])
@@ -77,5 +80,15 @@ class Api::Retailers::V1::RegistrationsController < Devise::RegistrationsControl
 		def find_employee
 			@employee = Employee.find_by(ecode: sign_up_params[:employee_code])
 		end
+
+		def  upload_profile_photo(retailer)
+	    if sign_up_params[:profile_photo].present?
+	      file_path = "retailers/#{retailer.id}/profile_photo"
+	      result = FileUpload.new.upload(file_path, sign_up_params[:profile_photo])
+	      if String(result[:status]) == String(RESPONSE[:success])
+	        retailer.update_attribute('photo_url', result[:file_url])
+	      end
+	    end  
+	  end
 
 end
