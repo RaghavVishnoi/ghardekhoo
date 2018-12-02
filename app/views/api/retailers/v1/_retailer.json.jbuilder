@@ -1,3 +1,4 @@
+json.id retailer.id
 json.gst_number retailer.gst_number
 json.adhaar_number retailer.adhaar_number
 json.pan_number retailer.pan_number
