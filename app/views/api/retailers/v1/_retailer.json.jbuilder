@@ -11,8 +11,9 @@ json.state retailer.state
 json.country retailer.country
 json.lat retailer.lat
 json.lng retailer.lng
+json.token retailer.token
 json.categories retailer.try(:product_categories).pluck(:name).join(',')
-json.employee retailer.try(:employee).try(:name)
+json.employee retailer.try(:employee).try(:name) || ""
 json.photos do
 	json.partial! 'api/retailers/v1/photo', collection: retailer.retailer_photos, as: :photo
 end

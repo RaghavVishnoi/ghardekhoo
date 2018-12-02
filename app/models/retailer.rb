@@ -14,5 +14,13 @@ class Retailer < ApplicationRecord
   belongs_to :employee, optional: true
   has_many :retailer_products, dependent: :destroy
   has_many :retailer_photos, dependent: :destroy
+
+  before_create :create_auth_token
+
+
+private
+  def create_auth_token
+    self.token ||= Token.new.generate
+  end
   
 end

@@ -5,7 +5,7 @@ class Api::Retailers::V1::RegistrationsController < Devise::RegistrationsControl
 
 	def create
 		ActiveRecord::Base.transaction do
-			build_resource(sign_up_params)
+			build_resource(sign_up_params.merge(employee_id: @employee.try(:id)))
 			if sign_up_params[:category_ids].present?
 				sign_up_params[:category_ids].split(',').each do |category_id|
 					resource.retailer_product_categories.new(product_category_id: category_id)
