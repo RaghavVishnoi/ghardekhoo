@@ -22,11 +22,11 @@ class Api::Retailers::V1::RegistrationsController < Devise::RegistrationsControl
 			else
 				render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: "Please add product category!" }}
 			end	
-		rescue StandardError => ex	
-			resource.destroy if resource.present?
-			render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: ex.message } }
 		end
-	end
+	rescue StandardError => ex	
+		resource.destroy if resource.present?
+		render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: ex.message } }
+	end	
 
 	private
 
