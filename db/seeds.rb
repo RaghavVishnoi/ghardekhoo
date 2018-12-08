@@ -11,7 +11,7 @@ employee_roles = [
 ]
 
 product_categories = [
-	{name: 'construction'}, {name: 'carpentory'}, {name: 'electric'}, {name: 'paints'}, {name: 'plumbing'}, {name: 'security'}
+	{name: 'construction'}, {name: 'carpentry'}, {name: 'electric'}, {name: 'paints'}, {name: 'plumbing'}, {name: 'security'}, {name: 'real_estate'}, {name: 'property_dealer'}
 ]
 
 employee_roles.each do |employee_role|
@@ -19,5 +19,43 @@ employee_roles.each do |employee_role|
 end
 
 product_categories.each do |product_category|
-	ProductCategory.find_or_create_by(product_category)
+	category = ProductCategory.find_or_create_by(product_category)
+	case product_category[:name]
+	when 'construction'
+		category.product_sub_categories.find_or_create_by(name: 'Bricks')
+		category.product_sub_categories.find_or_create_by(name: 'Cement')
+		category.product_sub_categories.find_or_create_by(name: 'Concrete')
+		category.product_sub_categories.find_or_create_by(name: 'Iron Rod')
+		category.product_sub_categories.find_or_create_by(name: 'Concrete Mixer Machine')
+		category.product_sub_categories.find_or_create_by(name: 'Tiles')
+		category.product_sub_categories.find_or_create_by(name: 'Granite')
+		category.product_sub_categories.find_or_create_by(name: 'Other')
+	when 'carpentry'
+		category.product_sub_categories.find_or_create_by(name: 'Wood')
+		category.product_sub_categories.find_or_create_by(name: 'Glass')
+		category.product_sub_categories.find_or_create_by(name: 'Steel')
+		category.product_sub_categories.find_or_create_by(name: 'Other')
+	when 'electric'
+		category.product_sub_categories.find_or_create_by(name: 'Machines & Equipments')
+	when 'paints'
+		category.product_sub_categories.find_or_create_by(name: 'Berger Paints')
+		category.product_sub_categories.find_or_create_by(name: 'Asian Paints')
+		category.product_sub_categories.find_or_create_by(name: 'Other Paints')
+	when 'plumbing'
+		category.product_sub_categories.find_or_create_by(name: 'Equipments')
+		category.product_sub_categories.find_or_create_by(name: 'Other')
+	when 'security'
+		category.product_sub_categories.find_or_create_by(name: 'Body Guard')
+		category.product_sub_categories.find_or_create_by(name: 'House Keeping')
+		category.product_sub_categories.find_or_create_by(name: 'Camera Installation')
+		category.product_sub_categories.find_or_create_by(name: 'Other')
+	when 'real_estate'
+		category.product_sub_categories.find_or_create_by(name: 'Rent')
+		category.product_sub_categories.find_or_create_by(name: 'Land')
+		category.product_sub_categories.find_or_create_by(name: 'Plot')
+		category.product_sub_categories.find_or_create_by(name: 'Flat')
+		category.product_sub_categories.find_or_create_by(name: 'Other')
+	when 'property_dealer'
+		category.product_sub_categories.find_or_create_by(name: 'Other')
+	end
 end

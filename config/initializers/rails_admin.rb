@@ -54,7 +54,7 @@ RailsAdmin.config do |config|
   # remove fileds with nil value from show mode. set it to false if you want to show empty fields
   config.compact_show_view = true
 
-  config.excluded_models = [ Admin, RetailerProductCategory]
+  config.excluded_models = [ Admin]
 
   # Hide unused fields from user model
   config.model 'Employee' do
@@ -83,7 +83,10 @@ RailsAdmin.config do |config|
                    :unconfirmed_email,
                    :login_histories,
                    :employee_roles,
-                   :retailer_product_categories
+                   :retailer_product_categories,
+                   :product_categories,
+                   :retailer_photos
+
   end
 
 end

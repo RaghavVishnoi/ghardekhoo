@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181202180341) do
+ActiveRecord::Schema.define(version: 20181208184531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,14 @@ ActiveRecord::Schema.define(version: 20181202180341) do
     t.index ["name"], name: "index_product_categories_on_name", using: :btree
   end
 
+  create_table "product_sub_categories", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "active",              default: true
+    t.integer  "product_category_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
   create_table "retailer_photos", force: :cascade do |t|
     t.string   "photo_url"
     t.string   "lat"
@@ -83,8 +91,9 @@ ActiveRecord::Schema.define(version: 20181202180341) do
     t.string   "price"
     t.integer  "retailer_id"
     t.boolean  "active"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "product_sub_category_id"
   end
 
   create_table "retailers", force: :cascade do |t|
@@ -125,8 +134,10 @@ ActiveRecord::Schema.define(version: 20181202180341) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
   end
 
+  add_foreign_key "product_sub_categories", "product_categories"
   add_foreign_key "retailer_photos", "retailers"
   add_foreign_key "retailer_product_categories", "product_categories"
   add_foreign_key "retailer_product_categories", "retailers"
+  add_foreign_key "retailer_products", "product_sub_categories"
   add_foreign_key "retailer_products", "retailers"
 end

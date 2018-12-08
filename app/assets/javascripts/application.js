@@ -10,6 +10,32 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require_tree .
+//= require jquery-min
+//= require bootstrap.min
+//= require material.min
+//= require material-kit
+//= require jquery.parallax
+//= require owl.carousel.min
+//= require wow
+//= require main
+//= require jquery.counterup.min
+//= require waypoints.min
+//= require jasny-bootstrap.min
+//= require form-validator.min
+//= require contact-form-script
+//= require jquery.themepunch.revolution.min
+//= require jquery.themepunch.tools.min
+//= require bootstrap-select.min
+
+
+
+
+
+
+
+
+
+
+
+
+
