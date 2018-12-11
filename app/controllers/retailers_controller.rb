@@ -9,19 +9,7 @@ class RetailersController < ApplicationController
 			retailer = Retailer.new(gst_number: retailer_data[0])
 			set_retailer_attributes(retailer, retailer_data)
 			retailer.save(validate: false)
-		end
-		# product_information_sheet = spreadsheet.sheet('ProductInformation')
-		# product_information_sheet.drop(1).each do |product_data|
-		# 	retailer = Retailer.find_by(gst_number: product_data[0])
-		# 	if retailer.blank?
-		# 		errors << [product_data[0], "Product", "Missing retailer on product"]
-		# 	else
-		#   	product = RetailerProduct.find_by(sku_code: product_data[2], retailer_id: retailer.try(:id))
-		#   	product = RetailerProduct.new(sku_code: product_data[2], retailer_id: retailer.try(:id)) if product.blank?
-		#   	set_product_information(product, product_data)
-		#   	product.save!
-		#   end
-		# end
+		end		
 		flash[:success] = "Successfully uploaded!"
 		create_error_file(errors)
 		@redirect_url = admin_retailer_upload_retailers_path

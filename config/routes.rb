@@ -10,6 +10,12 @@ Rails.application.routes.draw do
         devise_for :retailers, controllers: {sessions: "api/retailers/v1/sessions", registrations: "api/retailers/v1/registrations"}
         resources :product_categories, only: [:index]
 
+        resources :retailers do
+          collection do
+            post 'update' => 'retailers#update'
+          end
+        end
+
       end
   end
 
