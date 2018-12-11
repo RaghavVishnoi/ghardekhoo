@@ -15,6 +15,10 @@ json.lat retailer.lat
 json.lng retailer.lng
 json.token retailer.token
 json.categories retailer.try(:product_categories).pluck(:name).join(',')
+json.product_categories do
+	product_categories = retailer.try(:product_categories).map{|category| category.product_sub_categories.where(active: true)}.flatten
+	json.partial! 'api/v1/product_categories/sub_category', collection: product_categories, as: :product_sub_category
+end
 json.employee retailer.try(:employee).try(:name) || ""
 json.photos do
 	json.partial! 'api/retailers/v1/photo', collection: retailer.retailer_photos, as: :photo

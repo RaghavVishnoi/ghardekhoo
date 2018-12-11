@@ -7,7 +7,7 @@ Rails.application.routes.draw do
         default: { format: :json }
       ) do
 
-        devise_for :retailers, controllers: {sessions: "sessions", registrations: "api/retailers/v1/registrations"}
+        devise_for :retailers, controllers: {sessions: "api/retailers/v1/sessions", registrations: "api/retailers/v1/registrations"}
         resources :product_categories, only: [:index]
 
       end
