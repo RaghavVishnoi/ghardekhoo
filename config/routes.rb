@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
         devise_for :retailers, controllers: {sessions: "api/retailers/v1/sessions", registrations: "api/retailers/v1/registrations"}
         resources :product_categories, only: [:index]
-        resources :retailer_products, only: [:create]
+        resources :retailer_products, only: [:index, :show, :create]
         post 'product/:id/update' => 'retailer_products#update'
 
         resources :retailers do

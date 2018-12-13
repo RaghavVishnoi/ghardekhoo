@@ -1,5 +1,15 @@
 class Api::V1::RetailerProductsController < Api::Retailers::ApisController
 
+	def index
+		@retailer_products = RetailerProduct.where(retailer_id: current_user.id).paginate(:page => params[:page], :per_page => PRODUCTS_PER_PAGE)
+		render template: 'api/v1/retailer_products/index.json.jbuilder'
+	end
+
+	def show
+		@retailer_product = RetailerProduct.find_by(id: params[:id])
+		render template: 'api/v1/retailer_products/show.json.jbuilder'
+	end	
+
 	def create
 		@retailer_product = RetailerProduct.find_by(sku_code: product_params[:sku_code], retailer_id: current_user.id)
 		if @retailer_product.present?
