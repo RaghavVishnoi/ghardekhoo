@@ -1,7 +1,7 @@
 class Api::V1::RetailerProductsController < Api::Retailers::ApisController
 
 	def index
-		@retailer_products = RetailerProduct.where(retailer_id: current_user.id).paginate(:page => params[:page], :per_page => PRODUCTS_PER_PAGE)
+		@retailer_products = RetailerProduct.where(retailer_id: current_user.id).page(params[:page]).per(PRODUCTS_PER_PAGE)
 		render template: 'api/v1/retailer_products/index.json.jbuilder'
 	end
 

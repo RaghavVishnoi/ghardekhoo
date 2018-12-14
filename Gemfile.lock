@@ -917,7 +917,6 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
-    will_paginate (3.1.6)
     yard (0.9.16)
 
 PLATFORMS
@@ -932,6 +931,7 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.5)
   jquery-rails
+  kaminari
   listen (~> 3.0.5)
   pg
   puma (~> 3.0)
@@ -949,7 +949,6 @@ DEPENDENCIES
   versionist
   web-console (>= 3.3.0)
   websocket-driver (~> 0.6.3)
-  will_paginate (~> 3.1.0)
 
 BUNDLED WITH
    1.17.1
