@@ -13,7 +13,7 @@ class Api::V1::RetailerProductsController < Api::Retailers::ApisController
 	def create
 		@retailer_product = RetailerProduct.find_by(sku_code: product_params[:sku_code], retailer_id: current_user.id)
 		if @retailer_product.present?
-			@retailer_product.update(active: true)
+			@retailer_product.update(product_params)
 			render template: 'api/v1/retailer_products/create.json.jbuilder'
 		else
 			@retailer_product = RetailerProduct.new(product_params.merge(retailer_id: current_user.id, active: true))
@@ -41,7 +41,7 @@ class Api::V1::RetailerProductsController < Api::Retailers::ApisController
 
 	private	
 		def product_params
-			params.require(:retailer_product).permit(:sku_code, :product_name, :price, :product_sub_category_id, :active)
+			params.require(:retailer_product).permit(:sku_code, :product_name, :price, :product_sub_category_id, :active, :description)
 		end
 
 end
