@@ -1,0 +1,31 @@
+.logo{
+	width: 145px !important;
+	margin-left: -50px !important;
+	img{
+		margin-top: -40px !important;
+		width: 150px !important;
+	}
+}
+
+.category-content{
+	overflow: auto;
+	height: 190px;
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+}

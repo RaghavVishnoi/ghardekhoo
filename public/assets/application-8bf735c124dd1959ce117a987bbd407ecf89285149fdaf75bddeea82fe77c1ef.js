@@ -973,12 +973,12 @@ $('a[data-slide="next"]').click(function () {
 });
 
 //CounterUp
-jQuery(document).ready(function( $ ) {
-  $('.counter').counterUp({
-    delay: 1,
-    time: 800
-  });
-});
+// jQuery(document).ready(function( $ ) {
+//   $('.counter').counterUp({
+//     delay: 1,
+//     time: 800
+//   });
+// });
 
 //WOW Scroll Spy
 var wow = new WOW({
