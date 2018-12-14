@@ -61,11 +61,10 @@ class Api::Retailers::V1::RegistrationsController < Devise::RegistrationsControl
 	  end
 
 		def upload_photo(retailer)
-			file_path = "retailers/#{retailer.id}/photos"
 			files = sign_up_params[:photos]
 			files.values.each do |file|
 				if file[:photo].present?
-					file_path = file_path+"/"+file[:photo].original_filename
+					file_path = "retailers/#{retailer.id}/photos/"+file[:photo].original_filename
 					result = FileUpload.new.upload(file_path, file[:photo])
 					if String(result[:status]) == String(RESPONSE[:success])
 						retailer_photo = retailer.retailer_photos.new(photo_url: result[:file_url])

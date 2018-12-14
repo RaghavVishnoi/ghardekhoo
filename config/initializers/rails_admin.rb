@@ -71,6 +71,11 @@ RailsAdmin.config do |config|
                    :employee_roles
   end
 
+  config.model 'ProductCategory' do
+    exclude_fields :retailers,
+                   :retailer_product_categories
+  end
+
   config.model 'Retailer' do
     exclude_fields :unlock_token,
                    :reset_password_sent_at,
