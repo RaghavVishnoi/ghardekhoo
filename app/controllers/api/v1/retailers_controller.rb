@@ -3,6 +3,7 @@ class Api::V1::RetailersController < Api::Retailers::ApisController
 	def update
 		update_category
 		if @current_user.update(retailer_params)
+			upload_profile_photo
 			if retailer_params[:photos].present?
 				upload_photo_response = upload_photo
 			end
