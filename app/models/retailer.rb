@@ -2,7 +2,7 @@ class Retailer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, authentication_keys: [:phone]
+         :recoverable, :rememberable, authentication_keys: [:phone]
 
   attr_accessor :employee_code
   attr_accessor :category_ids
@@ -17,6 +17,8 @@ class Retailer < ApplicationRecord
   has_many :retailer_photos, dependent: :destroy
 
   before_create :create_auth_token
+
+  validates_uniqueness_of :phone
 
 private
   def create_auth_token

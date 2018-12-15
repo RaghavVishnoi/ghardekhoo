@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
         devise_for :retailers, controllers: {sessions: "api/retailers/v1/sessions", registrations: "api/retailers/v1/registrations"}
         resources :product_categories, only: [:index]
-        resources :retailer_products, only: [:create]
+        resources :retailer_products, only: [:create, :destroy]
         post 'product/:id/update' => 'retailer_products#update'
         get '/product/:id' => 'retailer_products#show'
         get '/products' => 'retailer_products#index'
@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   devise_for :employees
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#index'	
+
+  post '/city_list' => 'dropdowns#city_list'
+  post '/get_location' => 'home#get_location'
 
   devise_for :admin, controllers: {sessions: "admin/sessions"}
   devise_scope :admin do

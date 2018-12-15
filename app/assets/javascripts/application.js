@@ -26,6 +26,8 @@
 //= require jquery.themepunch.revolution.min
 //= require jquery.themepunch.tools.min
 //= require bootstrap-select.min
+//= require js.cookies
+//= require jquery_ujs
 
 
 

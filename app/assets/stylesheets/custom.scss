@@ -12,6 +12,11 @@
 	height: 190px;
 }
 
+#city-list ul{
+	height: 200px !important;
+    overflow: auto !important;
+}
+
 ::-webkit-scrollbar {
 	width: 5px;
 }

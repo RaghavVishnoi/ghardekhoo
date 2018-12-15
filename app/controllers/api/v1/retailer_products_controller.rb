@@ -41,6 +41,17 @@ class Api::V1::RetailerProductsController < Api::Retailers::ApisController
 		render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: ex.message } }
 	end
 
+	def destroy
+		@retailer_product = RetailerProduct.find_by(id: params[:id])
+		if @retailer_product.destroy
+			render json: { meta: { code: t('authentication.status.success'), message: 'Product successfully deleted!' } }
+		else
+			render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: @retailer_product.errors.full_messages } }
+		end
+	rescue StandardError => ex
+		render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: ex.message } }
+	end
+
 	private	
 		def product_params
 			params.require(:retailer_product).permit(:sku_code, :product_name, :price, :product_sub_category_id, :active, :description, :photos => [:lat, :lng, :photo])

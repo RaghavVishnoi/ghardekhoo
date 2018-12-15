@@ -1,0 +1,7 @@
+$('#state-list select').val('<%= @default_state %>').trigger('change');
+<% if @cities.present? %>
+	<% @cities.each_with_index do |city, index| %>
+		$('#city-list .dropdown-menu ul').append('<li data-original-index="<%=index+1%>"><a tabindex="<%=index+1%>" class="" style="" data-tokens="null"><span class="text"><%= city %></span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>')
+	<% end %>
+	$('#city-list select').val('<%= @default_city %>').trigger('change');
+<% end %>		

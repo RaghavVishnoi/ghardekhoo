@@ -1,7 +1,9 @@
   
     <%= render 'commons/template/header' %> 
 
-    <%= render 'commons/template/search_retailers' %> 
+    <div id="search_retailer_container">
+      <%= render 'commons/template/search_retailers', states: @states, cities: @cities, default_state: @default_state, default_city: @default_city %> 
+    </div>  
 
     <div class="wrapper">
       
@@ -26,3 +28,20 @@
       <i class="fa fa-angle-up"></i>
     </a>
 
+<%= render 'commons/hidden_forms' %>
+
+<script>
+  window.onload = function() {
+  var startPos;
+  var geoSuccess = function(position) {
+    startPos = position;
+    $('#get_location #lat').val(startPos.coords.latitude)
+    $('#get_location #lng').val(startPos.coords.longitude)
+    $('#get_location').trigger('submit.rails');
+  };
+  var geoError = function(error) {
+    console.log('Error occurred. Error code: ' + error.code);
+  };
+  navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+};
+</script>
