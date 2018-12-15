@@ -1,4 +1,4 @@
-<%= form_tag 'city_list', id: 'city_list', remote: true do |f| %>
+<%= form_tag '/city_list', method: 'POST', remote: true, id: 'city_list_form' do |f| %>
 	<%= hidden_field_tag :state_code %>
 <% end %>
 

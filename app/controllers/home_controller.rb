@@ -11,12 +11,12 @@ class HomeController < ApplicationController
 	def get_location
 		lat = params[:lat]
 		lng = params[:lng]
+		session[:lat] = lat
+		session[:lng] = lng
 		result = Geocoder.search([params[:lat].to_f, params[:lng].to_f]).first
 		state = result.state
 		@default_state = state_list.map{|states| states[1] if states[0] == state}.compact.first
 		@state_code = @default_state
-		@default_city = result.city
-		city_list
 	rescue StandardError => ex	
 	end
 
