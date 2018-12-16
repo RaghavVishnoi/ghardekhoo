@@ -9,3 +9,4 @@ CATEGORY_ICONS = {
 	"real_estate" => "fa-bed",
 	"property_dealer"  => "fa-user-secret"
 }
+RETAILER_NEAR_BY_RADIUS=50

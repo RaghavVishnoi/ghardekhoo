@@ -1,9 +1,6 @@
 class HomeController < ApplicationController
 
 	before_action :set_defaults, only: [:index]
-	before_action :state_list, only: [:index]
-	before_action :city_list, only: [:index]
-
 
 	def index
 	end
@@ -23,11 +20,9 @@ class HomeController < ApplicationController
 	private	
 		def set_defaults
 			@categories = ProductCategory.where(active: true).order('name')
-			@retailers_count = retailers_count
-		end
-
-		def retailers_count
-			RetailerProduct.where(active: true).group_by(&:product_sub_category_id)
+			@retailers_count = RetailerProduct.where(active: true).group_by(&:product_sub_category_id)
+			state_list
+			city_list
 		end
 
 		def state_list

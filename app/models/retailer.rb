@@ -4,6 +4,8 @@ class Retailer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, authentication_keys: [:phone]
 
+  reverse_geocoded_by :lat, :lng
+
   attr_accessor :employee_code
   attr_accessor :category_ids
   attr_accessor :photos
