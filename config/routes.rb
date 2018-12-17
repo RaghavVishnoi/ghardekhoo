@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         get '/product/:id' => 'retailer_products#show'
         get '/products' => 'retailer_products#index'
         get '/retailer_profile' => 'retailers#show'
+        get '/retailer_app_banner' => 'retailers#banner'
 
         resources :retailers do
           collection do

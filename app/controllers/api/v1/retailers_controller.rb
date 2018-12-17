@@ -18,6 +18,12 @@ class Api::V1::RetailersController < Api::Retailers::ApisController
 		end
 	end
 
+	def banner
+		ad_type = AdType.find_by(name: 'MobileBanner')
+		@banners = Advertisement.where(active: true, ad_type_id: ad_type&.id)
+		render template: 'api/v1/retailers/banner.json.jbuilder'
+	end
+
 
 	private
 		def retailer_params
