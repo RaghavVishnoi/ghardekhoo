@@ -1,4 +1,6 @@
- <section id="counter">
+  <%retailer_count = Retailer.where(active: true).count%>
+  <%product_count = RetailerProduct.where(active: true).count%>
+  <section id="counter">
 	<div class="container">
 	    <div class="row">
 	      <div class="col-md-3 col-sm-6 col-xs-12">
@@ -9,8 +11,8 @@
 	            </span>
 	          </div>
 	          <div class="desc">
-	            <h3 class="counter">12090</h3>
-	            <p>Regular Ads</p>
+	            <h3 class="counter"><%= retailer_count %></h3>
+	            <p>Total Retailers</p>
 	          </div>
 	        </div>
 	      </div>
@@ -22,8 +24,8 @@
 	            </span>
 	          </div>
 	          <div class="desc">
-	            <h3 class="counter">350</h3>
-	            <p>Locations</p>
+	            <h3 class="counter"><%= product_count %></h3>
+	            <p>Products/Services</p>
 	          </div>
 	        </div>
 	      </div>
@@ -35,8 +37,8 @@
 	            </span>
 	          </div>
 	          <div class="desc">
-	            <h3 class="counter">23453</h3>
-	            <p>Reguler Members</p>
+	            <h3 class="counter">0</h3>
+	            <p>Customers</p>
 	          </div>
 	        </div>
 	      </div>
@@ -49,7 +51,7 @@
 	          </div>
 	          <div class="desc">
 	            <h3 class="counter">150</h3>
-	            <p>Premium Ads</p>
+	            <p>Team</p>
 	          </div>
 	        </div>
 	      </div>
