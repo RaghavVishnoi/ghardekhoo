@@ -17,6 +17,12 @@
     overflow: auto !important;
 }
 
+#featured_list{
+	.product-item img{
+		height: 115px;
+	}
+}
+
 ::-webkit-scrollbar {
 	width: 5px;
 }
