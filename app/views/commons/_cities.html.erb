@@ -1,1 +1,1 @@
-<%= select_tag :cities, options_for_select(cities), {class: 'dropdown-product selectpicker', :prompt => "Select City" }%>   
+<%= select_tag :cities, options_for_select(cities), {class: 'dropdown-product selectpicker', :prompt => "Select City", onchange: "cityRetailers(this.value)" }%>   

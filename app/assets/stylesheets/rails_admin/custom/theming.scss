@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.retailer_photo_row img{
+  width: 100px !important;
+}
+
+.fieldset dd img{
+  width: 250px !important;
+}

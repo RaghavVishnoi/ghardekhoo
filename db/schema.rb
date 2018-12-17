@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181215185154) do
+ActiveRecord::Schema.define(version: 20181216152932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ad_types", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string   "first_name"
@@ -27,6 +34,15 @@ ActiveRecord::Schema.define(version: 20181215185154) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "advertisements", force: :cascade do |t|
+    t.integer  "retailer_id"
+    t.integer  "ad_type_id"
+    t.boolean  "active"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "photo_url"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -143,6 +159,8 @@ ActiveRecord::Schema.define(version: 20181215185154) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
   end
 
+  add_foreign_key "advertisements", "ad_types"
+  add_foreign_key "advertisements", "retailers"
   add_foreign_key "product_sub_categories", "product_categories"
   add_foreign_key "retailer_photos", "retailers"
   add_foreign_key "retailer_product_categories", "product_categories"

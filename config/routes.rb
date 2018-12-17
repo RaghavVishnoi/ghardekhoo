@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         post 'product/:id/update' => 'retailer_products#update'
         get '/product/:id' => 'retailer_products#show'
         get '/products' => 'retailer_products#index'
+        get '/retailer_profile' => 'retailers#show'
 
         resources :retailers do
           collection do
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
 
   post '/city_list' => 'dropdowns#city_list'
   post '/get_location' => 'home#get_location'
+  post '/city_retailers' => 'dropdowns#city_retailers'
 
   devise_for :admin, controllers: {sessions: "admin/sessions"}
   devise_scope :admin do

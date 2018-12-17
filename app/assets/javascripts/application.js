@@ -28,6 +28,7 @@
 //= require bootstrap-select.min
 //= require js.cookies
 //= require jquery_ujs
+//= require spinner
 //= require custom
 
 

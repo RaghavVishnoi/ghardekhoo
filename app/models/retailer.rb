@@ -10,6 +10,7 @@ class Retailer < ApplicationRecord
   attr_accessor :category_ids
   attr_accessor :photos
   attr_accessor :profile_photo
+  attr_accessor :distance
 
   has_many :product_categories, through: :retailer_product_categories
   has_many :retailer_product_categories, dependent: :destroy
@@ -17,10 +18,15 @@ class Retailer < ApplicationRecord
   belongs_to :employee, optional: true
   has_many :retailer_products, dependent: :destroy
   has_many :retailer_photos, dependent: :destroy
+  has_many :advertisements, dependent: :destroy
 
   before_create :create_auth_token
 
   validates_uniqueness_of :phone
+
+  def name
+    "#{String(first_name)}" + "#{String(last_name)}"
+  end 
 
 private
   def create_auth_token

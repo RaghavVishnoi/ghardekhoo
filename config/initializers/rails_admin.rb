@@ -89,9 +89,28 @@ RailsAdmin.config do |config|
                    :login_histories,
                    :employee_roles,
                    :retailer_product_categories,
-                   :product_categories,
-                   :retailer_photos
+                   :product_categories
 
+  end
+
+  config.model 'RetailerPhoto' do
+    list do
+      field :photo do
+        pretty_value do
+          bindings[:view].tag(:img, { :src => bindings[:object].photo_url })
+        end
+      end
+      fields :photo_url, :retailer, :lat, :lng
+    end
+
+    show do
+      field :photo do
+        pretty_value do
+          bindings[:view].tag(:img, { :src => bindings[:object].photo_url })
+        end
+      end
+      fields :photo_url, :retailer, :lat, :lng
+    end
   end
 
 end

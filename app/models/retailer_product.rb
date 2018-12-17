@@ -4,5 +4,9 @@ class RetailerProduct < ApplicationRecord
 	has_many :retailer_product_photos, dependent: :destroy
 
 	attr_accessor :photos
+
+	def name
+		"#{product_name} - #{sku_code}"
+	end
 	
 end

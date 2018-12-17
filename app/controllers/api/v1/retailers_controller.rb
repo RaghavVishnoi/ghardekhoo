@@ -1,5 +1,10 @@
 class Api::V1::RetailersController < Api::Retailers::ApisController
 
+	def show
+		@current_user = current_user
+		render template: 'api/v1/retailers/show.json.jbuilder'
+	end
+
 	def update
 		update_category
 		if @current_user.update(retailer_params)

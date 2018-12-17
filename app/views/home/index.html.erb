@@ -11,7 +11,9 @@
         <%= render 'commons/template/categories', categories: @categories, retailers_count: @retailers_count %>
       </div>  
 
-      <%= render 'commons/template/featured_list' %>
+      <div id="featured_list">
+        <%= render 'commons/template/featured_list', advertisements: @advertisements %>
+      </div>  
 
       <%= render 'commons/template/features' %>
 
@@ -37,6 +39,7 @@
     startPos = position;
     $('#get_location #lat').val(startPos.coords.latitude)
     $('#get_location #lng').val(startPos.coords.longitude)
+    start_spin('categories-homepage')
     $('#get_location').trigger('submit.rails');
   };
   var geoError = function(error) {

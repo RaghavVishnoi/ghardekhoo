@@ -59,3 +59,11 @@ product_categories.each do |product_category|
 		category.product_sub_categories.find_or_create_by(name: 'Other')
 	end
 end
+
+ad_types = [
+	{name: 'WebHomeListing'}, {name: 'WebFooterAds'}, {name: 'MobileBanner'}
+]
+
+ad_types.each do |ad_type|
+	AdType.find_or_create_by(name: ad_type[:name])
+end

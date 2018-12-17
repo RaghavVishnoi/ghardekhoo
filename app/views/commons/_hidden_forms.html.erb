@@ -2,6 +2,11 @@
 	<%= hidden_field_tag :state_code %>
 <% end %>
 
+<%= form_tag '/city_retailers', method: 'POST', remote: true, id: 'city_retailers_form' do |f| %>
+	<%= hidden_field_tag :state_code %>
+	<%= hidden_field_tag :city_name %>
+<% end %>
+
 <%= form_tag '/get_location', method: 'POST', remote: true, id: 'get_location' do |f| %>
 	<%= hidden_field_tag :lat %>
 	<%= hidden_field_tag :lng %>
