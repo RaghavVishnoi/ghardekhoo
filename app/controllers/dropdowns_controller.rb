@@ -1,8 +1,10 @@
 class DropdownsController < ApplicationController
 
+	before_action :nearest_location
+
 	def city_list
 		@cities = CS.cities(params[:state_code] , :in)
-		@default_city = @cities.include?(result.city) ? @default_city : nil
+		@default_city = @result.city
 	rescue StandardError => ex		
 	end
 
@@ -21,6 +23,10 @@ class DropdownsController < ApplicationController
 		end
 		ad_type = AdType.find_by(name: 'WebHomeListing')
 		@advertisements = Advertisement.where(active: true, retailer_id: retailer_ids, ad_type_id: ad_type&.id).limit(15)
+	end
+
+	def nearest_location
+		@result = Geocoder.search([session[:lat].to_f, session[:lng].to_f]).first
 	end
 
 end
