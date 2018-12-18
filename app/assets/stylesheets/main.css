@@ -1497,6 +1497,7 @@ footer .menu li a:hover {
   margin: 0px;
   display: inline-block;
   color: #999;
+  width:150px;
 }
 .product-filter .short-name span {
   float: left;

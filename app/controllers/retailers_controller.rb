@@ -1,5 +1,16 @@
 class RetailersController < ApplicationController
 
+	def search
+		@states = state_list
+		@cities = city_list(params[:state])
+		@default_category = params[:category_id]
+		@retailers = Retailer.near("#{params[:city]}, #{params[:state]}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')   
+		@retailers = @retailers.joins(:product_categories).where('product_categories.id = ?', @default_category) if @default_category.present?
+		@retailers_count = RetailerProductCategory.where(retailer_id: @retailers.pluck(:id)).group_by(&:product_category_id)
+	rescue StandardError => ex	
+		flash[:error] = ex.message[0..300]
+	end
+
 	def upload
 		errors = []
 		file = params[:retailer_data]
@@ -64,5 +75,13 @@ class RetailersController < ApplicationController
 		    send_data data, filename: "UploadErrors.csv"
 		  end
 		end
+
+		def state_list
+			@states = CS.states(:in).map{|h| [h[1],h[0]]}
+	  end
+
+	  def city_list(state_code)
+	  	@cities = CS.cities(state_code , :in)
+	  end
 
 end

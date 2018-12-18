@@ -25,8 +25,12 @@ class Retailer < ApplicationRecord
   validates_uniqueness_of :phone
 
   def name
-    "#{String(first_name)}" + "#{String(last_name)}"
+    "#{String(first_name)} " + "#{String(last_name)}"
   end 
+
+  def sub_categories
+    retailer_products.includes(:product_sub_category).map{|c| c.product_sub_category.name}.uniq
+  end
 
 private
   def create_auth_token

@@ -6,38 +6,7 @@
         <h1 class="intro-title">Welcome To <span style="color: #f57c00">GharDekhoo</span></h1>
         <p class="sub-title">We are the best leading service provider in India, We are helping our customers to find best property and services to their door.</p>
 
-        <!-- Start Search box -->
-        <div class="row search-bar">
-          <div class="advanced-search">
-            <div class="col-md-3 col-sm-6 search-col">
-              <div class="input-group-addon search-category-container">
-                <label class="styled-select" id="category-list">
-                  <%= select_tag :categories, options_for_select(categories), {class: 'dropdown-product selectpicker', :prompt => "Select Category" }%>                                
-                </label>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 search-col">
-              <div class="input-group-addon search-category-container">
-                <label class="styled-select" id="state-list">
-                  <%= render 'commons/states', states: states%>                          
-                </label>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 search-col">
-              <div class="input-group-addon search-category-container">
-                <label class="styled-select" id="city-list">
-                   <%= render 'commons/cities', cities: cities%>                              
-                </label>
-              </div>  
-            </div>
-            <div class="col-md-3 col-sm-6 search-col">
-              <button class="btn btn-common btn-search btn-block">
-                <strong>Search</strong>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- End Search box -->
+        <%= render 'commons/template/search_bar' , states: states, cities: cities, default_state: default_state, default_city: default_city, default_category: @default_category %>
       </div>
     </div>
   </div>

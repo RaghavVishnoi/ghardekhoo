@@ -44,3 +44,10 @@ function cityRetailers(city_name){
   start_spin('categories-homepage')
 	$('#city_retailers_form').trigger('submit.rails')
 }
+
+function search_retailers(){
+  category_id = $('#category-list #categories').val();
+  state = $('#state-list #states').val();
+  city = $('#city-list #cities').val();
+  window.location = "/retailers/search?category_id="+category_id+"&state="+state+"&city="+city
+}

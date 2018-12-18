@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 	before_action :set_defaults, only: [:index]
 
 	def index
+		@default_category = params[:category_id]
 		ad_type = AdType.find_by(name: 'WebHomeListing')
 		@advertisements = Advertisement.where(active: true, ad_type_id: ad_type&.id).limit(15)
 	end

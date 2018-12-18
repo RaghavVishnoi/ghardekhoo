@@ -11,3 +11,9 @@
 	<%= hidden_field_tag :lat %>
 	<%= hidden_field_tag :lng %>
 <% end %>
+
+<%= form_tag '/filter_retailers', method: 'GET', remote: true, id: 'filter_retailers' do |f| %>
+	<%= hidden_field_tag :city %>
+	<%= hidden_field_tag :state %>
+	<%= hidden_field_tag :category_id %>
+<% end %>

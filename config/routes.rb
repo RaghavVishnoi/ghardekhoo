@@ -27,6 +27,11 @@ Rails.application.routes.draw do
 
   devise_for :retailers
   devise_for :employees
+  resources :retailers do
+    collection do
+      get 'search' => 'retailers#search'
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#index'	
 
