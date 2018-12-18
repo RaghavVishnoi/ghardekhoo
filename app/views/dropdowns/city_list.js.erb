@@ -9,7 +9,7 @@
 	<% end %>
 	<% if !@cities.include?(@default_city) %>
 		$('#city-list .dropdown-menu ul').append('<li data-original-index="<%=@cities.length%>"><a tabindex="0" class="" style="" data-tokens="null"><span class="text"><%= @default_city %></span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>')
-		$('#city-list select').append('<option value="<%=@default_city%>"><%= default_city %></option>')
+		$('#city-list select').append('<option value="<%=@default_city%>"><%= @default_city %></option>')
 	<% end %>
 	$('#city-list select').val('<%= @default_city %>').trigger('change');
 <% end %>		
