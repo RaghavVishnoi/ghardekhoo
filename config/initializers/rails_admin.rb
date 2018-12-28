@@ -116,4 +116,26 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'RetailerProductPhoto' do
+    list do
+      field :photo do
+        pretty_value do
+          bindings[:view].tag(:img, { :src => bindings[:object].photo_url })
+        end
+      end
+      fields :photo_url, :retailer_product, :lat, :lng
+    end
+
+    show do
+      field :photo do
+        pretty_value do
+          bindings[:view].tag(:img, { :src => bindings[:object].photo_url })
+        end
+      end
+      fields :photo_url, :retailer_product, :lat, :lng
+    end
+  end
+
+
+
 end
