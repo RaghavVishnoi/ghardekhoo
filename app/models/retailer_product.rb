@@ -5,6 +5,10 @@ class RetailerProduct < ApplicationRecord
 
 	attr_accessor :photos
 
+	def status_enum
+	  [['Pending', 0],['Approved',1],['Declined',2]]
+	end
+
 	def name
 		"#{product_name} - #{sku_code}"
 	end

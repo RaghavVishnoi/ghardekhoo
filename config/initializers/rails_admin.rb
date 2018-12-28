@@ -89,7 +89,10 @@ RailsAdmin.config do |config|
                    :login_histories,
                    :employee_roles,
                    :retailer_product_categories,
-                   :product_categories
+                   :product_categories,
+                   :retailer_products,
+                   :retailer_photos,
+                   :advertisements
 
   end
 
