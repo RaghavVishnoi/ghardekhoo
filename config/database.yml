@@ -13,29 +13,16 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  host: <%= Rails.application.secrets.database['host'] %>
+  username: <%= Rails.application.secrets.database['username'] %>
+  password: <%= Rails.application.secrets.database['password'] %>
+  database: <%= Rails.application.secrets.database['name'] %>
+  min_messages: notice #log levels: log, notice, warning, error, fatal, and panic
   pool: 5
-  timeout: 5000
-  username: postgres
-  password: postgres
 
 development:
   <<: *default
-  encoding: utf8
-  host: localhost
-  min_messages: warning
-  pool: 2
-  connect_timeout: 30
-  database: ghardekhoo_development
-  username: postgres
 
 production:
   <<: *default
-  encoding: utf8
-  host: localhost
-  min_messages: warning
-  pool: 2
-  connect_timeout: 30
-  database: ghardekhoo_production
-  username: postgres
-
 
