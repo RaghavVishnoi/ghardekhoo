@@ -14,7 +14,11 @@ json.country retailer.country
 json.lat retailer.lat
 json.lng retailer.lng
 json.token retailer.token
-json.categories retailer.try(:product_categories).select(:id, :name)
+category = retailer.try(:product_categories)&.first
+json.category do
+	json.id category&.id
+	json.name category&.name
+end
 json.product_count retailer.retailer_products.where(active: true).count
 json.product_categories do
 	product_categories = retailer.try(:product_categories).map{|category| category.product_sub_categories.where(active: true)}.flatten
