@@ -44,4 +44,6 @@ en:
       record_exists: 'Record already exists!'
       internal_server: 'Something went wrong!'
       wrong_phone_account: 'You entered an invalid phone!'
-
+  retailers:
+    account_type:
+      free: "Thanks to being our partner, we'll notify you once your account is activated. Please feel free to contact us on +91-XX-XXXX-XXXX for any query"

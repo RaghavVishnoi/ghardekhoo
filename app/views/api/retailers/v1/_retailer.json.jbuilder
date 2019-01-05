@@ -14,6 +14,7 @@ json.country retailer.country
 json.lat retailer.lat
 json.lng retailer.lng
 json.token retailer.token
+json.account_type retailer.account_type
 category = retailer.try(:product_categories)&.first
 json.category do
 	json.id category&.id

@@ -28,6 +28,14 @@ class Retailer < ApplicationRecord
     "#{String(first_name)} " + "#{String(last_name)}"
   end 
 
+  def account_type_enum
+    [['Free', 'free'],['Premium', 'premium']]
+  end
+
+  def account_status_enum
+    [['Pending', 0],['Approved', 1],['Declined', 2]]
+  end
+
   def sub_categories
     retailer_products.includes(:product_sub_category).map{|c| c.product_sub_category.name}.uniq
   end

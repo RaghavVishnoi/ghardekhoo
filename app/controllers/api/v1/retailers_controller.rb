@@ -7,14 +7,14 @@ class Api::V1::RetailersController < Api::Retailers::ApisController
 
 	def update
 		update_category
-		if @current_user.update(retailer_params)
+		if current_user.update(retailer_params)
 			upload_profile_photo
 			if retailer_params[:photos].present?
 				upload_photo_response = upload_photo
 			end
 			render template: 'api/v1/retailers/update.json.jbuilder'
 		else
-			render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: @current_user.errors.full_messages } }
+			render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: current_user.errors.full_messages } }
 		end
 	end
 
@@ -22,6 +22,19 @@ class Api::V1::RetailersController < Api::Retailers::ApisController
 		ad_type = AdType.find_by(name: 'MobileBanner')
 		@banners = Advertisement.where(active: true, ad_type_id: ad_type&.id)
 		render template: 'api/v1/retailers/banner.json.jbuilder'
+	end
+
+	def add_account_type
+		type = params[:type]
+		if current_user.update_attribute('account_type', type)
+			if type == "free"
+				render json: { meta: { code: t('authentication.status.success'), message: t('retailers.account_type.free') } }
+			else
+				render json: { meta: { code: t('authentication.status.success'), message: t('retailers.account_type.free') } }
+			end
+		else
+			render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: current_user.errors.full_messages } }
+		end	
 	end
 
 
@@ -46,6 +59,7 @@ class Api::V1::RetailersController < Api::Retailers::ApisController
 	    	:employee_code,
 	    	:category_ids,
 	    	:profile_photo,
+	    	:account_type,
 	    	:photos => [
 	    		:photo,
 	    		:lat,

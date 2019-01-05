@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         get '/products' => 'retailer_products#index'
         get '/retailer_profile' => 'retailers#show'
         get '/retailer_app_banner' => 'retailers#banner'
+        post '/retailers/add_account_type' => 'retailers#add_account_type'
 
         resources :retailers do
           collection do
