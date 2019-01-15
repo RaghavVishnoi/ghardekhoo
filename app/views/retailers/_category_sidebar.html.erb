@@ -95,7 +95,9 @@
             <div class="item-list" id="retailer-card">
               <div class="col-sm-3 no-padding photobox">
                 <div class="add-image">
-                  <%= image_tag "#{retailer&.retailer_photos&.main_photo&.first&.photo_url}" %>
+                  <% photo_url = retailer&.retailer_photos&.main_photo&.first&.photo_url %>
+                  <% photo_url = photo_url.present? ? photo_url : "/assets/user_default.png"%>
+                  <%= image_tag "#{photo_url}" %>
                 </div>
               </div>
               <div class="col-xs-5 col-sm-5 col-md-6 add-desc-box">
