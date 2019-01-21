@@ -128,13 +128,13 @@
                   <div class="col-sm-4 col-xs-4 col-md-3 text-right  price-box">
                     <div class="col-sm-12 padding-0">
                       <p class="contact-info">
-                        <b><i class="fa fa-phone"></i>+(91)- <%= retailer.phone %></b>
+                        <i class="fa fa-phone"></i>+(91)- <%= retailer.phone %>
                       </p>
                     </div>
                     <% if retailer.email.present?%>
                       <div class="col-sm-12 padding-0">  
                         <p class="contact-info">
-                          <b><i class="fa fa-envelope-o" aria-hidden="true"></i><%= retailer.email %></b>
+                          <%= retailer.email %>
                         </p>
                       </div>
                     <% end %>  
