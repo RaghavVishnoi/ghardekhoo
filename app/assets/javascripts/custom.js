@@ -1,3 +1,20 @@
+$(document).ready(function(){
+  $('#search-retailer').on('keypress',function(e) {
+    if(e.which == 13) {
+        var search_value = $('#search-retailer').val();
+        var category_id = $('#retailer_search_hidden_fields #category_id').val();
+        var city = $('#retailer_search_hidden_fields #city').val();
+        var state = $('#retailer_search_hidden_fields #state').val();
+        start_spin('customer-list');
+        $('#search_retailers_form #search_value').val(search_value);
+        $('#search_retailers_form #category_id').val(category_id);
+        $('#search_retailers_form #city').val(city);
+        $('#search_retailers_form #state').val(state);
+        $('#search_retailers_form').trigger('submit.rails');
+    }
+});
+});
+
 function start_spin(targetId){
     var opts = {
       lines: 13, // The number of lines to draw

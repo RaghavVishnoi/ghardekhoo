@@ -4,9 +4,12 @@
 	<%= render 'filter_list', states: @states, cities: @cities, default_state: @default_state, default_city: @default_city, default_category: @default_category %>
 </div>
 
-<%= render 'category_sidebar', retailers: @retailers, retailers_count: @retailers_count %> 
+<div id="retailer-list">
+	<%= render 'category_sidebar', retailers: @retailers, retailers_count: @retailers_count %> 
+</div>	
 
 <%= render 'commons/hidden_forms' %>
+<%= render 'commons/search_retailers_form'%>
 
 
 <script type="text/javascript" src="/assets/main.js"></script>

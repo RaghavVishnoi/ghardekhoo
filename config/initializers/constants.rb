@@ -10,3 +10,4 @@ CATEGORY_ICONS = {
 	"property_dealer"  => "fa-user-secret"
 }
 RETAILER_NEAR_BY_RADIUS=50
+RETAILERS_PER_PAGE=10

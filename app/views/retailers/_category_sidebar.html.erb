@@ -1,3 +1,8 @@
+<div id="retailer_search_hidden_fields">
+  <%= hidden_field_tag :category_id, "#{params[:category_id]}" %>
+  <%= hidden_field_tag :city, "#{params[:city]}" %>
+  <%= hidden_field_tag :state, "#{params[:state]}" %>
+</div>  
 <!-- Main container Start -->  
 <div class="main-container">
   <div class="container">
@@ -61,7 +66,7 @@
           </div>
         </aside>
       </div>
-      <div class="col-sm-9 page-content">
+      <div class="col-sm-9 page-content" id="customer-list">
         <!-- Product filter Start -->
         <div class="product-filter">
           <div class="col-sm-2">
@@ -70,19 +75,10 @@
               <a class="grid switchToList" href="#"><i class="fa fa-th-large"></i></a>
             </div>
           </div>
-          <div class="col-sm-2 col-sm-offset-4">  
-            <div class="short-name">
-              <span><b>Sort By</b></span>
-              <select class="form-control">
-                <option value="first">Name</option>
-                <option value="first">Rating</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-3 col-sm-offset-1">  
+          <div class="col-sm-3 pull-right">  
             <div class="Show-item">
               <span><b>Search Name</b></span>
-              <input class="form-control" name="keyword" value="" placeholder="Enter Keyword" type="text">
+              <input class="form-control" name="keyword" placeholder="Enter name/category" type="text" id="search-retailer">
             </div>
           </div>  
         </div>
@@ -154,25 +150,13 @@
         <!-- Adds wrapper End -->
         
         <!-- Start Pagination -->
-        <div class="pagination-bar">
-          <ul class="pagination">
-          <li class="active"><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#"> ...</a></li>
-          <li><a class="pagination-btn" href="#">Next »</a></li>
-          </ul>
+        <div class="pagination-bar pull-right">
+          <%= paginate retailers %>
         </div>
         <!-- End Pagination -->
-
-        <div class="post-promo text-center">
-          <h2> Do you get anything for sell ? </h2>
-          <h5>Sell your products online FOR FREE. It's easier than you think !</h5>
-          <a href="post-ads.html" class="btn btn-post btn-danger">Post a Free Ad </a>
-        </div>
       </div>
     </div>
   </div>
 </div>
 <!-- Main container End -->  
+

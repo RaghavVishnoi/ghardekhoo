@@ -4,8 +4,10 @@ class RetailersController < ApplicationController
 		@states = state_list
 		@cities = city_list(params[:state])
 		@default_category = params[:category_id]
-		@retailers = Retailer.near("#{params[:city]}, #{params[:state]}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')   
-		@retailers = @retailers.joins(:product_categories).where('product_categories.id = ?', @default_category) if @default_category.present?
+		@retailers = Retailer.near("#{params[:city]}, #{params[:state]}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+		@retailers = @retailers.where('first_name like ? OR last_name like ?', "%#{params[:search_value]}%", "%#{params[:search_value]}%") if params[:search_value].present?
+		@retailers = @retailers.includes(:product_categories).where('product_categories.id = ?', @default_category) if @default_category.present?
+		@retailers = @retailers.page(params[:page]).per(RETAILERS_PER_PAGE)
 		@retailers_count = RetailerProductCategory.where(retailer_id: @retailers.pluck(:id)).group_by(&:product_category_id)
 	rescue StandardError => ex	
 		flash[:error] = ex.message[0..300]

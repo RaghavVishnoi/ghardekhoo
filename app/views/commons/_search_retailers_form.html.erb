@@ -1,0 +1,6 @@
+<%= form_tag '/retailers/search', method: 'GET', remote: true, id: 'search_retailers_form' do |f| %>
+	<%= hidden_field_tag :search_value %>
+	<%= hidden_field_tag :category_id %>
+	<%= hidden_field_tag :city %>
+	<%= hidden_field_tag :state %>
+<% end %>
