@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(version: 20190105145855) do
   create_table "advertisements", force: :cascade do |t|
     t.integer  "retailer_id"
     t.integer  "ad_type_id"
-    t.boolean  "active"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "active",      default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "photo_url"
   end
 
@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(version: 20190105145855) do
 
   create_table "product_categories", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["name"], name: "index_product_categories_on_name", using: :btree
   end
 
@@ -118,11 +118,11 @@ ActiveRecord::Schema.define(version: 20190105145855) do
     t.decimal  "price"
     t.integer  "retailer_id"
     t.boolean  "active"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "product_sub_category_id"
     t.text     "description"
-    t.integer  "status"
+    t.integer  "status",                  default: 0
     t.index ["status"], name: "index_retailer_products_on_status", using: :btree
   end
 

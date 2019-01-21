@@ -7,7 +7,7 @@
 		$('#city-list .dropdown-menu ul').append('<li data-original-index="<%=index+1%>"><a tabindex="0" class="" style="" data-tokens="null"><span class="text"><%= city %></span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>')
 		$('#city-list select').append('<option value="<%=city%>"><%= city %></option>')
 	<% end %>
-	<% if !@cities.include?(@default_city) %>
+	<% if !@cities.include?(@default_city) && @default_city.present?%>
 		$('#city-list .dropdown-menu ul').append('<li data-original-index="<%=@cities.length%>"><a tabindex="0" class="" style="" data-tokens="null"><span class="text"><%= @default_city %></span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>')
 		$('#city-list select').append('<option value="<%=@default_city%>"><%= @default_city %></option>')
 	<% end %>

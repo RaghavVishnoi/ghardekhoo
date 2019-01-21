@@ -15,7 +15,7 @@ class HomeController < ApplicationController
 		session[:lng] = lng
 		result = Geocoder.search([params[:lat].to_f, params[:lng].to_f]).first
 		state = result.state
-		@default_state = state_list.map{|states| states[1] if states[0] == state}.compact.first
+		@default_state = state_list.map{|states| states[1] if states[0].include?(state)}.compact.first
 		@state_code = @default_state
 		@categories = ProductCategory.where(active: true).order('name')
 		@retailers = Retailer.near([lat, lng], RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name').pluck(:id)		

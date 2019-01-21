@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   post '/city_list' => 'dropdowns#city_list'
   post '/get_location' => 'home#get_location'
   post '/city_retailers' => 'dropdowns#city_retailers'
-
+  
   devise_for :admin, controllers: {sessions: "admin/sessions"}
   devise_scope :admin do
     delete '/admin/sign_out' => 'admin/sessions#destroy'
