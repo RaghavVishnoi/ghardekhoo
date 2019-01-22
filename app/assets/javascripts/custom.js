@@ -28,6 +28,27 @@ function clearFilter(){
   $('#search_retailers_form').trigger('submit.rails');
 }
 
+function applySubCategory(element){
+  var sub_category_id = $(element).val();
+  var search_value = $('#search-retailer').val();
+  var category_id = $('#retailer_search_hidden_fields #category_id').val();
+  var city = $('#retailer_search_hidden_fields #city').val();
+  var state = $('#retailer_search_hidden_fields #state').val();
+  start_spin('customer-list');
+  $('#search_retailers_form #sub_category_id').val(sub_category_id);
+  $('#search_retailers_form #search_value').val(search_value);
+  $('#search_retailers_form #category_id').val(category_id);
+  $('#search_retailers_form #city').val(city);
+  $('#search_retailers_form #state').val(state);
+  $('#search_retailers_form').trigger('submit.rails');
+}
+
+function searchBySubCategory(sub_category_id){
+  var state = $('#states').val()
+  var city = $('#cities').val()
+  window.location = '/retailers/search?category_id=&state='+state+'&city='+city+'&sub_category_id='+sub_category_id
+}
+
 function start_spin(targetId){
     var opts = {
       lines: 13, // The number of lines to draw
@@ -64,6 +85,7 @@ function stop_spin(){
 function getCities(state){
 	state_code = state.value
 	$('#city_list_form #state_code').val(state_code);
+  start_spin('search-row-wrapper')
 	$('#city_list_form').trigger('submit.rails');
 }
 
