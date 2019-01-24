@@ -1,6 +1,8 @@
   
     <%= render 'commons/template/header' %> 
 
+    <%= render 'commons/template/slider' %> 
+
     <div id="search_retailer_container">
       <%= render 'commons/template/search_retailers', states: @states, cities: @cities, default_state: @default_state, default_city: @default_city %> 
     </div>  
@@ -34,17 +36,21 @@
 
 <script>
   window.onload = function() {
-  var startPos;
-  var geoSuccess = function(position) {
-    startPos = position;
-    $('#get_location #lat').val(startPos.coords.latitude)
-    $('#get_location #lng').val(startPos.coords.longitude)
-    start_spin('categories-homepage')
-    $('#get_location').trigger('submit.rails');
+    var startPos;
+    var geoSuccess = function(position) {
+      startPos = position;
+      $('#get_location #lat').val(startPos.coords.latitude)
+      $('#get_location #lng').val(startPos.coords.longitude)
+      start_spin('categories-homepage')
+      $('#get_location').trigger('submit.rails');
+    };
+    var geoError = function(error) {
+      console.log('Error occurred. Error code: ' + error.code);
+    };
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+
   };
-  var geoError = function(error) {
-    console.log('Error occurred. Error code: ' + error.code);
-  };
-  navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
-};
+
+  slideShow('<%=web_banners.count%>')
+
 </script>

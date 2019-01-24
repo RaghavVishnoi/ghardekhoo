@@ -12,4 +12,9 @@ module ApplicationHelper
 		end
 	end
 
+	def web_banners
+		ad_type = AdType.find_by(name: 'WebBanner')
+		ad_type.advertisements.where(active: true)
+	end
+
 end

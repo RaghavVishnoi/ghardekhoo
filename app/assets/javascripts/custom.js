@@ -85,7 +85,7 @@ function stop_spin(){
 function getCities(state){
 	state_code = state.value
 	$('#city_list_form #state_code').val(state_code);
-  start_spin('search-row-wrapper')
+  start_spin('intro')
 	$('#city_list_form').trigger('submit.rails');
 }
 
@@ -93,7 +93,7 @@ function cityRetailers(city_name){
 	state_code = $('#state-list select').val();
 	$('#city_retailers_form #state_code').val(state_code)
 	$('#city_retailers_form #city_name').val(city_name)
-  start_spin('categories-homepage')
+  start_spin('intro')
 	$('#city_retailers_form').trigger('submit.rails')
 }
 

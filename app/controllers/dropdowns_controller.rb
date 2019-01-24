@@ -17,7 +17,8 @@ class DropdownsController < ApplicationController
 			retailer_ids = @retailers.pluck(:id)
 			@retailers_count = RetailerProduct.where(active: true, retailer_id: retailer_ids).group_by(&:product_sub_category_id)
 		else
-			@retailers = Retailer.where(active: true)
+			state = CS.get(:IN).as_json[state_code]
+			@retailers = Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
 			retailer_ids = @retailers.pluck(:id)
 			@retailers_count = RetailerProduct.where(active: true, retailer_id: retailer_ids).group_by(&:product_sub_category_id)
 		end

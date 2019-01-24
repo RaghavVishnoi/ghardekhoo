@@ -6,11 +6,11 @@ class RetailersController < ApplicationController
 		@default_category = params[:category_id]
 		@search_value = params[:search_value]
 		@sub_category_id = params[:sub_category_id]
-		@neaby_retailers = Retailer.near("#{params[:city]}, #{params[:state]}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+		@nearby_retailers = nearby_retailers
 		if params[:search_value].present?
-			@retailers = @neaby_retailers.where('LOWER(first_name) like ? OR LOWER(last_name) like ?', "%#{@search_value.downcase}%", "%#{@search_value.downcase}%")
+			@retailers = @nearby_retailers.where('LOWER(first_name) like ? OR LOWER(last_name) like ?', "%#{@search_value.downcase}%", "%#{@search_value.downcase}%")
 		else
-			@retailers = @neaby_retailers
+			@retailers = @nearby_retailers
 		end
 		if @sub_category_id.blank?
 			@retailers = @retailers.joins(:product_categories).where('product_categories.id = ?', @default_category) if @default_category.present? && @retailers.present?
@@ -18,9 +18,18 @@ class RetailersController < ApplicationController
 			@retailers = @retailers.joins(:retailer_products).where('retailer_products.product_sub_category_id = ?', @sub_category_id) if @retailers.present?
 		end
 		@retailers = @retailers.page(params[:page]).per(RETAILERS_PER_PAGE)
-		@retailers_count = RetailerProductCategory.where(retailer_id: @neaby_retailers.pluck(:id)).group_by(&:product_category_id)
+		@retailers_count = RetailerProductCategory.where(retailer_id: @nearby_retailers.pluck(:id)).group_by(&:product_category_id)
 	rescue StandardError => ex	
 		flash[:error] = ex.message[0..300]
+	end
+
+	def nearby_retailers
+		if params[:city].present? && params[:state].present?
+			Retailer.near("#{params[:city]}, #{params[:state]}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+		else
+			state = CS.get(:IN).as_json[params[:state]]
+			Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+		end
 	end
 
 	def upload
