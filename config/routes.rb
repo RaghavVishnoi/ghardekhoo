@@ -26,6 +26,23 @@ Rails.application.routes.draw do
       end
   end
 
+  namespace :api do
+      api_version(
+        module: 'V1',
+        header: { name: 'Accept', value: 'application/vnd.ghardekhoo.com; version=1' },
+        default: { format: :json }
+      ) do
+
+        devise_for :users, controllers: {sessions: "api/users/v1/sessions", registrations: "api/users/v1/registrations"}
+        resources :users do
+          collection do
+            post 'update' => 'users#update'
+          end
+        end
+
+      end
+  end
+
   devise_for :retailers
   devise_for :employees
   resources :retailers do
