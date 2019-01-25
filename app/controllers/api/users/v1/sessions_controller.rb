@@ -29,8 +29,19 @@ class Api::Users::V1::SessionsController < Api::Users::ApisController
 			    end
 	        end
 	    else
-
+	    	@user = User.find_by(email: user_params[:email])
+	    	if @user.present?
+	    		unless @user.valid_password?(user_params[:password])
+					render json: { meta: { code: t('authentication.status.failed'), errorDetail:  t('authentication.message.failed')} }
+					return;
+				end
+				render template: 'api/users/v1/session.json.jbuilder'
+	    	else
+	    		render json: { meta: { code: t('authentication.status.failed'), errorDetail:  t('authentication.message.failed')} }
+	    	end
 	    end
+	rescue StandardError => ex
+		render json: { meta: { code: t('authentication.status.failed'), errorDetail:  ex.message} }
 	end
 
 
@@ -50,7 +61,8 @@ class Api::Users::V1::SessionsController < Api::Users::ApisController
 		    :phone,
 		    :google_user_id,
 		    :lat,
-		    :lng
+		    :lng,
+		    :password
 		)
 	end
 

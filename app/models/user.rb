@@ -8,6 +8,12 @@ class User < ApplicationRecord
     before_create :create_auth_token
     before_create :generate_username
 
+    attr_accessor :profile_photo
+
+    validates :email, uniqueness: true, if: proc { email.present? }
+    validates :facebook_user_id, uniqueness: true, if: proc { facebook_user_id.present? }
+    validates :google_user_id, uniqueness: true, if: proc { google_user_id.present? }
+
     private
 	    def create_auth_token
 	    	self.token ||= Token.new.generate
