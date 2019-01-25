@@ -43,13 +43,19 @@ Rails.application.routes.draw do
       end
   end
 
-  devise_for :retailers
+  get '/free_listing' => 'retailers#new'
+  get '/advertise' => 'retailers#new'
+
+  devise_for :retailers, controllers: {sessions: "retailers", registrations: "retailers"}
   devise_for :employees
   resources :retailers do
     collection do
       get 'search' => 'retailers#search'
     end
   end
+
+  get '/retailers/:username' => 'retailers#show'
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#index'	
 

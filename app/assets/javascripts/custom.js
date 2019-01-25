@@ -15,6 +15,21 @@ $(document).ready(function(){
   });
 });
 
+function scrollTop(){
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+}
+
+function discard_flash(){
+  setTimeout(function() {
+    $(".alert").fadeOut(5000);
+  }, 3000);
+}
+
+function renderFlash(container, flash){
+    $(container).html(flash);
+    // $(container).find('.row').delay(3000).fadeOut('slow');
+}
+
 function clearFilter(){
   var search_value = "";
   var category_id = $('#retailer_search_hidden_fields #category_id').val();

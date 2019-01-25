@@ -45,5 +45,10 @@ en:
       internal_server: 'Something went wrong!'
       wrong_phone_account: 'You entered an invalid phone!'
   retailers:
+    signup_success: Congratulations! you have successfully signed up, we'll notify you once your acount is activated.
+    missing_username: Something went wrong, please contact to our support team.
     account_type:
       free: "Thanks to being our partner, we'll notify you once your account is activated. Please feel free to contact us on +91-XX-XXXX-XXXX for any query"
+  validations:
+    retailer:
+      missing_category: Please select category

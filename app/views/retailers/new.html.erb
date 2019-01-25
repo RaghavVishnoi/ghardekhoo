@@ -1,0 +1,23 @@
+<!-- Content section Start --> 
+<section id="content">
+	<div class="container">
+	    <div class="row">
+	    	<div class="col-sm-10 col-sm-offset-1">
+	    		<div class="page-login-form">
+	    			<div class="col-sm-12">
+		          		<label class="retailer-form-header">
+		          			<% if @action == 'advertise' %>
+		          				Get the TOP POSITION, place your AD with Ghardekhoo
+		          			<% else %>
+			          			List your business for <b>FREE</b> with India's leading local search engine
+			          		<% end %>
+		          		</label>
+		          	</div>	
+			        <%= render 'form', account_type: @account_type %>
+		        </div>
+	    	</div>
+	    </div>
+	</div>
+</section>
+<!-- Content section End --> 
+

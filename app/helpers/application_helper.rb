@@ -1,4 +1,20 @@
 module ApplicationHelper
+	
+	def message_type(name)
+	    set_name = name.present? ? name.to_s : ''
+	    case set_name
+	    when 'error'
+	      'danger'
+	    when 'info'
+	      'info'
+	    else
+	      'success'
+	    end
+	end
+
+	def list_states
+		CS.get(:IN).values
+	end
 
 	def categories
 		ProductCategory.where(active: true).map{|category| [category.name.camelize, category.id]}

@@ -1,5 +1,43 @@
 class RetailersController < ApplicationController
 
+	def new
+		@action = request.url.split('/').last
+		@account_type = @action == 'advertise' ? 'premium' : 'free'
+		@retailer = Retailer.new
+	end
+
+	def create
+		ActiveRecord::Base.transaction do
+			category_id = retailer_params[:category_ids]
+			if category_id.present?
+				@retailer = Retailer.new(retailer_params)
+				if @retailer.save
+					@retailer.retailer_product_categories.create(product_category_id: category_id)
+					flash[:success] = t('retailers.signup_success')
+				else
+					@show_errors = true
+					flash[:error] = @retailer.errors.full_messages.join('<br>')
+				end
+			else
+				@show_errors = true
+				flash[:error] = t('validations.retailer.missing_category')
+			end
+		end
+	rescue StandardError => ex
+		@show_errors = true
+		flash[:error] = ex.message
+	end
+
+	def show
+		username = params[:id].downcase
+		if username.present? && username != 'not_available'
+			@retailer = Retailer.where('LOWER(username) = ?', username)
+		else
+			flash[:error] = t('retailers.missing_username')
+			redirect_to request.referrer
+		end
+	end
+
 	def search
 		@states = state_list
 		@cities = city_list(params[:state])
@@ -53,6 +91,27 @@ class RetailersController < ApplicationController
 	end
 
 	private
+		def retailer_params
+			params.require(:retailer).permit(
+		    	:adhaar_number,
+		    	:pan_number,
+		    	:first_name,
+		    	:last_name,
+		    	:phone,
+		    	:email,
+		    	:password,
+		    	:password_confirmation,
+		    	:address,
+		    	:city,
+		    	:state,
+		    	:country,
+		    	:lat,
+		    	:lng,
+		    	:category_ids,
+		    	:account_type
+		    )
+		end
+
 		def open_spreadsheet(file)
 		  case File.extname(file.original_filename)
 		  when ".xlsx","xls","csv" then Roo::Excelx.new(file.path)

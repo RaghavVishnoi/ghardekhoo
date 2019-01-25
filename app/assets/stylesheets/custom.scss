@@ -110,3 +110,35 @@ footer{
 #intro{
 	margin-top: 40px;
 }
+
+.mandatory{
+	color: red;
+	font-size: 15px;
+    padding-left: 4px;
+}
+
+.retailer-form-header{
+	font-size: 20px;
+    padding-bottom: 5px;
+    color: green;
+    margin: auto;
+    border-bottom: 1px solid;
+    margin-bottom: 50px;
+}
+
+.retailer-form-button{
+	margin-top: 35px;
+    width: 200px;
+}
+
+.form-label{
+	font-size: 13px !important;
+	font-weight: 300 !important;
+	margin-bottom: 0px !important;
+}
+
+#new_retailer{
+	input[type=text], input[type=password]{
+		padding-left: 10px !important;
+	}
+}

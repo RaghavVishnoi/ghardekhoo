@@ -1,0 +1,15 @@
+<div class="row">
+	<div class="col-sm-12">
+	  <%if flash.present?%>
+	    <% flash.each do |name, msg| %>
+	      <% unless msg.is_a?(String) == false or msg.strip.blank? %>
+	        <div class="alert_container alert alert-<%= message_type(name) %> alert-dismissible">
+	          <a class="close" data-dismiss="alert">×</a>
+	          <%= content_tag :div, msg.html_safe, :id => "flash_#{name}" %>
+	        </div>
+	      <% end %>
+	    <% end %>
+	  <%end%>
+	</div>
+</div>
+
