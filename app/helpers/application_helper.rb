@@ -33,4 +33,17 @@ module ApplicationHelper
 		ad_type.advertisements.where(active: true)
 	end
 
+	def retailer_address(retailer)
+		"#{retailer.address}, " + "#{retailer.city}, " + "#{retailer.state}, " + "#{retailer.country}"
+	end
+
+	def retailer_product_sub_categories(retailer)
+		retailer_products = retailer.retailer_products.where(active: true)
+		if retailer_products.present?
+			retailer_products.map{|retailer_product| retailer_product.product_sub_category}.pluck(:name)
+		else
+			[]
+		end
+	end
+
 end

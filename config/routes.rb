@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
   get '/free_listing' => 'retailers#new'
   get '/advertise' => 'retailers#new'
+  get '/retailer_location' => 'retailers#location'
 
   devise_for :retailers, controllers: {sessions: "retailers", registrations: "retailers"}
   devise_for :employees

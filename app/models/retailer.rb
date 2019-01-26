@@ -23,14 +23,18 @@ class Retailer < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :phone, presence: true
-  validates :password, presence: true
-  validates_confirmation_of :password
+  validates_presence_of :password, if: :password_required?
+  validates_confirmation_of :password, if: :password_required?
 
   before_create :create_auth_token
   before_save :unformat_phone
   before_create :generate_username
 
   validates_uniqueness_of :phone
+
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
+  end
 
   def name
     "#{String(first_name)} " + "#{String(last_name)}"

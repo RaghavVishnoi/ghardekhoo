@@ -31,11 +31,15 @@ class RetailersController < ApplicationController
 	def show
 		username = params[:id].downcase
 		if username.present? && username != 'not_available'
-			@retailer = Retailer.where('LOWER(username) = ?', username)
+			@retailer = Retailer.find_by('LOWER(username) = ?', username)
 		else
 			flash[:error] = t('retailers.missing_username')
 			redirect_to request.referrer
 		end
+	end
+
+	def location
+
 	end
 
 	def search
