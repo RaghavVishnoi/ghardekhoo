@@ -74,7 +74,7 @@
             <div class="widget-title">
               <h4>Advertisement</h4>
             </div>
-            <img src="assets/img/img1.jpg" alt="">
+            <a href="/retailers/<%= @retailer.username %>"><img src="<%= profile_advertisement.photo_url %>" alt=""></a>
           </div>
         <div class="col-xs-12">
           <div class="features-box wow fadeInDownQuick" data-wow-delay="0.3s">
@@ -87,7 +87,7 @@
                 Fraud Protection
               </h4>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo aut magni perferendis repellat rerum assumenda facere. 
+                We have all the trusted retailers associated with us and providing you the best quality with minimum cost.
               </p>
             </div>
           </div>
@@ -102,7 +102,7 @@
                 No Extra Fees 
               </h4>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo aut magni perferendis repellat rerum assumenda facere. 
+                We are not asking to pay extra fee for products and services while delivering to you.
               </p>
             </div>
           </div>
@@ -114,10 +114,10 @@
             </div>
             <div class="features-content">
               <h4>
-                Verified Data
+                Verified Data/Products
               </h4>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo aut magni perferendis repellat rerum assumenda facere. 
+                All the retailers and products are verified by our experts to avoid any kind of fraud.
               </p>
             </div>
           </div>
@@ -129,10 +129,10 @@
             </div>
             <div class="features-content">
               <h4>
-                Friendly Return Policy
+                Service at your door
               </h4>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo aut magni perferendis repellat rerum assumenda facere. 
+                When your deadline is non-negotiable, we are providing fast service at your door.
               </p>
             </div>
           </div>
@@ -149,74 +149,28 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 wow fadeIn" data-wow-delay="0.5s">
-      <h3 class="section-title">Related Products</h3>
+      <h3 class="section-title">Available Products</h3>
       <div id="new-products" class="owl-carousel">
-        <div class="item">
-          <div class="product-item">
-            <div class="carousel-thumb">
-              <img src="assets/img/product/img1.jpg" alt=""> 
-              <div class="overlay">
-                <a href="ads-details.html"><i class="fa fa-link"></i></a>
-              </div> 
-            </div>    
-            <a href="ads-details.html" class="item-name">Lorem ipsum dolor sit</a>  
-            <span class="price">$150</span>  
-          </div>
-        </div>
-        <div class="item">
-          <div class="product-item">
-            <div class="carousel-thumb">
-              <img src="assets/img/product/img2.jpg" alt=""> 
-              <div class="overlay">
-                <a href="ads-details.html"><i class="fa fa-link"></i></a>
-              </div> 
-            </div> 
-            <a href="ads-details.html" class="item-name">Sed diam nonummy</a>  
-            <span class="price">$67</span> 
-          </div>
-        </div>
-        <div class="item">
-          <div class="product-item">
-            <div class="carousel-thumb">
-              <img src="assets/img/product/img3.jpg" alt=""> 
-              <div class="overlay">
-                <a href="ads-details.html"><i class="fa fa-link"></i></a>
-              </div> 
+        <% products = retailer_products(@retailer) %>
+        <% products.each do |product| %>
+          <div class="item retailer-product">
+            <div class="product-item">
+              <div class="carousel-thumb">
+                <img src="<%= product&.retailer_product_photos&.first&.photo_url %>" alt=""> 
+                <div class="overlay">
+                  <a href="ads-details.html"><i class="fa fa-link"></i></a>
+                </div> 
+              </div>    
+              <a href="ads-details.html" class="item-name">Lorem ipsum dolor sit</a>  
+              <span class="price">$150</span>  
             </div>
-            <a href="ads-details.html" class="item-name">Feugiat nulla facilisis</a>  
-            <span class="price">$300</span>  
           </div>
-        </div>
-        <div class="item">
-          <div class="product-item">
-            <div class="carousel-thumb">
-              <img src="assets/img/product/img4.jpg" alt=""> 
-              <div class="overlay">
-                <a href="ads-details.html"><i class="fa fa-link"></i></a>
-              </div> 
-            </div>
-            <a href="ads-details.html" class="item-name">Feugiat nulla facilisis</a>  
-            <span class="price">$45</span>  
-          </div>
-        </div>
-        <div class="item">
-          <div class="product-item">
-            <div class="carousel-thumb">
-              <img src="assets/img/product/img5.jpg" alt=""> 
-              <div class="overlay">
-                <a href="ads-details.html"><i class="fa fa-link"></i></a>
-              </div> 
-            </div>
-            <a href="ads-details.html" class="item-name">Feugiat nulla facilisis</a>  
-            <span class="price">$1120</span>  
-          </div>
-        </div>
-
-
-        </div>
+        <% end %>  
       </div>
     </div> 
   </div>
 </div>
 </section>
 <!-- Related Products End -->
+
+<script type="text/javascript" src="/assets/main.js"></script>

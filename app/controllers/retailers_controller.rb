@@ -57,7 +57,7 @@ class RetailersController < ApplicationController
 		if @sub_category_id.blank?
 			@retailers = @retailers.joins(:product_categories).where('product_categories.id = ?', @default_category) if @default_category.present? && @retailers.present?
 		else
-			@retailers = @retailers.joins(:retailer_products).where('retailer_products.product_sub_category_id = ?', @sub_category_id) if @retailers.present?
+			@retailers = @retailers.joins(:retailer_products).where('retailer_products.product_sub_category_id = ? AND status = ?', @sub_category_id, 1) if @retailers.present?
 		end
 		@retailers = @retailers.page(params[:page]).per(RETAILERS_PER_PAGE)
 		@retailers_count = RetailerProductCategory.where(retailer_id: @nearby_retailers.pluck(:id)).group_by(&:product_category_id)
