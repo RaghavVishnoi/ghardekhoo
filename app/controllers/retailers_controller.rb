@@ -32,6 +32,10 @@ class RetailersController < ApplicationController
 		username = params[:id].downcase
 		if username.present? && username != 'not_available'
 			@retailer = Retailer.find_by('LOWER(username) = ? AND account_status = ?', username, 1)
+			if @retailer.blank?
+				flash[:error] = t('retailers.missing_username')
+				redirect_to '/'
+			end
 		else
 			flash[:error] = t('retailers.missing_username')
 			redirect_to request.referrer
