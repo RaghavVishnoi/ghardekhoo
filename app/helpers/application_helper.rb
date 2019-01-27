@@ -51,7 +51,7 @@ module ApplicationHelper
 		if ad_type.present?
 			ad_type.advertisements.where(active: true).first
 		else
-			[]
+			nil
 		end
 	end
 
