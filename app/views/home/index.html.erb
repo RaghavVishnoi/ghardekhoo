@@ -1,0 +1,46 @@
+    <%= render 'commons/template/slider' %> 
+
+    <div id="search_retailer_container">
+      <%= render 'commons/template/search_retailers', states: @states, cities: @cities, default_state: @default_state, default_city: @default_city %> 
+    </div>  
+
+    <div class="wrapper">
+      
+      <div id="category-container">
+        <%= render 'commons/template/categories', categories: @categories, retailers_count: @retailers_count %>
+      </div>  
+
+      <div id="featured_list">
+        <%= render 'commons/template/featured_list', advertisements: @advertisements %>
+      </div>  
+
+      <%= render 'commons/template/features' %>
+
+      <%= render 'commons/template/location' %>
+
+    </div>
+
+    <%= render 'commons/template/counter' %>
+
+<%= render 'commons/hidden_forms' %>
+
+<script>
+  window.onload = function() {
+    var startPos;
+    var geoSuccess = function(position) {
+      startPos = position;
+      $('#get_location #lat').val(startPos.coords.latitude)
+      $('#get_location #lng').val(startPos.coords.longitude)
+      start_spin('categories-homepage')
+      $('#get_location').trigger('submit.rails');
+    };
+    var geoError = function(error) {
+      console.log('Error occurred. Error code: ' + error.code);
+    };
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+
+  };
+
+  slideShow('<%=web_banners.count%>')
+
+</script>

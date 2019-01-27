@@ -1,0 +1,16 @@
+<% if @cities.present? %>
+	$('#city-list .dropdown-menu ul li').remove();
+	$('#city-list select option').remove();
+	$('#city-list select').append('<option value="">Select City</option>')
+	$('#city-list .dropdown-menu ul').append('<li data-original-index=0><a tabindex=0 class="" style="" data-tokens="null"><span class="text">Select City</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>')
+	<% @cities.each_with_index do |city, index| %>		
+		$('#city-list .dropdown-menu ul').append('<li data-original-index="<%=index+1%>"><a tabindex="0" class="" style="" data-tokens="null"><span class="text"><%= city %></span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>')
+		$('#city-list select').append('<option value="<%=city%>"><%= city %></option>')
+	<% end %>
+	<% if !@cities.include?(@default_city) %>
+		$('#city-list select').val('').trigger('change');
+	<% else %>
+		$('#city-list select').val('<%= @default_city %>').trigger('change');
+	<% end %>
+<% end %>
+stop_spin()		

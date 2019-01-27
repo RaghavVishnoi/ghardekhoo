@@ -1,0 +1,182 @@
+.logo{
+	width: 145px !important;
+	margin-left: -50px !important;
+	img{
+		margin-top: -40px !important;
+		width: 150px !important;
+	}
+}
+
+.category-content{
+	overflow: auto;
+	height: 190px;
+}
+
+#city-list ul{
+	height: 152px !important;
+    overflow: auto !important;
+}
+
+#featured_list{
+	.product-item img{
+		height: 115px;
+	}
+}
+
+#categories-homepage .category-content li{
+	height: 35px;
+    background-color: #f8f8f8;
+    padding-top: 8px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+}
+
+.ratings{
+	.checked {
+	  color: orange;
+	}
+}
+
+#retailer-card{
+    border-radius: 5px;
+	img{
+		height: 150px;
+	    border-radius: 7px;
+	}
+	.contact-info{
+    	font-size: 13px;
+    	margin-bottom: 10px;
+    	i{
+    		margin-right: 7px;
+    	}
+	}
+	.review{
+		height: 30px;
+		padding-top: 7px;
+	}
+}
+
+.padding-0{
+	padding: 0px;
+}
+
+footer{
+	#ad_list{
+		height: 200px;
+	    overflow: auto;
+	    width: 265px;
+	}
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555; 
+}
+
+.blank-retailers-container{
+	margin-top: 50px;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+.product-filter{
+	height: 100px;
+}
+
+#sub_categories{
+	height: 40px;
+	width: 200px;
+}
+
+#search-retailer{
+	height: 40px;
+}
+
+#intro{
+	margin-top: 40px;
+}
+
+.mandatory{
+	color: red;
+	font-size: 15px;
+    padding-left: 4px;
+}
+
+.retailer-form-header{
+	font-size: 20px;
+    padding-bottom: 5px;
+    color: green;
+    margin: auto;
+    border-bottom: 1px solid;
+    margin-bottom: 50px;
+}
+
+.retailer-form-button{
+	margin-top: 35px;
+    width: 200px;
+}
+
+.form-label{
+	font-size: 13px !important;
+	font-weight: 300 !important;
+	margin-bottom: 0px !important;
+}
+
+#new_retailer{
+	input[type=text], input[type=password]{
+		padding-left: 10px !important;
+	}
+}
+
+.item{
+	.retailer-photo{
+		height: 350px !important;
+	}
+}
+
+.ads-details-wrapper{
+	.ratings{
+		margin-bottom: 20px;
+	}
+}
+
+.retailer-product{
+	img{
+		height: 120px;
+	}
+}
+
+.close{
+	font-size: 20px;
+}
+
+#flash_error{
+	font-size: 15px;
+}
+
+.flash_container #content{
+	padding: 0px !important;
+	.alert{
+		padding: 15px !important;
+	}
+}
+
+.posting .postin-title{
+	line-height: 20px !important;
+	font-size: 15px !important;
+}

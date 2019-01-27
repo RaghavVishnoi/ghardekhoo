@@ -1,0 +1,19 @@
+<%= form_tag '/city_list', method: 'POST', remote: true, id: 'city_list_form' do |f| %>
+	<%= hidden_field_tag :state_code %>
+<% end %>
+
+<%= form_tag '/city_retailers', method: 'POST', remote: true, id: 'city_retailers_form' do |f| %>
+	<%= hidden_field_tag :state_code %>
+	<%= hidden_field_tag :city_name %>
+<% end %>
+
+<%= form_tag '/get_location', method: 'POST', remote: true, id: 'get_location' do |f| %>
+	<%= hidden_field_tag :lat %>
+	<%= hidden_field_tag :lng %>
+<% end %>
+
+<%= form_tag '/filter_retailers', method: 'GET', remote: true, id: 'filter_retailers' do |f| %>
+	<%= hidden_field_tag :city %>
+	<%= hidden_field_tag :state %>
+	<%= hidden_field_tag :category_id %>
+<% end %>

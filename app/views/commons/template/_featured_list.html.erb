@@ -1,0 +1,29 @@
+<!-- Featured Listings Start -->
+<section class="featured-lis" >
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 wow fadeIn" data-wow-delay="0.5s">
+      <h3 class="section-title">Suggested Retailers</h3>
+      <div id="new-products" class="owl-carousel">
+        <%advertisements.each do |advertisement|%>
+          <div class="item">
+            <div class="product-item">
+              <div class="carousel-thumb">
+                <img src="<%=advertisement.photo_url%>" alt=""> 
+                <div class="overlay">
+                  <a href="#"><i class="fa fa-link"></i></a>
+                </div> 
+              </div>    
+              <a href="#" class="item-name"><%= advertisement&.retailer&.name %></a>  
+              <p><label><%= advertisement&.retailer&.product_categories&.pluck(:name)&.map{|category| category.camelize}&.join(',') %></label></p>
+            </div>
+          </div>
+        <% end %>  
+      </div>
+    </div> 
+  </div>
+</div>
+</section>
+<!-- Featured Listings End -->
+
+<script type="text/javascript" src="/assets/main.js"></script>

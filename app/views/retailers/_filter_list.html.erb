@@ -1,0 +1,11 @@
+<!-- Search wrapper Start -->
+<div id="search-row-wrapper">
+  <div class="container">
+    <div class="search-inner">
+        <!-- Start Search box -->
+        <%= render 'commons/template/search_bar', states: states, cities: cities, default_state: params[:state], default_city: params[:city], default_category: default_category %>
+        <!-- End Search box -->
+    </div>
+  </div>
+</div>
+<!-- Search wrapper End --> 

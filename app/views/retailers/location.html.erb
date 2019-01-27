@@ -1,0 +1,26 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSuMrug3EVoZ7DjOALfcBOwR7mr2Pideo&callback=initMap"
+    async defer></script>
+
+
+<div class="container">
+	<div class="main">
+		<div class="row">
+			<div class="col-sm-10">
+				<div id="map_canvas" style="height:250px; border: thin solid black; "></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: <%=params[:lat]%>, lng: <%=params[:lng]%>};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map_canvas'), {zoom: 50, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+}
+</script>

@@ -1,0 +1,10 @@
+<div id="category-list-contaiiner">
+	<%= render 'filter_list', states: @states, cities: @cities, default_state: @default_state, default_city: @default_city, default_category: @default_category %>
+</div>
+
+<div id="retailer-list">
+	<%= render 'category_sidebar', retailers: @retailers, retailers_count: @retailers_count, search_value: @search_value %> 
+</div>	
+
+<%= render 'commons/hidden_forms' %>
+<%= render 'commons/search_retailers_form'%>

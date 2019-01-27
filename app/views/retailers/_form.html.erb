@@ -1,0 +1,109 @@
+ <%= form_for @retailer, remote: true, id: "retailer_form" do |f| %>
+	<div class="col-sm-12">
+      	<div class="col-sm-4">
+      		<div class="form-group">
+	            <div class="input-icon">
+	            	<label class="control-label form-label">Category</label><span class="mandatory">*</span>
+	                <%= f.select :category_ids, options_for_select(categories), {:prompt => "Select Category"}, class: 'form-control'%>
+	            </div>
+	        </div> 
+      	</div>
+       	<div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+              	<label class="control-label form-label">Email</label>
+              	<%= f.text_field :email , class: 'form-control', placeholder: 'Email'%>
+              </div>
+            </div> 
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+              	<label class="control-label form-label">Phone</label><span class="mandatory">*</span>
+              	<%= f.text_field :phone , class: 'form-control bfh-phone', placeholder: 'Phone', data: {format: ' (ddd) ddd-dddd'}%>
+              </div>
+            </div> 
+        </div>
+    </div>
+    <div class="col-sm-12">    
+        <div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+              	<label class="control-label form-label">Pan number</label>
+              	<%= f.text_field :pan_number , class: 'form-control', placeholder: 'Pan number'%>
+              </div>
+            </div> 
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+              	<label class="control-label form-label">First name</label><span class="mandatory">*</span>
+              	<%= f.text_field :first_name , class: 'form-control', placeholder: 'First name'%>
+              </div>
+            </div> 
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+              	<label class="control-label form-label">Last name</label><span class="mandatory">*</span>
+              	<%= f.text_field :last_name , class: 'form-control', placeholder: 'Last name'%>
+              </div>
+            </div> 
+        </div>
+    </div>   
+    <div class="col-sm-12">    
+        <div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+              	<label class="control-label form-label">State</label><span class="mandatory">*</span>
+              	<%= f.select :state , options_for_select(list_states), {}, class: 'form-control', placeholder: 'State', onchange: 'populateCity(this)'%>
+              	<%= f.hidden_field :country,value: "India", class: 'form-control'%>
+              	<%= f.hidden_field :account_type,value: "#{account_type}", class: 'form-control'%>
+                <%= f.hidden_field :lat, class: 'form-control', id: 'retailer_lat' %>
+                <%= f.hidden_field :lng, class: 'form-control', id: 'retailer_lng'%>
+              </div>
+            </div> 
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+                <label class="control-label form-label">City</label><span class="mandatory">*</span>
+                <%= f.select :city , options_for_select([]), {}, class: 'form-control', placeholder: 'Cities', id: 'retailer_cities', onchange: 'setLocation(this)'%>
+              </div>
+            </div> 
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+                <label class="control-label form-label">Address</label>
+                <%= f.text_field :address , class: 'form-control', placeholder: 'Address'%>
+              </div>
+            </div> 
+        </div>
+    </div> 
+    <div class="col-sm-12">
+        <div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+              	<label class="control-label form-label">Password</label><span class="mandatory">*</span>
+              	<%= f.password_field :password , class: 'form-control', placeholder: 'Confirm password'%>
+              </div>
+            </div> 
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+              <div class="input-icon">
+              	<label class="control-label form-label">Confirm password</label><span class="mandatory">*</span>
+              	<%= f.password_field :password_confirmation , class: 'form-control', placeholder: 'Confirm password'%>
+              </div>
+            </div> 
+        </div>
+    </div>   
+    <div class="col-sm-12">
+    	<div class="col-sm-4">
+    		<%= f.submit :register, class: 'btn btn-common log-btn retailer-form-button', onclick: 'start_spin("new_retailer")'%>
+    	</div>
+    </div>
+<% end %> 
+
+<%= render 'hidden_form' %> 

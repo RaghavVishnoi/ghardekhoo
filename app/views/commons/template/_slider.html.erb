@@ -1,0 +1,14 @@
+<!-- Header Section End -->
+<%banners = web_banners%>
+<div id="slideshow-wrapper">
+  <div id="slideshow">
+    <% banners.each do |banner| %>
+      <a href="#"><img src="<%= banner.photo_url %>"></img></a>
+    <% end %>
+  </div>
+  <div style="text-align: center">
+    <% banners.each_with_index do |banner, index| %>
+      <div id="circle<%=index+1%>" class="circle"></div>
+    <% end %>  
+  </div>
+</div> 

@@ -1,0 +1,256 @@
+<!-- Start Content -->
+<div id="content">
+  <div class="container">
+    <div class="row">
+      <!-- Product Info Start -->
+      <div class="product-info">
+        <div class="col-sm-8">
+          <div class="inner-box ads-details-wrapper">
+            <h2><%= @retailer.name %></h2>
+            <div class="info ratings">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span> (
+              <b>6</b> )              
+            </div>
+            <div id="owl-demo" class="owl-carousel owl-theme">
+              <% retailer_photos = @retailer.retailer_photos %>
+              <% if retailer_photos.present? %>
+                <% @retailer.retailer_photos.each do |retailer_photo| %>
+                  <div class="item">
+                    <img src="<%= retailer_photo.photo_url %>" alt="" class="retailer-photo">
+                  </div>
+                <% end %>
+              <% else %>  
+                <div class="item">
+                  <img src="/assets/missing_retailer_photo" alt="" class="retailer-photo">
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="box">
+            <h2 class="title-2"><strong>Contact Details</strong></h2>
+              <div class="row">
+              <div class="ads-details-info col-md-8">
+                <p class="mb15"> <%= @retailer.about_business %> <br> Below is the list of services, we are providing to our customers:</p>
+                <ul class="list-circle">
+                  <% retailer_product_sub_categories(@retailer).each do |product_category| %>
+                    <li><i class="fa fa-check-circle"></i> <%= product_category %></li>
+                  <% end %>  
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <aside class="panel panel-body panel-details">
+                  <ul>
+                    <li>
+                    <p class=" no-margin "><strong>Total Products:</strong> <%= @retailer.retailer_products.where(active: true).count %></p>
+                    </li>
+                    <li>
+                    <p class="no-margin"><strong>Category:</strong> <a href="#"><%= @retailer.product_categories.where(active: true).pluck(:name).map(&:camelize).join(',') %></a></p>
+                    </li>
+                    <li>
+                    <p class="no-margin"><strong>Address:</strong> <%= @retailer.address %> <!-- <a href="/retailer_location?lat=<%=@retailer.lat%>&lng=<%=@retailer.lng%>" target="_blank"> <i class="fa fa-street-view" aria-hidden="true"></i></a> --></p>
+                    </li>
+                    <li>
+                    <p class=" no-margin "><strong>City:</strong> <%= @retailer.city %></p>
+                    </li>
+                    <li>
+                    <p class="no-margin"><strong>State:</strong> <%= @retailer.state %> </p>
+                    </li>
+                  </ul>
+                </aside>
+
+                <div class="ads-action">
+                  <ul class="list-border">
+                    <li>
+                      <i class=" fa fa-phone"></i> <%= @retailer.phone %></li>
+                    <li>
+                      <i class=" fa fa-envelope-o"></i>
+                     <%= @retailer.email %>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="inner-box">
+            <div class="widget-title">
+              <h4>Advertisement</h4>
+            </div>
+            <a href="/retailers/<%= @retailer.username %>"><img src="<%= profile_advertisement.photo_url %>" alt=""></a>
+          </div>
+        <div class="col-xs-12">
+          <div class="features-box wow fadeInDownQuick" data-wow-delay="0.3s">
+            <div class="features-icon">
+              <i class="lnr lnr-star">
+              </i>
+            </div>
+            <div class="features-content">
+              <h4>
+                Fraud Protection
+              </h4>
+              <p>
+                We have all the trusted retailers associated with us and providing you the best quality with minimum cost.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="features-box wow fadeInDownQuick" data-wow-delay="0.6s">
+            <div class="features-icon">
+              <i class="lnr lnr-chart-bars"></i>
+            </div>
+            <div class="features-content">
+              <h4>
+                No Extra Fees 
+              </h4>
+              <p>
+                We are not asking to pay extra fee for products and services while delivering to you.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="features-box wow fadeInDownQuick" data-wow-delay="0.9s">
+            <div class="features-icon">
+              <i class="lnr lnr-spell-check"></i>
+            </div>
+            <div class="features-content">
+              <h4>
+                Verified Data/Products
+              </h4>
+              <p>
+                All the retailers and products are verified by our experts to avoid any kind of fraud.
+              </p>
+            </div>
+          </div>
+           </div>
+        <div class="col-xs-12">
+          <div class="features-box wow fadeInDownQuick" data-wow-delay="0.9s">
+            <div class="features-icon">
+              <i class="lnr lnr-smile"></i>
+            </div>
+            <div class="features-content">
+              <h4>
+                Service at your door
+              </h4>
+              <p>
+                When your deadline is non-negotiable, we are providing fast service at your door.
+              </p>
+            </div>
+          </div>
+           </div>
+
+        </div>
+      </div>
+  </div>         
+</div>
+<!-- End Content -->
+
+<!-- Related Products Start -->
+<section class="featured-lis mb30" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 wow fadeIn" data-wow-delay="0.5s">
+        <h3 class="section-title">Available Products</h3>
+        <div id="new-products" class="owl-carousel">
+          <% products = retailer_products(@retailer) %>
+          <% products.each do |product| %>
+            <div class="item retailer-product">
+              <div class="product-item">
+                <div class="carousel-thumb">
+                  <img src="<%= product&.retailer_product_photos&.first&.photo_url %>" alt=""> 
+                </div>    
+                <%= product.product_name.to_s + "-" + product.sku_code.to_s%>
+                <span class="price">INR <%= product.price %></span>  
+              </div>
+            </div>
+          <% end %>  
+        </div>
+      </div> 
+    </div>
+  </div>
+</section>
+<!-- Related Products End -->
+
+<!-- Start Comment Area -->
+<div id="comments">
+  <div class="inner-box">
+    <h3>Reviews (3)</h3>
+    <ol class="comments-list">
+      <li>
+        <div class="media">
+          <div class="thumb-left">
+            <a href="#">
+              <img alt="" src="/assets/blog/user1.jpg" />
+            </a>
+          </div>
+          <div class="info-body">
+            <div class="media-heading">
+              <h4 class="name">Larsen Mortin</h4> | 
+              <span class="comment-date">Mar 02, 2017</span>
+            </div> 
+            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+          </div>
+        </div>
+        <ul>
+          <li>
+            <div class="media">
+              <div class="thumb-left">
+                <a href="#">
+                  <img alt="" src="/assets/blog/user2.jpg" />
+                </a>
+              </div>
+              <div class="info-body">
+                <div class="media-heading">
+                  <h4 class="name">Albert Johnes</h4> | 
+                  <span class="comment-date">Fab 03, 2017</span>
+                </div> 
+                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <div class="media">
+          <div class="thumb-left">
+            <a href="#">
+              <img alt="" src="/assets/blog/user3.jpg" />
+            </a>
+          </div>
+          <div class="info-body">
+            <div class="media-heading">
+              <h4 class="name">Steven Hawkins</h4> | 
+              <span class="comment-date">Jan 02, 2017</span>
+            </div>  
+            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>                        
+          </div>
+        </div>
+      </li>
+    </ol>
+    <!-- Start Respond Form -->
+    <div id="respond">
+      <h2 class="respond-title">Add your valuable review</h2>
+      <form action="#">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <textarea id="comment" class="form-control" name="comment" cols="45" rows="8" placeholder="Review..."></textarea>
+            </div>
+            <button type="submit" id="submit" class="btn btn-common">Post Comment</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- End Respond Form -->
+  </div>
+</div>
+<!-- End Comment Area -->
+
+<script type="text/javascript" src="/assets/main.js"></script>

@@ -1,0 +1,60 @@
+  <%retailer_count = Retailer.where(active: true).count%>
+  <%product_count = RetailerProduct.where(active: true).count%>
+  <section id="counter">
+	<div class="container">
+	    <div class="row">
+	      <div class="col-md-3 col-sm-6 col-xs-12">
+	        <div class="counting wow fadeInDownQuick" data-wow-delay=".5s">
+	          <div class="icon">
+	            <span>
+	              <i class="lnr lnr-tag"></i>
+	            </span>
+	          </div>
+	          <div class="desc">
+	            <h3 class="counter"><%= retailer_count %></h3>
+	            <p>Total Retailers</p>
+	          </div>
+	        </div>
+	      </div>
+	      <div class="col-md-3 col-sm-6 col-xs-12">
+	        <div class="counting wow fadeInDownQuick" data-wow-delay="1s">
+	          <div class="icon">
+	            <span>
+	              <i class="lnr lnr-map"></i>
+	            </span>
+	          </div>
+	          <div class="desc">
+	            <h3 class="counter"><%= product_count %></h3>
+	            <p>Products/Services</p>
+	          </div>
+	        </div>
+	      </div>
+	      <div class="col-md-3 col-sm-6 col-xs-12">
+	        <div class="counting wow fadeInDownQuick" data-wow-delay="1.5s">
+	          <div class="icon">
+	            <span>
+	              <i class="lnr lnr-users"></i>
+	            </span>
+	          </div>
+	          <div class="desc">
+	            <h3 class="counter">0</h3>
+	            <p>Customers</p>
+	          </div>
+	        </div>
+	      </div>
+	      <div class="col-md-3 col-sm-6 col-xs-12">
+	        <div class="counting wow fadeInDownQuick" data-wow-delay="2s">
+	          <div class="icon">
+	            <span>
+	              <i class="lnr lnr-license"></i>
+	            </span>
+	          </div>
+	          <div class="desc">
+	            <h3 class="counter">150</h3>
+	            <p>Team</p>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</section>
