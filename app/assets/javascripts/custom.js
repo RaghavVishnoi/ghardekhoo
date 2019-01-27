@@ -15,7 +15,7 @@ $(document).ready(function(){
   });
 
   $('.close').click(function(){
-    $('.inner-box').attr('style', 'display: none')
+    $('.posting').attr('style', 'display: none')
   });
 });
 
