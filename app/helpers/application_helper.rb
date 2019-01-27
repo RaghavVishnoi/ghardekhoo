@@ -48,7 +48,11 @@ module ApplicationHelper
 
 	def profile_advertisement
 		ad_type = AdType.find_by(name: 'ProfilePage')
-		ad_type.advertisements.where(active: true).first
+		if ad_type.present?
+			ad_type.advertisements.where(active: true).first
+		else
+			[]
+		end
 	end
 
 	def retailer_products(retailer)
