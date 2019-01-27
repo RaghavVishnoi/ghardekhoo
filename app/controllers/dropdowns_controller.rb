@@ -13,12 +13,12 @@ class DropdownsController < ApplicationController
 		state_code = params[:state_code]
 		@categories = ProductCategory.where(active: true).order('name')
 		if city_name.present?
-			@retailers = Retailer.near("#{city_name}, #{state_code}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+			@retailers = Retailer.near("#{city_name}, #{state_code}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name').where(account_status: 1)
 			retailer_ids = @retailers.pluck(:id)
 			@retailers_count = RetailerProduct.where(active: true, retailer_id: retailer_ids).group_by(&:product_sub_category_id)
 		else
 			state = CS.get(:IN).as_json[state_code]
-			@retailers = Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+			@retailers = Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name').where(account_status: 1)
 			retailer_ids = @retailers.pluck(:id)
 			@retailers_count = RetailerProduct.where(active: true, retailer_id: retailer_ids).group_by(&:product_sub_category_id)
 		end

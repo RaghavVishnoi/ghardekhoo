@@ -31,15 +31,20 @@ class RetailersController < ApplicationController
 	def show
 		username = params[:id].downcase
 		if username.present? && username != 'not_available'
-			@retailer = Retailer.find_by('LOWER(username) = ?', username)
+			@retailer = Retailer.find_by('LOWER(username) = ? AND account_status = ?', username, 1)
 		else
 			flash[:error] = t('retailers.missing_username')
 			redirect_to request.referrer
 		end
 	end
 
-	def location
+	def state_cities
+		state_code = CS.get(:in).map{|k,v| k if v==params[:state_name]}.compact.first
+		@cities = CS.cities(state_code , :in)
+	end
 
+	def set_location
+		@location = Geocoder.search("#{params[:retailer_city_name]}, #{params[:retailer_state_name]}").first.coordinates		
 	end
 
 	def search
@@ -67,10 +72,10 @@ class RetailersController < ApplicationController
 
 	def nearby_retailers
 		if params[:city].present? && params[:state].present?
-			Retailer.near("#{params[:city]}, #{params[:state]}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+			Retailer.near("#{params[:city]}, #{params[:state]}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name').where(account_status: 1)
 		else
 			state = CS.get(:IN).as_json[params[:state]]
-			Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+			Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name').where(account_status: 1)
 		end
 	end
 

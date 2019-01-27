@@ -156,5 +156,27 @@ footer{
 }
 
 .retailer-product{
-	height: 150px;
+	img{
+		height: 120px;
+	}
+}
+
+.close{
+	font-size: 20px;
+}
+
+#flash_error{
+	font-size: 15px;
+}
+
+.flash_container #content{
+	padding: 0px !important;
+	.alert{
+		padding: 15px !important;
+	}
+}
+
+.posting .postin-title{
+	line-height: 20px !important;
+	font-size: 15px !important;
 }

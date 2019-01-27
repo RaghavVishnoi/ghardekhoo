@@ -13,6 +13,10 @@ $(document).ready(function(){
         $('#search_retailers_form').trigger('submit.rails');
     }
   });
+
+  $('.close').click(function(){
+    $('.inner-box').attr('style', 'display: none')
+  });
 });
 
 function open_location(lat, lng){
@@ -23,13 +27,29 @@ function open_location(lat, lng){
   });
 }
 
+function populateCity(state){
+  var selectedState = state.value
+  start_spin('retailer_state')
+  $('#retailers_city_list_form #state_name').val(selectedState);
+  $('#retailers_city_list_form').trigger('submit.rails')
+}
+
+function setLocation(city){
+  var selectedCity = city.value
+  var selectedState = $('#retailer_state').val();
+  start_spin('retailer_state')
+  $('#retailers_set_location_form #retailer_city_name').val(selectedCity);
+  $('#retailers_set_location_form #retailer_state_name').val(selectedState);
+  $('#retailers_set_location_form').trigger('submit.rails')
+}
+
 function scrollTop(){
     $("html, body").animate({ scrollTop: 0 }, "slow");
 }
 
 function discard_flash(){
   setTimeout(function() {
-    $(".alert").fadeOut(5000);
+    $(".inner-box").fadeOut(5000);
   }, 3000);
 }
 

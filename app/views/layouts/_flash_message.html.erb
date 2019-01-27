@@ -1,15 +1,26 @@
 <div class="row">
 	<div class="col-sm-12">
-	  <%if flash.present?%>
-	    <% flash.each do |name, msg| %>
-	      <% unless msg.is_a?(String) == false or msg.strip.blank? %>
-	        <div class="alert_container alert alert-<%= message_type(name) %> alert-dismissible">
-	          <a class="close" data-dismiss="alert">×</a>
-	          <%= content_tag :div, msg.html_safe, :id => "flash_#{name}" %>
-	        </div>
-	      <% end %>
-	    <% end %>
-	  <%end%>
+		<section id="content">
+			<div class="container">
+			    <div class="row">
+				    <div class="col-md-12">
+				      	<%if flash.present?%>
+					       <div class="inner-box posting">       	
+							    <% flash.each do |name, msg| %>
+								    <% unless msg.is_a?(String) == false or msg.strip.blank? %>
+								        <div class="alert_container alert alert-<%= message_type(name) %> alert-dismissible">
+									        <a class="close" data-dismiss="alert">×</a>
+									        <h4 class="postin-title">
+									          	<strong><%= content_tag :div, msg.html_safe, :id => "flash_#{name}" %></strong>
+									        </h4>	
+								        </div>
+								    <% end %>
+							    <% end %>
+					        </div>
+					    <% end %>    
+				    </div>
+			    </div>
+			</div>
+		</section>
 	</div>
 </div>
-

@@ -1,0 +1,4 @@
+<% if @location.present? %>
+	$('#retailer_lat').val('<%= @location[0] %>')
+	$('#retailer_lng').val('<%= @location[1] %>')
+<% end %>	

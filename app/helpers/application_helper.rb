@@ -13,7 +13,7 @@ module ApplicationHelper
 	end
 
 	def list_states
-		CS.get(:IN).values
+		CS.get(:IN).values.sort
 	end
 
 	def categories

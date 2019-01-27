@@ -1,0 +1,6 @@
+$('#retailer_cities option').remove();
+$('#retailer_cities').append('<option value="">Select City</option>')
+<% @cities.each_with_index do |city, index| %>		
+	$('#retailer_cities').append('<option value="<%=city%>"><%= city %></option>')
+<% end %>
+stop_spin();
