@@ -4,6 +4,8 @@ class RetailerProduct < ApplicationRecord
 	has_many :retailer_product_photos, dependent: :destroy
 	has_many :retailer_product_photos
 
+	before_create :default_value
+
 	attr_accessor :photos
 
 	def status_enum
@@ -12,6 +14,10 @@ class RetailerProduct < ApplicationRecord
 
 	def name
 		"#{retailer.name} - #{product_name} - #{sku_code}"
+	end
+
+	def default_value
+		self.status = 0
 	end
 	
 end
