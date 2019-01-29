@@ -1,0 +1,1 @@
+json.image banner.photo_url

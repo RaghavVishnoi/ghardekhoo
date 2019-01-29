@@ -61,7 +61,7 @@ product_categories.each do |product_category|
 end
 
 ad_types = [
-	{name: 'WebBanner'}, {name: 'WebHomeListing'}, {name: 'ProfilePage'}, {name: 'WebFooterAds'}, {name: 'MobileBanner'}
+	{name: 'WebBanner'}, {name: 'WebHomeListing'}, {name: 'ProfilePage'}, {name: 'WebFooterAds'}, {name: 'MobileBanner'}, {name: 'CustomerAppBanner'}
 ]
 
 ad_types.each do |ad_type|

@@ -40,6 +40,8 @@ Rails.application.routes.draw do
           end
         end
 
+        get '/user_app_banner' => 'users#banner'
+
       end
   end
 
