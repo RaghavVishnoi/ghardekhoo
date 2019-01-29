@@ -722,6 +722,8 @@ GEM
     aws-sigv4 (1.0.3)
     bcrypt (3.1.12)
     bindex (0.5.0)
+    bootstrap-social-rails (4.12.0)
+      railties (>= 3.1)
     builder (3.2.3)
     byebug (10.0.2)
     city-state (0.0.13)
@@ -833,6 +835,8 @@ GEM
     omniauth (1.9.0)
       hashie (>= 3.4.6, < 3.7.0)
       rack (>= 1.6.2, < 3)
+    omniauth-facebook (5.0.0)
+      omniauth-oauth2 (~> 1.2)
     omniauth-google-oauth2 (0.6.0)
       jwt (>= 2.0)
       omniauth (>= 1.1.1)
@@ -963,6 +967,7 @@ PLATFORMS
 DEPENDENCIES
   autonumeric-rails
   aws-sdk (~> 3)
+  bootstrap-social-rails
   byebug
   city-state
   coffee-rails (~> 4.2)
@@ -975,6 +980,8 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen (~> 3.0.5)
+  omniauth-facebook
+  omniauth-google-oauth2
   pg
   puma (~> 3.0)
   rails (~> 5.0.1)

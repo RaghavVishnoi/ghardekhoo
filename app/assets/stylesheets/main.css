@@ -676,9 +676,9 @@ nav#menu span.fa.fa-bars:hover {
 }
 
 .header-button {
-  padding-left: 25px;
-  margin-left: 25px;
-  border-left: 1px solid #ddd;
+  padding-right:  25px;
+  margin-right: 25px;
+  border-right: 1px solid #ddd;
   margin-top: 5px;
 }
 

@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   post '/set_location' => 'retailers#set_location'
 
   devise_for :retailers, controllers: {sessions: "retailers", registrations: "retailers"}
+  devise_for :users, controllers: {sessions: "users/sessions", registrations: "users"}
   devise_for :employees
   resources :retailers do
     collection do
@@ -58,6 +59,9 @@ Rails.application.routes.draw do
   end
 
   get '/retailers/:username' => 'retailers#show'
+  get '/users/facebook_login' => 'users#facebook_login'
+  get 'auth/facebook/callback', to: 'users#facebook_login'
+  get 'auth/failure', to: redirect('/users/sign_in')
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#index'	

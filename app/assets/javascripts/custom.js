@@ -19,14 +19,6 @@ $(document).ready(function(){
   });
 });
 
-function open_location(lat, lng){
-  $("#map").on('click', function () {
-    url = "https://www.google.com.sa/maps/search/"+ coordinates +",12.21z?hl=en";
-
-    window.open(url, '_blank');
-  });
-}
-
 function populateCity(state){
   var selectedState = state.value
   start_spin('retailer_state')
