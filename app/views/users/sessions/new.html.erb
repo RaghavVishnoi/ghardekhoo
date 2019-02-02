@@ -48,29 +48,25 @@
             <li class="pull-right"><a href="#">Lost your password?</a></li>
           </ul>
           <hr />
-          <div class="fb-login-button social-login-button" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="true" onclick="loginFacebook()"></div>
-          <br>
-          <div class="g-signin2" data-onsuccess="onSignIn"></div>
-          <%#= link_to user_google_oauth2_omniauth_authorize_path, class: 'btn btn-block btn-social btn-google' do%>
-            <!-- <span class="fa fa-google"></span>Sign in with Google -->
-          <%# end %> 
+          <div class="facebook" id="facebook">
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size = "large">
+            </fb:login-button>
+          </div>
+          <div class="google" >
+            <a class="btn btn-block btn-social btn-google social-login-button" href="/auth/google_oauth2">
+              <span class="fa fa-google"></span><b> Sign in </b>
+            </a>
+          </div>  
         </div>
       </div>
     </div>
   </div>
 </section>
 <!-- Content section End --> 
+<%= render 'facebook_token_form' %>
 
 <div id="fb-root"></div>
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '375593839921327',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v3.2'
-    });
-  };
 
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -80,24 +76,18 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-
-  function loginFacebook(){
+  function checkLoginState() {
     FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-        var accessToken = response.authResponse.accessToken;
-      } 
-    } );
-
-    FB.login(function(response) {
-      if (response.authResponse) {
-         console.log('Welcome!  Fetching your information.... ');
-         FB.api('/me', function(response) {
-           console.log('Good to see you, ' + response.name + '.');
-         });
-      } else {
-         console.log('User cancelled login or did not fully authorize.');
-      }
+      statusChangeCallback(response);
     });
+  }
+
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    access_token = response['authResponse']['accessToken']
+    $('#facebook_login_form #access_token').val(access_token);
+    start_spin('facebook')
+    $('#facebook_login_form').trigger('submit.rails')
   }
 
 </script>

@@ -14,6 +14,10 @@ class User < ApplicationRecord
     validates :facebook_user_id, uniqueness: true, if: proc { facebook_user_id.present? }
     validates :google_user_id, uniqueness: true, if: proc { google_user_id.present? }
 
+    def name
+    	"#{String(first_name)} " + "#{String(last_name)}"
+    end
+
     private
 	    def create_auth_token
 	    	self.token ||= Token.new.generate

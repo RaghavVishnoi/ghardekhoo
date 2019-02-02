@@ -1,0 +1,3 @@
+<%= form_tag '/facebook_login', method: 'POST', remote: true, id: 'facebook_login_form' do |f| %>
+	<%= hidden_field_tag :access_token %>
+<% end %>

@@ -63,7 +63,7 @@
 	font-size:12px;
 	color:#d9534f;
 	line-height:26px;
-	margin-left:10px;
+	margin-right:5px;
 }
 .profile .name:hover {
 	color:#d9534f;
@@ -254,6 +254,34 @@ footer{
 }
 
 .social-login-button{
-	margin-left: 35px;
-    margin-bottom: 10px;
+	width: 118px;
+    height: 30px;
+    padding-top: 6px !important;
+    text-transform: none;
+}
+
+.facebook{
+	float: left;
+    margin-right: 8px;
+	margin-left: 72px;
+}
+
+.btn-social{
+	height: 25px;
+	line-height: 16px;
+	.fa-google {
+		line-height: 24px !important;
+	}
+}
+
+#comments .comments-list{
+	img{
+		width: 100px !important;
+		height: 100px !important;
+	}
+	.thumb-left{
+		border-right: 2px solid #888;
+	    padding-right: 23px;
+	    margin-right: 20px;
+	}
 }

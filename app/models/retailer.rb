@@ -19,6 +19,7 @@ class Retailer < ApplicationRecord
   has_many :retailer_products, dependent: :destroy
   has_many :retailer_photos, dependent: :destroy
   has_many :advertisements, dependent: :destroy
+  has_many :retailer_reviews
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -42,6 +43,15 @@ class Retailer < ApplicationRecord
 
   def account_type_enum
     [['Free', 'free'],['Premium', 'premium']]
+  end
+
+  def categories
+    product_categories.pluck(:name).join(',')
+  end
+
+  def sub_categories
+    sub_category_ids = retailer_products.pluck(:sub_category_id)
+    ProductSubCategory.where(id: sub_category_ids).pluck(:name)
   end
 
   def generate_username

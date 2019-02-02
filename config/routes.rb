@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         resources :users do
           collection do
             post 'update' => 'users#update'
+            post '/search_retailers' => 'users#search'
           end
         end
 
@@ -53,6 +54,7 @@ Rails.application.routes.draw do
 
   devise_for :retailers, controllers: {sessions: "retailers", registrations: "retailers"}
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users"}
+
   devise_for :employees
   resources :retailers do
     collection do
@@ -62,8 +64,8 @@ Rails.application.routes.draw do
 
   get '/retailers/:username' => 'retailers#show'
   get '/users/facebook_login' => 'users#facebook_login'
-  get 'auth/facebook/callback', to: 'users#facebook_login'
-  get 'auth/failure', to: redirect('/users/sign_in')
+  get '/auth/google_oauth2/callback', to: 'users#google_login'
+  post '/facebook_login' => 'users#facebook_login'
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#index'	

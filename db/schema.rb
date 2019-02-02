@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190126133043) do
+ActiveRecord::Schema.define(version: 20190202120459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 20190126133043) do
     t.index ["status"], name: "index_retailer_products_on_status", using: :btree
   end
 
+  create_table "retailer_reviews", force: :cascade do |t|
+    t.integer  "retailer_id"
+    t.integer  "user_id"
+    t.text     "review"
+    t.float    "rating"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["rating"], name: "index_retailer_reviews_on_rating", using: :btree
+  end
+
   create_table "retailers", force: :cascade do |t|
     t.string   "gst_number"
     t.string   "adhaar_number"
@@ -154,6 +164,8 @@ ActiveRecord::Schema.define(version: 20190126133043) do
     t.integer  "account_status",         default: 0
     t.string   "username"
     t.text     "about_business"
+    t.float    "rating"
+    t.index ["rating"], name: "index_retailers_on_rating", using: :btree
     t.index ["reset_password_token"], name: "index_retailers_on_reset_password_token", unique: true, using: :btree
   end
 
@@ -202,4 +214,6 @@ ActiveRecord::Schema.define(version: 20190126133043) do
   add_foreign_key "retailer_product_photos", "retailer_products"
   add_foreign_key "retailer_products", "product_sub_categories"
   add_foreign_key "retailer_products", "retailers"
+  add_foreign_key "retailer_reviews", "retailers"
+  add_foreign_key "retailer_reviews", "users"
 end

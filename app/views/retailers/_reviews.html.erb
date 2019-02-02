@@ -1,0 +1,46 @@
+<!-- Start Comment Area -->
+<div id="comments">
+  <div class="inner-box">
+  	<%reviews = retailer.retailer_reviews%>
+    <h3>Reviews (<%= reviews&.count || 0%>)</h3>
+    <ol class="comments-list">
+    	<% reviews.each do |review| %>
+    		<% user = review.user %>
+		    <li>
+		        <div class="media">
+		          <div class="thumb-left">
+		            <a href="#">
+		              <img alt="" src="<%=user.photo_url%>" />
+		            </a>
+		          </div>
+		          <div class="info-body">
+		            <div class="media-heading">
+		              <h4 class="name"><%= user.name %></h4> | 
+		              <span class="comment-date"><%= review.updated_at.strftime('%b %d, %Y') %></span>
+		            </div> 
+		            <p><%= review.review %></p>
+		          </div>
+		        </div>
+		    </li>
+		<% end %>    
+    </ol>
+    <% if current_user.present? %>
+	    <!-- Start Respond Form -->
+	    <div id="respond">
+	      <h2 class="respond-title">Add your valuable review</h2>
+	      <form action="#">
+	        <div class="row">
+	          <div class="col-md-12">
+	            <div class="form-group">
+	              <textarea id="comment" class="form-control" name="comment" cols="45" rows="8" placeholder="Review..."></textarea>
+	            </div>
+	            <button type="submit" id="submit" class="btn btn-common">Post Comment</button>
+	          </div>
+	        </div>
+	      </form>
+	    </div>
+	    <!-- End Respond Form -->
+	<% end %>    
+  </div>
+</div>
+<!-- End Comment Area -->
