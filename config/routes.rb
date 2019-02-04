@@ -62,6 +62,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :retailer_reviews, only: [:create, :edit, :update]
+
   get '/retailers/:username' => 'retailers#show'
   get '/users/facebook_login' => 'users#facebook_login'
   get '/auth/google_oauth2/callback', to: 'users#google_login'

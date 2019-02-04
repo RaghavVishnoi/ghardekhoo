@@ -1,7 +1,8 @@
-<%= render 'retailer_info', retailer: @retailer %>
+<%reviews = @retailer.retailer_reviews%>
+<%= render 'retailer_info', retailer: @retailer, reviews: reviews %>
 
 <%= render 'product_info', retailer: @retailer %>
 
-<%= render 'reviews', retailer: @retailer %>
+<%= render 'reviews', retailer: @retailer, retailer_review: @retailer_review, reviews: reviews %>
 
 <script type="text/javascript" src="/assets/main.js"></script>
