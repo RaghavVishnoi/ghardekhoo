@@ -92,7 +92,8 @@ RailsAdmin.config do |config|
                    :product_categories,
                    :retailer_products,
                    :retailer_photos,
-                   :advertisements
+                   :advertisements,
+                   :retailer_reviews
 
   end
 
