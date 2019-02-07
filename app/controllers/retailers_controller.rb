@@ -69,7 +69,7 @@ class RetailersController < ApplicationController
 		else
 			@retailers = @retailers.joins(:retailer_products).where('retailer_products.product_sub_category_id = ? AND status = ?', @sub_category_id, 1) if @retailers.present?
 		end
-		@retailers = @retailers.page(params[:page]).per(RETAILERS_PER_PAGE)
+		@retailers = @retailers.uniq.page(params[:page]).per(RETAILERS_PER_PAGE)
 		@retailers_count = RetailerProductCategory.where(retailer_id: @nearby_retailers.pluck(:id)).group_by(&:product_category_id)
 	rescue StandardError => ex	
 		flash[:error] = ex.message[0..300]
