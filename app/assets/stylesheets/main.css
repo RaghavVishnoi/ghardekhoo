@@ -661,11 +661,11 @@ nav#menu span.fa.fa-bars:hover {
   -o-transition: color .3s linear;
   transition: color .3s linear;
 }
-.main-navigation .navbar-nav > li a:hover,
+/*.main-navigation .navbar-nav > li a:hover,
 .main-navigation .navbar-nav > li a.active,
 .main-navigation .navbar-nav > li a:focus {
   color: #3498db;
-}
+}*/
 .main-navigation .navbar-nav > li a i {
   margin-right: 3px;
 }
@@ -688,7 +688,6 @@ nav#menu span.fa.fa-bars:hover {
   font-size: 12px;
   height: 40px;
   line-height: normal;
-  text-transform: uppercase;
   width: 140px;
   webkit-transition: all .3s linear;
   -moz-transition: all .3s linear;
