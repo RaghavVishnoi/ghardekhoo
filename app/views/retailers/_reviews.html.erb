@@ -17,6 +17,11 @@
 		              <h4 class="name"><%= user.name %></h4> | 
 		              <span class="comment-date"><%= review.updated_at.strftime('%b %d, %Y') %></span>
 		            </div> 
+		            <div class="info ratings">
+		              <%(1...6).each do |index|%>
+		              	<span class="fa fa-star <%='checked' if index <= review.rating.to_i%>"></span>
+		              <% end %>
+		            </div>
 		            <p><%= review.review %></p>
 		          </div>
 		        </div>
@@ -27,12 +32,14 @@
 	    <!-- Start Respond Form -->
 	    <div id="respond">
 	      <h2 class="respond-title">Add your valuable review</h2>
+	      <%= render 'add_rating' %>
 	      <%= form_for retailer_review do |f|%>
 	        <div class="row">
 	          <div class="col-md-12">
 	            <div class="form-group">
 	              <%= f.text_area :review, class: 'form-control', cols: 45, rows: 8, placeholder: "Add review.."%>
 	              <%= f.hidden_field :retailer_id, value: "#{retailer.id}"%>
+	              <%= f.hidden_field :rating %>
 	            </div>
 	            <button type="submit" id="submit" class="btn btn-common">Add Review</button>
 	          </div>

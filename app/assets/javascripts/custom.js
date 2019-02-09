@@ -17,6 +17,12 @@ $(document).ready(function(){
   $('.close').click(function(){
     $('.posting').attr('style', 'display: none')
   });
+
+  $('.rate input').click(function(){
+    var rating  = $('.rate input:checked').val();
+    $('#new_retailer_review #retailer_review_rating').val(rating);
+  })
+
 });
 
 function populateCity(state){
