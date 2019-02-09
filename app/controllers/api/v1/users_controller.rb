@@ -1,5 +1,17 @@
 class Api::V1::UsersController < Api::Users::ApisController
 
+	def update
+		upload_profile_photo if user_params[:profile_photo].present?
+		if current_user.update(user_params)
+			@user = current_user
+			render template: 'api/users/v1/session.json.jbuilder'
+		else
+			render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: current_user.errors.full_messages.join(',') } }	
+		end
+	rescue StandardError => ex	
+		render json: { meta: { code: t('authentication.status.unprocessible_entity'), errorDetail: ex.message } }	
+	end	
+
 	def banner
 		ad_type = AdType.find_by(name: 'CustomerAppBanner')
 		@banners = Advertisement.where(active: true, ad_type_id: ad_type&.id)
@@ -33,6 +45,26 @@ class Api::V1::UsersController < Api::Users::ApisController
 			).where(account_status: 1) if params[:lat].present? && params[:lng].present?
 
 		end
+
+		def user_params
+	    	params.require(:user).permit(
+		    	:first_name,
+		    	:last_name,
+		    	:phone,
+		    	:email,
+		    	:password,
+		    	:password_confirmation,
+		    	:profile_photo
+		    )
+	  	end
+
+	  	def upload_profile_photo
+	  		file_path = "users/#{current_user.id}/profile_photo"
+		    result = FileUpload.new.upload(file_path, user_params[:profile_photo])
+		    if String(result[:status]) == String(RESPONSE[:success])
+		        current_user.update_attribute('photo_url', result[:file_url])
+		    end
+	  	end
 
 
 end

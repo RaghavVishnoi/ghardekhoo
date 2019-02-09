@@ -23,6 +23,10 @@ $(document).ready(function(){
     $('#new_retailer_review #retailer_review_rating').val(rating);
   })
 
+  $('#new_user button').click(function(){
+    start_spin('new_user')
+  })
+
 });
 
 function populateCity(state){

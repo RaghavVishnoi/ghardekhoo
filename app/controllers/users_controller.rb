@@ -2,6 +2,23 @@ class UsersController < ApplicationController
 
 	before_action :google_user_params, only: [:google_login]
 
+	def new
+		@user = User.new
+	end
+
+	def create
+		@user = User.new(user_params)
+		if @user.save
+			@user_operation = true
+			session[:user_id] = @user.id
+		else
+			flash[:error] = @user.errors.full_messages.join(',')
+		end
+	rescue StandardError => ex
+		flash[:error] = ex.message
+		redirect_to new_user_registration_path	
+	end
+
 	def google_login
 		@user = User.find_or_initialize_by(google_user_id: @params[:google_user_id])
 		unless @user.update(@params)
@@ -61,5 +78,18 @@ class UsersController < ApplicationController
 		def facebook_user_token
 			params[:access_token]
 		end
+
+		def user_params
+	    	params.require(:user).permit(
+		    	:first_name,
+		    	:last_name,
+		    	:phone,
+		    	:email,
+		    	:password,
+		    	:password_confirmation,
+		    	:profile_photo,
+		    	:user_registration
+		    )
+	  	end
 
 end

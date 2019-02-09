@@ -9,14 +9,32 @@ class User < ApplicationRecord
     before_create :generate_username
 
     attr_accessor :profile_photo
+    attr_accessor :user_registration
 
     validates :email, uniqueness: true, if: proc { email.present? }
     validates :facebook_user_id, uniqueness: true, if: proc { facebook_user_id.present? }
     validates :google_user_id, uniqueness: true, if: proc { google_user_id.present? }
 
+    validates :first_name, presence: true
+	validates :phone, presence: true
+	validates_presence_of :password, if: proc{ :password_required? && user_registration == true}
+	validates_confirmation_of :password, if: proc{ :password_required? && user_registration == true}
+
+	after_initialize do
+		user_registration = false
+	end
+
     def name
     	"#{String(first_name)} " + "#{String(last_name)}"
     end
+
+    def user_registration=(val)
+	    @user_registration = ActiveModel::Type::Boolean.new.cast(val)
+	end
+
+	def user_registration
+	    @user_registration
+	end
 
     private
 	    def create_auth_token

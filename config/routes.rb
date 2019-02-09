@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   end
 
   resources :retailer_reviews, only: [:create, :edit, :update]
+  resources :users, only: [:new, :create]
 
   get '/retailers/:username' => 'retailers#show'
   get '/users/facebook_login' => 'users#facebook_login'
