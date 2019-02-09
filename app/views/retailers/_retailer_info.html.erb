@@ -8,12 +8,11 @@
           <div class="inner-box ads-details-wrapper">
             <h2><%= retailer.name %></h2>
             <div class="info ratings">
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
-              <span class="fa fa-star"></span> (
-              <b><%= reviews.count %></b> )              
+              <% avg_ratings = 5 if avg_ratings.nil? %>
+              <%(1...6).each do |index|%>
+                <span class="fa fa-star <%='checked' if index <= avg_ratings.to_i%>"></span>
+              <% end %> 
+              (<b><%= reviews.count %></b> )              
             </div>
             <div id="owl-demo" class="owl-carousel owl-theme">
               <% retailer_photos = retailer.retailer_photos %>

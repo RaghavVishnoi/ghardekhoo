@@ -1,5 +1,8 @@
-<%reviews = @retailer.retailer_reviews%>
-<%= render 'retailer_info', retailer: @retailer, reviews: reviews %>
+<% reviews = @retailer.retailer_reviews %>
+<% ratings = reviews.pluck(:rating).compact.map(&:to_f) %>
+<% avg_ratings = (ratings.sum/ratings.count).round if ratings.present? %>
+
+<%= render 'retailer_info', retailer: @retailer, reviews: reviews, avg_ratings: avg_ratings %>
 
 <%= render 'product_info', retailer: @retailer %>
 

@@ -15,6 +15,7 @@ class Users::SessionsController < Devise::SessionsController
     set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)
     yield resource if block_given?
+    session[:user_id] = resource.id
     respond_with resource, location: '/' 
   end
 
