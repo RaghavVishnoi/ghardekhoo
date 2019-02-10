@@ -11,3 +11,11 @@ CATEGORY_ICONS = {
 }
 RETAILER_NEAR_BY_RADIUS=50
 RETAILERS_PER_PAGE=10
+REQUEST_STATUS = [
+	['Pending', 0],
+	['Accepted', 1],
+	['In Process', 2],
+	['Resolved', 3],
+	['Closed', 4],
+	['Reopen', 5]
+]

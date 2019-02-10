@@ -21,50 +21,7 @@
           <h3>
             Register
           </h3>
-          <%= form_for @user, remote: true do |f|%>
-            <div class="form-group">
-              <div class="input-icon">
-                <i class="icon fa fa-user"></i>
-                <%= f.text_field :first_name, class: 'form-control', placeholder: 'First name'%>
-              </div>
-            </div> 
-            <div class="form-group">
-              <div class="input-icon">
-                <i class="icon fa fa-user"></i>
-                <%= f.text_field :last_name, class: 'form-control', placeholder: 'Last name'%>
-              </div>
-            </div> 
-            <div class="form-group">
-              <div class="input-icon">
-                <i class="icon fa fa-envelope"></i>
-                <%= f.text_field :email, class: 'form-control', placeholder: 'Email'%>
-              </div>
-            </div> 
-            <div class="form-group">
-              <div class="input-icon">
-                <i class="icon fa fa-phone"></i>
-                <%= f.text_field :phone, class: 'form-control bfh-phone', data: {format: ' (ddd) ddd-dddd'}, placeholder: 'Phone'%>
-              </div>
-            </div> 
-            <div class="form-group">
-              <div class="input-icon">
-                <i class="icon fa fa-unlock-alt"></i>
-                <%= f.text_field :password, class: 'form-control', placeholder: 'Password'%>
-              </div>
-            </div> 
-            <div class="form-group">
-              <div class="input-icon">
-                <i class="icon fa fa-unlock-alt"></i>
-                <%= f.text_field :password_confirmation, class: 'form-control', placeholder: 'Password confirmation'%>
-              </div>
-            </div>   
-            <%= f.hidden_field :user_registration, value: true, class: 'form-control'%>            
-            <div class="checkbox">
-              <input type="checkbox" id="remember" name="rememberme" value="forever" style="float: left;">
-              <label for="remember">By creating account you agree to our Terms & Conditions</label>
-            </div>
-            <button class="btn btn-common log-btn">Register</button>
-          <% end %>
+          <%= render 'form', user: @user %>
         </div>
       </div>
     </div>

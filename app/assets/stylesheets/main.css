@@ -704,10 +704,12 @@ nav#menu span.fa.fa-bars:hover {
   line-height: normal;
   text-transform: uppercase;
   width: 100px;
+  background-color: #ee8022 !important;
 }
 
 .header-button a:hover {
   color: #000 !important;
+  background-color: #fff !important;
 }
 
 .main-navigation .navbar-nav > li.postadd a:hover {

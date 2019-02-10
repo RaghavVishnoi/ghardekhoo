@@ -7,6 +7,12 @@
 	}
 }
 
+.advanced-search{
+	button{
+		background-color: #2a357e;
+	}
+}
+
 .category-content{
 	overflow: auto;
 	height: 190px;
@@ -121,7 +127,7 @@ footer{
 .retailer-form-header{
 	font-size: 20px;
     padding-bottom: 5px;
-    color: green;
+    color: #ee8022;
     margin: auto;
     border-bottom: 1px solid;
     margin-bottom: 50px;
@@ -130,6 +136,7 @@ footer{
 .retailer-form-button{
 	margin-top: 35px;
     width: 200px;
+    background-color: #2a357e;
 }
 
 .form-label{
@@ -224,9 +231,11 @@ footer{
     .btn-danger{
     	color: #fff !important;
     	text-transform: none;
+    	background-color: #ee8022 !important;
     }
     .btn-danger:hover{
     	color: #d9534f !important;
+    	background-color: #fff !important;
     }
 }
 
@@ -235,6 +244,9 @@ footer{
     padding: 10px;
     padding-bottom: 0px;
     padding-top: 0px;
+    .btn-primary{
+    	background-color: #2a357e !important;
+    }
     a{
     	color: #fff !important;
     	text-transform: none;
@@ -250,9 +262,9 @@ footer{
 }
 
 .profile-menu{
-	border: 1px solid #d9534f;
+	border: 1px solid #ee8022;
 	.dropdown-toggle{
-		color: #d9534f !important;
+		color: #ee8022 !important;
 		img{
 			width: 25px;
 			height: 25px;
@@ -294,4 +306,19 @@ footer{
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
+}
+
+.request-container{
+	.page-ads{
+		height: 550px;
+		input[type=submit]{
+			background-color: #2a357e;
+			color: #fff;
+			width: 150px;
+		}
+	}
+	h2{
+		color: #ee8022 !important;
+		text-transform: none;
+	}
 }

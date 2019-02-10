@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190202120459) do
+ActiveRecord::Schema.define(version: 20190210112257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,17 @@ ActiveRecord::Schema.define(version: 20190202120459) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id", using: :btree
   end
 
+  create_table "user_requests", force: :cascade do |t|
+    t.integer  "product_category_id"
+    t.integer  "product_sub_category_id"
+    t.string   "subject"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "status"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -216,4 +227,7 @@ ActiveRecord::Schema.define(version: 20190202120459) do
   add_foreign_key "retailer_products", "retailers"
   add_foreign_key "retailer_reviews", "retailers"
   add_foreign_key "retailer_reviews", "users"
+  add_foreign_key "user_requests", "product_categories"
+  add_foreign_key "user_requests", "product_sub_categories"
+  add_foreign_key "user_requests", "users"
 end

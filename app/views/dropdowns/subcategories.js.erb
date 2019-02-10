@@ -1,0 +1,7 @@
+var element_id = '<%= @element_id %>'
+$('#request-sub-category option').remove();
+$('#request-sub-category').append('<option value="">Please select</option>')
+<% @subcategories.each do |subcategory| %>		
+	$('#request-sub-category').append('<option value="<%= subcategory[1] %>"><%= subcategory[0] %></option>')
+<% end %>
+stop_spin();

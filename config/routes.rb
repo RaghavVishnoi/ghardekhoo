@@ -64,6 +64,7 @@ Rails.application.routes.draw do
 
   resources :retailer_reviews, only: [:create, :edit, :update]
   resources :users, only: [:new, :create]
+  resources :user_requests, only: [:new, :create]
 
   get '/retailers/:username' => 'retailers#show'
   get '/users/facebook_login' => 'users#facebook_login'
@@ -76,6 +77,7 @@ Rails.application.routes.draw do
   post '/city_list' => 'dropdowns#city_list'
   post '/get_location' => 'home#get_location'
   post '/city_retailers' => 'dropdowns#city_retailers'
+  post '/subcategories' => 'dropdowns#subcategories'
   
   devise_for :admin, controllers: {sessions: "admin/sessions"}
   devise_scope :admin do

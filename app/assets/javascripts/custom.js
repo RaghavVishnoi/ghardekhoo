@@ -29,6 +29,14 @@ $(document).ready(function(){
 
 });
 
+function get_subcategories(element){
+  var category = $(element).val();
+  $('#subcategory_form #category_id').val(category);
+  $('#subcategory_form #element_id').val('request-sub-category');
+  start_spin('content')
+  $('#subcategory_form').trigger('submit.rails');
+}
+
 function populateCity(state){
   var selectedState = state.value
   start_spin('retailer_state')

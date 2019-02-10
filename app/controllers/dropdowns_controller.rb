@@ -8,6 +8,12 @@ class DropdownsController < ApplicationController
 	rescue StandardError => ex		
 	end
 
+	def subcategories
+		@element_id = params[:element_id]
+		category_id = params[:category_id]
+		@subcategories = ProductSubCategory.where(active: true, product_category_id: category_id ).pluck(:name, :id)
+	end
+
 	def city_retailers
 		city_name = params[:city_name]
 		state_code = params[:state_code]
