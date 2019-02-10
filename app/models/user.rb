@@ -16,7 +16,7 @@ class User < ApplicationRecord
     validates :google_user_id, uniqueness: true, if: proc { google_user_id.present? }
 
     validates :first_name, presence: true
-	validates :phone, presence: true
+	validates :phone, presence: true, if: proc{ user_registration == true }
 	validates_presence_of :password, if: proc{ :password_required? && user_registration == true}
 	validates_confirmation_of :password, if: proc{ :password_required? && user_registration == true}
 
