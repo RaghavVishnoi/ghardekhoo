@@ -54,3 +54,4 @@ en:
       missing_category: Please select category
   users:
     request_success: Your request is successfully placed, our support team will reach you soon.
+    access_denied: Please login before proceed.

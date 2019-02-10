@@ -1,6 +1,6 @@
 class UserRequestsController < ApplicationController
 
-	before_action :authenticate_user!, only: [:new]
+	before_action :access_denied, only: [:new]
 
 	def new
 		@user_request = UserRequest.new
