@@ -20,6 +20,8 @@ class User < ApplicationRecord
 	validates_presence_of :password, if: proc{ :password_required? && user_registration == true}
 	validates_confirmation_of :password, if: proc{ :password_required? && user_registration == true}
 
+	has_many :user_requests
+
 	after_initialize do
 		user_registration = false
 	end

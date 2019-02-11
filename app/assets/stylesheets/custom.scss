@@ -322,3 +322,41 @@ footer{
 		text-transform: none;
 	}
 }
+
+.request-list-container{
+	h2{
+		color: #ee8022 !important;
+		text-transform: none;
+		float: left;
+		border: none;
+	}
+	table {
+		th{
+			color: #ee8022 !important;
+		}
+		td{
+			a i{
+				font-size: 17px;
+				color: #ee8022 !important;
+			}
+		}
+	}
+	.add-request{
+		float: right;
+		width: 160px;
+		background-color: #ee8022 !important;
+		color: #fff;
+		height: 40px;
+		text-transform: none;
+		font-size: 16px;
+    	padding-top: 9px;
+
+	}
+	.inner-box{
+		border: none;
+	}
+	.heading{
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 10px;
+	}
+}

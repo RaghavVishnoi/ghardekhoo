@@ -19,3 +19,4 @@ REQUEST_STATUS = [
 	['Closed', 4],
 	['Reopen', 5]
 ]
+REQUESTS_PER_PAGE=10

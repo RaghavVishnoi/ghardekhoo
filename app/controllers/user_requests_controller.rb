@@ -1,6 +1,11 @@
 class UserRequestsController < ApplicationController
 
-	before_action :access_denied, only: [:new]
+	before_action :access_denied, only: [:index, :new]
+
+	def index
+		@requests = current_user.user_requests.order('created_at')
+		@requests = @requests.page(params[:page]).per(REQUESTS_PER_PAGE)
+	end
 
 	def new
 		@user_request = UserRequest.new
