@@ -1,0 +1,43 @@
+<section id="content" class='request-container'>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-10 col-md-offset-1">
+      	<div class="page-ads box show-request">
+    		<h2 class="title-2">Request Details : <%= @user_request.number %>
+    			<a href="/user_requests" class="btn btn-default cancel">Cancel</a></h2>
+        	<div class="col-sm-12">
+		    <div class="form-group mb30">
+		        <label class="control-label">Service Category</label> 
+		        <h4><%= @user_request.product_category&.name&.camelize %></h4>
+		      </div>
+		    </div>
+		    <div class="col-sm-12">
+		      <div class="form-group mb30">
+		        <label class="control-label">Sub Category</label> 
+		        <h4><%= @user_request.product_sub_category&.name %></h4>
+		      </div>
+		    </div>
+		    <div class="col-sm-12">
+		      <div class="form-group mb30">
+		        <label class="control-label" for="textarea">Subject</label> 
+		        <h4><%= @user_request.subject %></h4>
+		      </div>
+		    </div> 
+		    <div class="col-sm-12">
+		      <div class="form-group mb30">
+		        <label class="control-label" for="textarea">Description</label> 
+		        <h4><%= @user_request.description %></h4>
+		      </div>
+		    </div>
+		    <div class="col-sm-12">
+		      <div class="form-group mb30">
+		        <label class="control-label" for="textarea">Status</label> 
+		        <h4><%= REQUEST_STATUS.map{|k,v| k if v == @user_request.status}.compact[0] %></h4>
+		      </div>
+		    </div>
+        </div>	
+      </div>
+    </div>
+  </div>
+</section> 
+<!-- Content section End -->

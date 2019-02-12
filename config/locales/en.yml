@@ -55,3 +55,4 @@ en:
   users:
     request_success: Your request is successfully placed, our support team will reach you soon.
     access_denied: Please login before proceed.
+    request_delete: Request deleted successfully.

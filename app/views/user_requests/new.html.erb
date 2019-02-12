@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12 col-md-10 col-md-offset-1">
-        <%= render 'form', user_request: @user_request %>
+      	<div class="page-ads box">
+    		<h2 class="title-2">Show a request for service</h2>
+        	<%= render 'form', user_request: @user_request , disabled: false%>
+        </div>	
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@
 	      		<h2 class="title-2">My Requests</h2>
 	        	<a href="/user_requests/new" class="btn btn-danger btn-block btn-sm add-request">
 	            	<span class="fa fa-plus-circle"></span>
-	            	<b>Add Request</b>
+	            	Add Request
 	        	</a>
 	        </div>	
         	<div class="col-sm-12">
@@ -17,33 +17,34 @@
 		              <thead>
 		                <tr>
 		                  <th align="center">Request Number</th>
-		                  <th align="center">Subject</th>
-		                  <th align="center">Status</th>
+		                  <th>Subject</th>
+		                  <th>Status</th>
 		                  <th align="center">Created On</th>
-		                  <th align="center">Action</th>
+		                  <th>Action</th>
 		                </tr>
 		              </thead>
 		              <tbody>
 		              	<% @requests.each do |request| %>
 			                <tr>
 			                  <td align="center">
-			                    <a href="#">
-			                      GREQ000<%=request.id%>
+			                    <a href="/user_requests/<%= request.id %>">
+			                      <%= request.number %>
 			                    </a>
 			                  </td>
-			                  <td align="center">
+			                  <td>
 			                    <%= request.subject %>
 			                  </td>
-			                  <td align="center">
+			                  <td>
 			                    <strong><%= REQUEST_STATUS.map{|k,v| k if v == request.status}.compact[0] %></strong>
 			                  </td>
 			                  <td align="center">
 			                  	<%=request.created_at.strftime("%B %d, %Y")%>
 			                  </td>
-			                  <td align="center">
-			                    <a> <i class="fa fa-pencil-square-o"></i></a>
-			                    <a > <i class="fa fa-eye"></i> </a>
-			                    <a > <i class=" fa fa-trash"></i> </a>
+			                  <td class="action">
+			                    <a href="/user_requests/<%= request.id %>"> <i class="fa fa-eye"></i> </a>
+			                    <%= link_to user_request_path(request.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
+			                   		<i class=" fa fa-trash"></i>
+			                   	<% end %>	
 			                  </td>
 			                </tr>
 			            <% end %>    

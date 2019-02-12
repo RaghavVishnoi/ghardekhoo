@@ -3,7 +3,7 @@ class UserRequestsController < ApplicationController
 	before_action :access_denied, only: [:index, :new]
 
 	def index
-		@requests = current_user.user_requests.order('created_at')
+		@requests = current_user.user_requests.where(active: true).order('created_at')
 		@requests = @requests.page(params[:page]).per(REQUESTS_PER_PAGE)
 	end
 
@@ -21,6 +21,20 @@ class UserRequestsController < ApplicationController
 		end
 	rescue StandardError => ex
 		flash[:error] = ex.message
+	end
+
+	def show
+		@user_request = UserRequest.find_by(id: params[:id])
+	end
+
+	def destroy
+		@user_request = UserRequest.find_by(id: params[:id])
+		if @user_request.update(active: false)
+			flash[:success] = t('users.request_delete')
+			redirect_to user_requests_path
+		else
+			flash[:error] = @user_request.errors.full_messages.join(',')
+		end
 	end
 
 	private
