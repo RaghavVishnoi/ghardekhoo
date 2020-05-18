@@ -1,0 +1,13 @@
+$('#retailer_city').html('')
+$('#retailer_city').append($('<option>', { 
+  value: '',
+  text : 'Select city'
+}));
+<% @cities.each do |city| %>
+	$('#retailer_city').append($('<option>', { 
+	  value: '<%= city %>',
+	  text : '<%= city %>'
+	}));
+<% end %>
+
+$('#retailer_city').val('<%= @default_city %>').change();

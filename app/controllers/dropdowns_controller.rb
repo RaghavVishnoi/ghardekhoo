@@ -1,33 +1,56 @@
 class DropdownsController < ApplicationController
 
-	before_action :nearest_location
+	before_action :default_retailer, only: [:admin_city_list]
+	before_action :default_advertisement, only: [:city_retailers]
 
 	def city_list
-		@cities = CS.cities(params[:state_code] , :in)
-		@default_city = @result.city
+		state = State.find_by(name: params[:name])
+		if state&.cities.present?
+			@cities = state.cities.where(active: true).pluck(:name)
+		else
+			@cities = []
+		end
 	rescue StandardError => ex		
+	end
+
+	def admin_city_list
+		state = State.find_by(name: params[:name])
+		if state&.cities.present?
+			@cities = state.cities.where(active: true).pluck(:name)
+		else
+			@cities = []
+		end
 	end
 
 	def city_retailers
 		city_name = params[:city_name]
-		state_code = params[:state_code]
-		@categories = ProductCategory.where(active: true).order('name')
+		state_name = params[:state_name]
 		if city_name.present?
-			@retailers = Retailer.near("#{city_name}, #{state_code}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
-			retailer_ids = @retailers.pluck(:id)
-			@retailers_count = RetailerProduct.where(active: true, retailer_id: retailer_ids).group_by(&:product_sub_category_id)
+			# @retailers = Retailer.near("#{city_name}, #{state_code}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+			# retailer_ids = @retailers.pluck(:id)
+			@retailers_count = RetailerProduct.joins(:retailer).where('retailer_products.active = ? AND retailer_products.status = ? AND LOWER(retailers.state) = ? AND LOWER(retailers.city) = ? AND retailers.active = ? AND retailers.account_status = ?', true, 1, state_name, city_name, true, 1).group_by(&:product_sub_category_id)
 		else
-			state = CS.get(:IN).as_json[state_code]
-			@retailers = Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
-			retailer_ids = @retailers.pluck(:id)
-			@retailers_count = RetailerProduct.where(active: true, retailer_id: retailer_ids).group_by(&:product_sub_category_id)
+			# Remove Geocoder api to find retailer on state
+			# @retailers = Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+			# retailer_ids = @retailers.pluck(:id)
+			@retailers_count = RetailerProduct.joins(:retailer).where('retailer_products.active = ? AND retailer_products.status = ? LOWER(retailers.state) = ? AND retailers.active = ? AND retailers.account_status = ?', true, 1, state_name, true, 1).group_by(&:product_sub_category_id)
 		end
-		ad_type = AdType.find_by(name: 'WebHomeListing')
-		@advertisements = Advertisement.where(active: true, retailer_id: retailer_ids, ad_type_id: ad_type&.id).limit(15)
 	end
 
 	def nearest_location
 		@result = Geocoder.search([session[:lat].to_f, session[:lng].to_f]).first
 	end
+
+	private
+		def default_retailer
+			if params[:retailer_id].present?
+				@default_city = Retailer.find_by(id: params[:retailer_id])&.city
+			end
+		end
+
+		def default_advertisement
+			ad_type = AdType.find_by(name: 'WebHomeListing')
+			@advertisements = Advertisement.where(active: true, ad_type_id: ad_type&.id).limit(15)
+		end
 
 end

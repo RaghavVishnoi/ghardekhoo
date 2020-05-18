@@ -39,11 +39,15 @@ Rails.application.routes.draw do
   post '/city_list' => 'dropdowns#city_list'
   post '/get_location' => 'home#get_location'
   post '/city_retailers' => 'dropdowns#city_retailers'
+  get '/state/:name/city_list' => 'dropdowns#admin_city_list'
   
   devise_for :admin, controllers: {sessions: "admin/sessions"}
   devise_scope :admin do
     delete '/admin/sign_out' => 'admin/sessions#destroy'
     post '/admin/retailer/upload_retailers' => 'retailers#upload'
+    post '/admin/retailer/:id/upload_photo' => 'retailers#upload_photos'
+    post '/admin/retailer_product/:id/upload_photo' => 'retailer_products#upload_photos'
+    post '/admin/advertisement/:id/upload_photo' => 'advertisements#upload_photos'
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

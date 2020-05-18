@@ -1,5 +1,7 @@
 class RetailersController < ApplicationController
 
+	before_action :find_retailer, only: [:upload_photos]
+
 	def search
 		@states = state_list
 		@cities = city_list(params[:state])
@@ -50,6 +52,31 @@ class RetailersController < ApplicationController
 		flash[:error] = ex.message
 		create_error_file(errors)
 		@redirect_url = admin_retailer_upload_retailers_path
+	end
+
+	def upload_photos
+		if @retailer.present?
+			retailer_photos = params[:retailer_photos]
+			if retailer_photos.present?
+				Array.wrap(retailer_photos).each_with_index do |retailer_photo, index|
+					if UPLOAD_FILE_LIB == 'active_storage'
+						upload_photo_result = upload_to_active_storage(retailer_photo)
+					elsif UPLOAD_FILE_LIB == 'aws'						
+						upload_photo_result = upload_to_aws(retailer_photo, index)
+					end
+					@retailer.retailer_photos.find_or_create_by(
+						retailer_id: @retailer.id, 
+						photo_url: upload_photo_result[:url],
+						attachment_id: upload_photo_result[:attachment_id]
+					)
+				end
+				@redirect_url = "/admin/retailer/#{@retailer.id}"
+			else
+				flash[:error] = 'Please choose photos to upload!'
+			end
+		else
+			flash[:error] = 'Please choose a retailer to upload photos!'
+		end
 	end
 
 	private
@@ -103,6 +130,27 @@ class RetailersController < ApplicationController
 
 	  def city_list(state_code)
 	  	@cities = CS.cities(state_code , :in)
+	  end
+
+	  def find_retailer
+	  	@retailer = Retailer.find_by(id: params[:id])
+	  end
+
+	  def upload_to_aws(retailer_photo)
+	  	file_path = "retailers/#{@retailer.id}/profile_photo_#{index+1}"
+      result = FileUpload.new.upload(file_path, retailer_photo)
+      if result[:status] == 200
+      	{url: result[:file_url]}
+      else
+      	flash[:error] = result[:message]
+      end
+	  end
+
+	  def upload_to_active_storage(retailer_photo)
+	  	result = @retailer.photos.attach(retailer_photo)
+	  	{url: url_for(result.first), attachment_id: result.first&.id}
+	  rescue StandardError => ex
+			flash[:error] = ex.message
 	  end
 
 end

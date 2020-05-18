@@ -67,7 +67,7 @@ function start_spin(targetId){
       fps: 20, // Frames per second when using setTimeout() as a fallback in IE 9
       zIndex: 2e9, // The z-index (defaults to 2000000000)
       className: 'spinner', // The CSS class to assign to the spinner
-      top: '50%', // Top position relative to parent
+      // top: '50%', // Top position relative to parent
       left: '50%', // Left position relative to parent
       shadow: 'none', // Box-shadow for the lines
       position: 'absolute' // Element positioning
@@ -84,16 +84,16 @@ function stop_spin(){
 
 function getCities(state){
 	state_code = state.value
-	$('#city_list_form #state_code').val(state_code);
-  start_spin('intro')
+	$('#city_list_form #name').val(state_code);
+  start_spin('categories-homepage')
 	$('#city_list_form').trigger('submit.rails');
 }
 
 function cityRetailers(city_name){
 	state_code = $('#state-list select').val();
-	$('#city_retailers_form #state_code').val(state_code)
+	$('#city_retailers_form #state_name').val(state_code)
 	$('#city_retailers_form #city_name').val(city_name)
-  start_spin('intro')
+  start_spin('categories-homepage')
 	$('#city_retailers_form').trigger('submit.rails')
 }
 

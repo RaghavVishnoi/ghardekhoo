@@ -4,25 +4,39 @@
       <div class="col-md-12">
         <h3 class="section-title">We are providing experties in following areas:</h3>
       </div> 
-      <% Array.wrap(categories).each do |category| %>         
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="category-box border-1 wow fadeInUpQuick" data-wow-delay="0.3s">
-            <div class="icon">
-              <a href="#"><i class="fa <%= CATEGORY_ICONS[category.name] %> color-1" aria-hidden="true"></i><!-- <i class="lnr lnr-users color-1"></i> --></a>
+      <% if categories.present? %>
+        <% Array.wrap(categories).each do |category| %>         
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="category-box border-1 wow fadeInUpQuick" data-wow-delay="0.3s">
+              <div class="icon">
+                <a href="#"><i class="fa <%= CATEGORY_ICONS[category.name] %> color-1" aria-hidden="true"></i><!-- <i class="lnr lnr-users color-1"></i> --></a>
+              </div>
+              <div class="category-header">  
+                <a href="#"><h4><%= category.name.camelcase %></h4></a>
+              </div>
+              <div class="category-content">
+                <ul>
+                  <% category.product_sub_categories.each do |sub_category| %>
+                    <li>
+                      <% retailer_count = retailers_count.present? ? retailers_count[sub_category.id]&.pluck(:retailer_id)&.uniq&.count : 0 %>
+                      <a class="pointer" onclick="searchBySubCategory('<%=sub_category.id%>')"><b><%= sub_category.name %></b></a>
+                      <sapn class="category-counter"><b><%= retailer_count || 0%></b></sapn>
+                    </li>
+                  <% end %>  
+                </ul>
+              </div>
             </div>
-            <div class="category-header">  
-              <a href="#"><h4><%= category.name.camelcase %></h4></a>
-            </div>
-            <div class="category-content">
-              <ul>
-                <% category.product_sub_categories.each do |sub_category| %>
-                  <li>
-                    <% retailer_count = retailers_count[sub_category.id]&.pluck(:retailer_id)&.uniq&.count %>
-                    <a class="pointer" onclick="searchBySubCategory('<%=sub_category.id%>')"><b><%= sub_category.name %></b></a>
-                    <sapn class="category-counter"><b><%= retailer_count || 0%></b></sapn>
-                  </li>
-                <% end %>  
-              </ul>
+          </div>
+        <% end %>  
+      <% else %>
+        <div class="page-content">
+          <div class="adds-wrapper">
+            <div class="fallback-inner blank-retailers-container">
+              <div class="fallback-content">
+                <ul>
+                  Please select your state and city to get instant service!                                    
+                </ul>
+              </div>
             </div>
           </div>
         </div>

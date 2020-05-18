@@ -23,9 +23,13 @@ en:
   admin:
     actions:
       upload_retailers:
-        menu: 'Upload'
+        menu: 'Upload Retailers'
         breadcrumb: 'Upload'
         title: 'Upload Retailers'
+      upload_photo:
+        menu: 'Upload Photos'
+        breadcrumb: 'Upload'
+        title: 'Upload Photos'
   authentication:
     status:
       failed: 401

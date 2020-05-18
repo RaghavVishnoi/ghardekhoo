@@ -1,3 +1,7 @@
+require Rails.root.join('lib', 'upload_photo.rb')
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::UploadPhoto)
+
+
 RailsAdmin.config do |config|
 
   ### Popular gems integration
@@ -26,17 +30,20 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
-    new
+    new do
+      except ['RetailerPhoto', 'RetailerProductPhoto']
+    end
     export
     bulk_delete
     show
-    edit
-    delete
-    show_in_app
-    collection :upload_retailers do
-      only ['Retailer']
+    edit do
+      except ['RetailerProductPhoto', 'Advertisement']
+    end
+    upload_photo do
+      only ['Retailer', 'RetailerProduct', 'Advertisement']
       link_icon 'fa fa-upload'
     end
+    delete
 
     ## With an audit adapter, you can add:
     # history_index
@@ -54,7 +61,7 @@ RailsAdmin.config do |config|
   # remove fileds with nil value from show mode. set it to false if you want to show empty fields
   config.compact_show_view = true
 
-  config.excluded_models = [ Admin]
+  config.excluded_models = [ Admin ]
 
   # Hide unused fields from user model
   config.model 'Employee' do
@@ -92,8 +99,73 @@ RailsAdmin.config do |config|
                    :product_categories,
                    :retailer_products,
                    :retailer_photos,
-                   :advertisements
+                   :advertisements,
+                   :country
+    include_fields :first_name,
+                   :last_name,
+                   :email,
+                   :phone,
+                   :state,
+                   :city,
+                   :address,
+                   :gst_number,
+                   :adhaar_number,
+                   :pan_number,
+                   :lat,
+                   :lng,
+                   :employee_id,
+                   :active,
+                   :password,
+                   :password_confirmation,
+                   :photo_url,
+                   :account_type,
+                   :account_status,
+                   :username,
+                   :about_business,
+                   :rating
+    create do
+      field :city do
+        partial "city"
+      end
+    end 
 
+    edit do
+      field :city do
+        partial "city"
+      end
+    end 
+
+    field :photos, :multiple_active_storage do 
+      delete_method :delete_photos
+    end
+
+  end
+
+  config.model 'RetailerProduct' do
+    exclude_fields :retailer_product_photos
+    field :photos, :multiple_active_storage do 
+      delete_method :delete_photos
+    end
+  end
+
+  config.model 'Advertisement' do
+    exclude_fields :photo_url, :retailer, :attachment
+    fields :ad_type_id, :photos, :active
+
+    create do
+      exclude_fields :photos
+    end
+
+    edit do
+      exclude_fields :photos
+    end
+  end
+
+  config.model 'ProductSubCategory' do
+    exclude_fields :name, :retailer_products
+    create do
+      fields :p_name, :active, :product_category_id
+    end
   end
 
   config.model 'RetailerPhoto' do
@@ -103,7 +175,7 @@ RailsAdmin.config do |config|
           bindings[:view].tag(:img, { :src => bindings[:object].photo_url })
         end
       end
-      fields :photo_url, :retailer, :lat, :lng
+      fields :photo_url, :retailer, :main
     end
 
     show do
@@ -112,7 +184,7 @@ RailsAdmin.config do |config|
           bindings[:view].tag(:img, { :src => bindings[:object].photo_url })
         end
       end
-      fields :photo_url, :retailer, :lat, :lng
+      fields :photo_url, :retailer, :main
     end
   end
 
@@ -123,7 +195,7 @@ RailsAdmin.config do |config|
           bindings[:view].tag(:img, { :src => bindings[:object].photo_url })
         end
       end
-      fields :photo_url, :retailer_product, :lat, :lng
+      fields :photo_url, :retailer_product
     end
 
     show do
@@ -132,7 +204,7 @@ RailsAdmin.config do |config|
           bindings[:view].tag(:img, { :src => bindings[:object].photo_url })
         end
       end
-      fields :photo_url, :retailer_product, :lat, :lng
+      fields :photo_url, :retailer_product
     end
   end
 

@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.2'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
@@ -54,7 +54,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'websocket-driver', '~> 0.6.3'
 gem 'devise'
-gem 'rails_admin', '~> 1.2'
+gem 'rails_admin', '~> 2.0.2'
 gem "rolify"
 gem 'roo'
 gem 'versionist'
@@ -64,3 +64,4 @@ gem 'httparty'
 gem 'kaminari'
 gem 'city-state'
 gem 'geocoder'
+gem 'mini_magick'

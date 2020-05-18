@@ -67,3 +67,12 @@ ad_types = [
 ad_types.each do |ad_type|
 	AdType.find_or_create_by(name: ad_type[:name])
 end
+
+states_list = {:AN=>"Andaman and Nicobar Islands", :AP=>"Andhra Pradesh", :AR=>"Arunachal Pradesh", :AS=>"Assam", :BR=>"Bihar", :CH=>"Chandigarh", :CT=>"Chhattisgarh", :DD=>"Daman and Diu", :DL=>"Delhi", :DN=>"Dadra and Nagar Haveli", :GA=>"Goa", :GJ=>"Gujarat", :HP=>"Himachal Pradesh", :HR=>"Haryana", :JH=>"Jharkhand", :JK=>"Kashmir", :KA=>"Karnataka", :KL=>"Kerala", :LD=>"Laccadives", :MH=>"Maharashtra", :ML=>"Meghalaya", :MN=>"Manipur", :MP=>"Madhya Pradesh", :MZ=>"Mizoram", :NL=>"Nagaland", :OR=>"Odisha", :PB=>"State of Punjab", :PY=>"Puducherry", :RJ=>"Rajasthan", :SK=>"Sikkim", :TG=>"Telangana", :TN=>"Tamil Nadu", :TR=>"Tripura", :UL=>"Uttarakhand", :UP=>"Uttar Pradesh", :WB=>"West Bengal"}
+states_list.keys.each do |state_code|
+	state = State.find_or_create_by(name: states_list[state_code], active: true)
+	cities_list = CS.cities(state_code , :in)
+	cities_list.each do |city_name|
+		City.find_or_create_by(state_id: state.id, name: city_name, active: true)
+	end
+end

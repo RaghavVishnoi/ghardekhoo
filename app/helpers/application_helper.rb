@@ -1,7 +1,7 @@
 module ApplicationHelper
 
 	def categories
-		ProductCategory.where(active: true).map{|category| [category.name.camelize, category.id]}
+		ProductCategory.where(active: true)
 	end
 
 	def category_types(category_id)

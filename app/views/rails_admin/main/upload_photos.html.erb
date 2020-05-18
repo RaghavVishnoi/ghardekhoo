@@ -1,0 +1,77 @@
+<div id="upload-retailer">
+	<%= form_for '', remote: true do |f| %>
+		<fieldset>
+		   <legend style="display:none"><i class="icon-chevron-down"></i> Basic info</legend>
+		   <div class="form-group control-group">
+		   	<div class="col-sm-12">
+		      <label class="col-sm-4 control-label">Choose photos</label>
+		      <div class="col-sm-3 controls">
+		      	<%=f.file_field :retailer_photos,:style => "margin-bottom: 20px; ", multiple: true%>
+			    </div>
+				</div> 
+				<!-- <div class="form-group control-group">
+					<div class="col-sm-12">
+					 <div class="col-sm-3 controls col-sm-offset-4">
+					 	<h4>OR</h4>
+			     </div>
+				  </div>   
+		   </div>
+		   <div class="form-group control-group">
+		   	<div class="col-sm-12">
+				 <label class="col-sm-4 control-label">Enter photos url (',' separated)</label>
+		      <div class="col-sm-6 controls">
+		      	<%=f.text_field :photo_urls, class: 'form-control', style: "margin-bottom: 20px; "%>
+			    </div>
+		   </div>
+		 </div> -->
+		   <br>
+		   <div class="form-group form-actions">
+		   <div class="col-sm-12"> 
+			    <div class="col-sm-offset-4 col-sm-8">
+				   	<label class="btn btn-primary">
+				   		Upload
+				   	</label>
+			   </div>
+			</div>   
+		</div>	
+		</fieldset>
+	<%end%>
+</div>
+
+<script>
+	$('#upload-retailer label').click(function(){
+		start_spin('upload-retailer');
+		var event = jQuery.Event( "submit" );
+		$( "#upload-retailer form" ).trigger( event );
+	})
+</script>
+
+<style>
+	@keyframes spinner-line-fade-more {
+	  0%, 100% {
+	    opacity: 0; /* minimum opacity */
+	  }
+	  1% {
+	    opacity: 1;
+	  }
+	}
+
+	@keyframes spinner-line-fade-quick {
+	  0%, 39%, 100% {
+	    opacity: 0.25; /* minimum opacity */
+	  }
+	  40% {
+	    opacity: 1;
+	  }
+	}
+
+	@keyframes spinner-line-fade-default {
+	  0%, 100% {
+	    opacity: 0.22; /* minimum opacity */
+	  }
+	  1% {
+	    opacity: 1;
+	  }
+	}
+
+</style> 

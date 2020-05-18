@@ -1,9 +1,9 @@
 <%= form_tag '/city_list', method: 'POST', remote: true, id: 'city_list_form' do |f| %>
-	<%= hidden_field_tag :state_code %>
+	<%= hidden_field_tag :name %>
 <% end %>
 
 <%= form_tag '/city_retailers', method: 'POST', remote: true, id: 'city_retailers_form' do |f| %>
-	<%= hidden_field_tag :state_code %>
+	<%= hidden_field_tag :state_name %>
 	<%= hidden_field_tag :city_name %>
 <% end %>
 

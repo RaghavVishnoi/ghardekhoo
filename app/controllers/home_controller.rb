@@ -32,11 +32,11 @@ class HomeController < ApplicationController
 		end
 
 		def state_list
-			@states = CS.states(:in).map{|h| [h[1],h[0]]}
+			@states = State.where(active: true).pluck(:name)
 	  end
 
 	  def city_list
-	  	@cities = CS.cities(@state_code , :in)
+	  	@cities = []
 	  end
 
 end

@@ -5,7 +5,7 @@ class RetailerProduct < ApplicationRecord
 
 	before_create :default_value
 
-	attr_accessor :photos
+	has_many_attached :photos
 
 	def status_enum
 	  [['Pending', 0],['Approved',1],['Declined',2]]
