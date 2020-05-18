@@ -1,26 +1,23 @@
 class RetailersController < ApplicationController
 
 	before_action :find_retailer, only: [:upload_photos]
+	before_action :set_defaults, only: [:search]
 
-	def search
-		@states = state_list
-		@cities = city_list(params[:state])
+	def search		
 		@default_category = params[:category_id]
 		@search_value = params[:search_value]
 		@sub_category_id = params[:sub_category_id]
-		@nearby_retailers = nearby_retailers
-		if params[:search_value].present?
-			@retailers = @nearby_retailers.where('LOWER(first_name) like ? OR LOWER(last_name) like ?', "%#{@search_value.downcase}%", "%#{@search_value.downcase}%")
-		else
-			@retailers = @nearby_retailers
-		end
+		@retailers = Retailer
+		@retailers = @retailers.where(state: params[:state]) if params[:state].present?
+		@retailers = @retailers.where(city: params[:city]) if params[:city].present?
+		@retailers = @retailers.where('LOWER(first_name) like ? OR LOWER(last_name) like ?', "%#{@search_value.downcase}%", "%#{@search_value.downcase}%") if params[:search_value].present?
 		if @sub_category_id.blank?
 			@retailers = @retailers.joins(:product_categories).where('product_categories.id = ?', @default_category) if @default_category.present? && @retailers.present?
 		else
 			@retailers = @retailers.joins(:retailer_products).where('retailer_products.product_sub_category_id = ?', @sub_category_id) if @retailers.present?
 		end
 		@retailers = @retailers.page(params[:page]).per(RETAILERS_PER_PAGE)
-		@retailers_count = RetailerProductCategory.where(retailer_id: @nearby_retailers.pluck(:id)).group_by(&:product_category_id)
+		@retailers_count = RetailerProductCategory.joins(:retailer).where('retailers.id IN (?)', @retailers.pluck(:id)).group_by(&:product_category_id)
 	rescue StandardError => ex	
 		flash[:error] = ex.message[0..300]
 	end
@@ -152,5 +149,10 @@ class RetailersController < ApplicationController
 	  rescue StandardError => ex
 			flash[:error] = ex.message
 	  end
+
+	  def set_defaults
+			@states = State.where(active: true).pluck(:name)
+			@cities = []
+		end
 
 end

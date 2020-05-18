@@ -27,16 +27,8 @@ class HomeController < ApplicationController
 
 	private	
 		def set_defaults
-			state_list
-			city_list
-		end
-
-		def state_list
 			@states = State.where(active: true).pluck(:name)
-	  end
-
-	  def city_list
-	  	@cities = []
-	  end
+			@cities = []
+		end
 
 end

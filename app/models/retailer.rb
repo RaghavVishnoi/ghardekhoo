@@ -12,9 +12,8 @@ class Retailer < ApplicationRecord
   attr_accessor :profile_photo
   attr_accessor :distance
 
-  has_many :product_categories, through: :retailer_product_categories
   has_many :retailer_product_categories, dependent: :destroy
-
+  has_many :product_categories, through: :retailer_product_categories
   belongs_to :employee, optional: true
   has_many :retailer_products, dependent: :destroy
   has_many :retailer_photos, dependent: :destroy

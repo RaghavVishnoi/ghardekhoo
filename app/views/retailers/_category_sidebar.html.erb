@@ -19,9 +19,9 @@
                 <ul>
                   <% categories.each do |category| %>
                     <li>
-                      <a href="/retailers/search?category_id=<%=category[1]%>&state=<%=params[:state]%>&city=<%=params[:city]%>">
-                        <i class="fa <%= CATEGORY_ICONS[category[0].underscore] %>" aria-hidden="true"></i>
-                        <%= category[0]%> <span class="category-counter"><%= retailers_count[category[1]]&.count || 0 rescue 0 %></span>
+                      <a href="/retailers/search?category_id=<%=category.id%>&state=<%=params[:state]%>&city=<%=params[:city]%>">
+                        <i class="fa <%= CATEGORY_ICONS[category.name.underscore] %>" aria-hidden="true"></i>
+                        <%= category.name %> <span class="category-counter"><%= retailers_count[category.id]&.count || 0 rescue 0 %></span>
                       </a>
                     </li>
                   <% end %>  
