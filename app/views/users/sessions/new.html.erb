@@ -1,0 +1,93 @@
+<meta name="google-signin-client_id" content="216364818453-bgmb05h8s5p5hd3ob7olj9edbpksfo06.apps.googleusercontent.com">
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- Page Header Start -->
+<div class="page-header" style="background: url(/assets/banner1.jpg);">
+  <div class="container">
+    <div class="row">         
+      <div class="col-md-12">
+        <div class="breadcrumb-wrapper">
+          <h2 class="page-title">Login to account</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page Header End --> 
+
+<!-- Content section Start --> 
+<section id="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-4 col-md-4 col-md-offset-4">
+        <div class="page-login-form box">
+          <h3>
+            Login
+          </h3>
+          <%= form_for(resource, as: resource_name, url: user_session_path, class: 'login-form') do |f| %>  
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="icon fa fa-user"></i>
+                <%=f.email_field :email,:class => "form-control", placeholder: 'Email'%>
+              </div>
+            </div> 
+            <div class="form-group">
+              <div class="input-icon">
+                <i class="icon fa fa-unlock-alt"></i>
+                <%=f.password_field :password,:class => "form-control", placeholder: 'Password'%>
+              </div>
+            </div>                  
+            <div class="checkbox">
+              <input type="checkbox" id="remember" name="rememberme" value="forever" style="float: left;">
+              <label for="remember">Remember me</label>
+            </div>
+            <button class="btn btn-common log-btn">Submit</button>
+          <% end %>
+          <ul class="form-links">
+            <li class="pull-left"><a href="#">Don't have an account?</a></li>
+            <li class="pull-right"><a href="#">Lost your password?</a></li>
+          </ul>
+          <hr />
+          <div class="facebook" id="facebook">
+            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size = "large">
+            </fb:login-button>
+          </div>
+          <div class="google" >
+            <a class="btn btn-block btn-social btn-google social-login-button" href="/auth/google_oauth2">
+              <span class="fa fa-google"></span><b> Sign in </b>
+            </a>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Content section End --> 
+<%= render 'facebook_token_form' %>
+
+<div id="fb-root"></div>
+<script>
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=375593839921327&autoLogAppEvents=1';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    access_token = response['authResponse']['accessToken']
+    $('#facebook_login_form #access_token').val(access_token);
+    start_spin('facebook')
+    $('#facebook_login_form').trigger('submit.rails')
+  }
+
+</script>

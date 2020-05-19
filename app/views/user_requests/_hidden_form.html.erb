@@ -1,0 +1,4 @@
+<%= form_tag '/subcategories', method: 'POST', remote: true, id: 'subcategory_form' do |f| %>
+	<%= hidden_field_tag :category_id %>
+	<%= hidden_field_tag :element_id  %>
+<% end %>

@@ -100,6 +100,7 @@ RailsAdmin.config do |config|
                    :retailer_products,
                    :retailer_photos,
                    :advertisements,
+                   :retailer_reviews
                    :country
     include_fields :first_name,
                    :last_name,

@@ -31,6 +31,8 @@
 //= require spinner
 //= require custom
 //= require slideshow
+//= require autonumeric
+//= require bootstrap-phone-helper
 
 
 

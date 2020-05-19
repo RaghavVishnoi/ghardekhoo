@@ -1,0 +1,63 @@
+ <!-- Start Content -->
+<div id="content">
+  <div class="container request-list-container">
+    <div class="row">
+      <div class="col-sm-12 page-content">
+        <div class="inner-box">
+      		<div class="col-sm-12 heading">
+	      		<h2 class="title-2">My Requests</h2>
+	        	<a href="/user_requests/new" class="btn btn-danger btn-block btn-sm add-request">
+	            	<span class="fa fa-plus-circle"></span>
+	            	Add Request
+	        	</a>
+	        </div>	
+        	<div class="col-sm-12">
+		        <div class="table-responsive">
+		            <table class="table table-striped table-bordered add-manage-table">
+		              <thead>
+		                <tr>
+		                  <th align="center">Request Number</th>
+		                  <th>Subject</th>
+		                  <th>Status</th>
+		                  <th align="center">Created On</th>
+		                  <th>Action</th>
+		                </tr>
+		              </thead>
+		              <tbody>
+		              	<% @requests.each do |request| %>
+			                <tr>
+			                  <td align="center">
+			                    <a href="/user_requests/<%= request.id %>">
+			                      <%= request.number %>
+			                    </a>
+			                  </td>
+			                  <td>
+			                    <%= request.subject %>
+			                  </td>
+			                  <td>
+			                    <strong><%= REQUEST_STATUS.map{|k,v| k if v == request.status}.compact[0] %></strong>
+			                  </td>
+			                  <td align="center">
+			                  	<%=request.created_at.strftime("%B %d, %Y")%>
+			                  </td>
+			                  <td class="action">
+			                    <a href="/user_requests/<%= request.id %>"> <i class="fa fa-eye"></i> </a>
+			                    <%= link_to user_request_path(request.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
+			                   		<i class=" fa fa-trash"></i>
+			                   	<% end %>	
+			                  </td>
+			                </tr>
+			            <% end %>    
+		              </tbody>
+		            </table>
+		        </div>
+		    </div>                   
+        </div>
+        <div class="pagination-bar pull-right">
+	      	<%= paginate @requests %>
+	    </div> 
+      </div>
+    </div> 
+  </div>      
+</div>
+<!-- End Content -->

@@ -661,11 +661,11 @@ nav#menu span.fa.fa-bars:hover {
   -o-transition: color .3s linear;
   transition: color .3s linear;
 }
-.main-navigation .navbar-nav > li a:hover,
+/*.main-navigation .navbar-nav > li a:hover,
 .main-navigation .navbar-nav > li a.active,
 .main-navigation .navbar-nav > li a:focus {
   color: #3498db;
-}
+}*/
 .main-navigation .navbar-nav > li a i {
   margin-right: 3px;
 }
@@ -676,9 +676,9 @@ nav#menu span.fa.fa-bars:hover {
 }
 
 .header-button {
-  padding-left: 25px;
-  margin-left: 25px;
-  border-left: 1px solid #ddd;
+  padding-right:  25px;
+  margin-right: 25px;
+  border-right: 1px solid #ddd;
   margin-top: 5px;
 }
 
@@ -688,7 +688,6 @@ nav#menu span.fa.fa-bars:hover {
   font-size: 12px;
   height: 40px;
   line-height: normal;
-  text-transform: uppercase;
   width: 140px;
   webkit-transition: all .3s linear;
   -moz-transition: all .3s linear;
@@ -705,10 +704,12 @@ nav#menu span.fa.fa-bars:hover {
   line-height: normal;
   text-transform: uppercase;
   width: 100px;
+  background-color: #ee8022 !important;
 }
 
 .header-button a:hover {
   color: #000 !important;
+  background-color: #fff !important;
 }
 
 .main-navigation .navbar-nav > li.postadd a:hover {
@@ -2119,7 +2120,7 @@ table.add-manage-table > tbody > tr > th {
 }
 .ads-details-wrapper .item-intro .poster {
   color: #999;
-  font-size: 12px;
+  font-size: 14px;
 }
 .ads-details-info h4 {
   font-size: 15px;

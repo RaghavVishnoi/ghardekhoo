@@ -1,0 +1,9 @@
+<% if @user_operation == true %>
+	window.location = '/user_requests'
+<% else %>
+	renderFlash('div.flash_container', $("<%=j render 'layouts/flash_message'%>"));
+	scrollTop()
+	<% flash.discard %>
+	stop_spin();
+	discard_flash();
+<% end %>

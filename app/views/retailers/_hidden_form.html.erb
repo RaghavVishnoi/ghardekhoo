@@ -1,0 +1,8 @@
+<%= form_tag '/retailers_city_list', method: 'POST', remote: true, id: 'retailers_city_list_form' do |f| %>
+	<%= hidden_field_tag :state_name %>
+<% end %>
+
+<%= form_tag '/set_location', method: 'POST', remote: true, id: 'retailers_set_location_form' do |f| %>
+	<%= hidden_field_tag :retailer_city_name %>
+	<%= hidden_field_tag :retailer_state_name %>
+<% end %>

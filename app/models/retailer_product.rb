@@ -2,6 +2,7 @@ class RetailerProduct < ApplicationRecord
 	belongs_to :retailer
 	belongs_to :product_sub_category
 	has_many :retailer_product_photos, dependent: :destroy
+	has_many :retailer_product_photos
 
 	before_create :default_value
 
@@ -12,7 +13,7 @@ class RetailerProduct < ApplicationRecord
 	end
 
 	def name
-		"#{product_name} - #{sku_code}"
+		"#{retailer.name} - #{product_name} - #{sku_code}"
 	end
 
 	def default_value

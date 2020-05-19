@@ -1,0 +1,33 @@
+<%= form_for user_request, remote: true do |f| %>
+    <div class="col-sm-6">
+      <div class="form-group mb30">
+        <label class="control-label">Service Category</label> 
+        <%= f.select :product_category_id, options_for_select(categories), {include_blank: 'Please select'}, class: 'form-control input-md', onchange: 'get_subcategories(this)' %>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group mb30">
+        <label class="control-label">Sub Category</label> 
+        <%= f.select :product_sub_category_id, options_for_select([]), {include_blank: 'Please select'}, class: 'form-control input-md', id: 'request-sub-category' %>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="form-group mb30">
+        <label class="control-label" for="textarea">Subject</label> 
+        <%= f.text_field :subject, class: 'form-control', placeholder: 'Subject' %>
+      </div>
+    </div> 
+    <div class="col-sm-12">
+      <div class="form-group mb30">
+        <label class="control-label" for="textarea">Description</label> 
+        <%= f.text_area :description, class: 'form-control', rows: 4, placeholder: 'Add your description here'%>
+        <%= f.hidden_field :status, value: 0%>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="form-group mb30">
+        <%= f.submit :submit, class: 'form-control', rows: 4, placeholder: 'Add your description here', onclick: 'start_spin("new_user_request")'%>
+      </div>
+    </div>
+<% end %>
+<%= render 'hidden_form' %>

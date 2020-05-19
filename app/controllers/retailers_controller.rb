@@ -3,7 +3,59 @@ class RetailersController < ApplicationController
 	before_action :find_retailer, only: [:upload_photos]
 	before_action :set_defaults, only: [:search]
 
-	def search		
+	def new
+		@action = request.url.split('/').last
+		@account_type = @action == 'advertise' ? 'premium' : 'free'
+		@retailer = Retailer.new
+	end
+
+	def create
+		ActiveRecord::Base.transaction do
+			category_id = retailer_params[:category_ids]
+			if category_id.present?
+				@retailer = Retailer.new(retailer_params)
+				if @retailer.save
+					@retailer.retailer_product_categories.create(product_category_id: category_id)
+					flash[:success] = t('retailers.signup_success')
+				else
+					@show_errors = true
+					flash[:error] = @retailer.errors.full_messages.join('<br>')
+				end
+			else
+				@show_errors = true
+				flash[:error] = t('validations.retailer.missing_category')
+			end
+		end
+	rescue StandardError => ex
+		@show_errors = true
+		flash[:error] = ex.message
+	end
+
+	def show
+		username = params[:id].downcase
+		if username.present? && username != 'not_available'
+			@retailer = Retailer.find_by('LOWER(username) = ? AND account_status = ?', username, 1)
+			@retailer_review = RetailerReview.new
+			if @retailer.blank?
+				flash[:error] = t('retailers.missing_username')
+				redirect_to '/'
+			end
+		else
+			flash[:error] = t('retailers.missing_username')
+			redirect_to request.referrer
+		end
+	end
+
+	def state_cities
+		state_code = CS.get(:in).map{|k,v| k if v==params[:state_name]}.compact.first
+		@cities = CS.cities(state_code , :in)
+	end
+
+	def set_location
+		@location = Geocoder.search("#{params[:retailer_city_name]}, #{params[:retailer_state_name]}").first.coordinates		
+	end
+
+	def search
 		@default_category = params[:category_id]
 		@search_value = params[:search_value]
 		@sub_category_id = params[:sub_category_id]
@@ -14,7 +66,7 @@ class RetailersController < ApplicationController
 		if @sub_category_id.blank?
 			@retailers = @retailers.joins(:product_categories).where('product_categories.id = ?', @default_category) if @default_category.present? && @retailers.present?
 		else
-			@retailers = @retailers.joins(:retailer_products).where('retailer_products.product_sub_category_id = ?', @sub_category_id) if @retailers.present?
+			@retailers = @retailers.joins(:retailer_products).where('retailer_products.product_sub_category_id = ? AND status = ?', @sub_category_id, 1) if @retailers.present?
 		end
 		@retailers = @retailers.page(params[:page]).per(RETAILERS_PER_PAGE)
 		@retailers_count = RetailerProductCategory.joins(:retailer).where('retailers.id IN (?)', @retailers.pluck(:id)).group_by(&:product_category_id)
@@ -24,10 +76,10 @@ class RetailersController < ApplicationController
 
 	def nearby_retailers
 		if params[:city].present? && params[:state].present?
-			Retailer.near("#{params[:city]}, #{params[:state]}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+			Retailer.near("#{params[:city]}, #{params[:state]}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name').where(account_status: 1)
 		else
 			state = CS.get(:IN).as_json[params[:state]]
-			Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name')
+			Retailer.near("#{state}, IN", RETAILER_NEAR_BY_RADIUS, units: :km, order: 'first_name').where(account_status: 1)
 		end
 	end
 
@@ -77,6 +129,27 @@ class RetailersController < ApplicationController
 	end
 
 	private
+		def retailer_params
+			params.require(:retailer).permit(
+		    	:adhaar_number,
+		    	:pan_number,
+		    	:first_name,
+		    	:last_name,
+		    	:phone,
+		    	:email,
+		    	:password,
+		    	:password_confirmation,
+		    	:address,
+		    	:city,
+		    	:state,
+		    	:country,
+		    	:lat,
+		    	:lng,
+		    	:category_ids,
+		    	:account_type
+		    )
+		end
+
 		def open_spreadsheet(file)
 		  case File.extname(file.original_filename)
 		  when ".xlsx","xls","csv" then Roo::Excelx.new(file.path)

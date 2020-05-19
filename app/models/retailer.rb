@@ -19,8 +19,11 @@ class Retailer < ApplicationRecord
   has_many :retailer_photos, dependent: :destroy
   has_many :advertisements, dependent: :destroy
   has_many_attached :photos
+  has_many :retailer_reviews
 
   before_create :create_auth_token
+  before_save :unformat_phone
+  before_create :generate_username
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -29,6 +32,10 @@ class Retailer < ApplicationRecord
   validates :city, presence: true
   validates :state, presence: true
   validates_uniqueness_of :phone
+
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
+  end
 
   def name
     "#{String(first_name)} " + "#{String(last_name)}"
@@ -44,6 +51,49 @@ class Retailer < ApplicationRecord
 
   def account_type_enum
     [['Free', 'free'],['Premium', 'premium']]
+  end
+
+  def categories
+    product_categories.pluck(:name).join(',')
+  end
+
+  def sub_categories
+    sub_category_ids = retailer_products.pluck(:sub_category_id)
+    ProductSubCategory.where(id: sub_category_ids).pluck(:name)
+  end
+
+  def generate_username
+    username = String(first_name) + String(last_name)
+    tempUserName = castUserName(username)
+    userNameSplit = tempUserName.split(/(\d+)/)
+    if userNameSplit[1].present?
+      tempUserName = userNameSplit[0] + userNameSplit[1]
+    else
+      tempUserName = userNameSplit[0]
+    end
+    tempUserName.delete(' ').downcase
+    self.username ||= tempUserName
+  end
+
+  def castUserName(username)
+    tempUserName = username
+    count = 1
+    while User.exists?(username: tempUserName.downcase)
+      tempUserName = nil
+      count += 1
+      tempUserName = username + String(count)
+    end
+    tempUserName
+  end
+
+  def unformat_phone
+    if self.phone.present?
+      begin
+        self.phone = self.phone.delete('-').delete('(').delete(')').delete(' ')
+      rescue StandardError
+        self.phone
+      end
+    end
   end
 
   def account_status_enum

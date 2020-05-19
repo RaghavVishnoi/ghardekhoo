@@ -13,7 +13,60 @@ $(document).ready(function(){
         $('#search_retailers_form').trigger('submit.rails');
     }
   });
+
+  $('.close').click(function(){
+    $('.posting').attr('style', 'display: none')
+  });
+
+  $('.rate input').click(function(){
+    var rating  = $('.rate input:checked').val();
+    $('#new_retailer_review #retailer_review_rating').val(rating);
+  })
+
+  $('#new_user button').click(function(){
+    start_spin('new_user')
+  })
+
 });
+
+function get_subcategories(element){
+  var category = $(element).val();
+  $('#subcategory_form #category_id').val(category);
+  $('#subcategory_form #element_id').val('request-sub-category');
+  start_spin('content')
+  $('#subcategory_form').trigger('submit.rails');
+}
+
+function populateCity(state){
+  var selectedState = state.value
+  start_spin('retailer_state')
+  $('#retailers_city_list_form #state_name').val(selectedState);
+  $('#retailers_city_list_form').trigger('submit.rails')
+}
+
+function setLocation(city){
+  var selectedCity = city.value
+  var selectedState = $('#retailer_state').val();
+  start_spin('retailer_state')
+  $('#retailers_set_location_form #retailer_city_name').val(selectedCity);
+  $('#retailers_set_location_form #retailer_state_name').val(selectedState);
+  $('#retailers_set_location_form').trigger('submit.rails')
+}
+
+function scrollTop(){
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+}
+
+function discard_flash(){
+  setTimeout(function() {
+    $(".inner-box").fadeOut(5000);
+  }, 3000);
+}
+
+function renderFlash(container, flash){
+    $(container).html(flash);
+    // $(container).find('.row').delay(3000).fadeOut('slow');
+}
 
 function clearFilter(){
   var search_value = "";

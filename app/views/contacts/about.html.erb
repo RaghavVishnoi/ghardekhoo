@@ -1,0 +1,68 @@
+<!-- Page Header Start -->
+<div class="page-header" style="background: url(assets/banner1.jpg);">
+  <div class="container">
+    <div class="row">         
+      <div class="col-md-12">
+        <div class="breadcrumb-wrapper">
+          <h2 class="page-title">About Us</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page Header End --> 
+
+<!-- Main container Start -->  
+<div class="main-container">
+  <div class="container">
+    <div class="row">          
+      <div class="col-sm-9">
+        <img src="assets/about.jpg" alt="">
+        <div class="ad-detail-content">
+          <p>Ghar Dekhoo is a global solutions provider that redefines enterprise realestate and construction by providing a unique blend of innovative world-class services and outstanding customer experiences.</p>
+
+          <p><h5>Real Estate Solutions:</h5></p>
+          <p>We have lots of businesses/brokers and owners connect, to provide best deal for you, with minimum cost and maximum benifits.</p>
+
+          <p><h5>Expert Advice:</h5></p>
+          <p>We have experts who can help you to manage the deals and plans. We have Vastu Expert, Architect, Interior Designer, Legal Advisor.</p>	
+
+          <p><h5>Quick Services:</h5></p>
+          <p>When your deadline is non-negotiable, we are providing fast service that you can count on. Your specific needs vary which is why we are flexible with our express delivery services.</p>	
+
+          <p><h5>Retailer Hub:</h5></p>
+          <p>We have number of retailers associated as our business partners who are closely working with us to provide you the best services/solutions.</p>
+
+          <p><h5>Business with US:</h5></p>
+          <p>If you are a retailer or service provider then you can connect with us, We'll help you to grow your business through our large bucket of customers.</p>
+
+        </div>
+      </div>
+      <div class="col-sm-3 page-sidebar">
+        <aside>
+          <div class="inner-box">
+            <div class="categories">
+              <div class="widget-title">
+                <i class="fa fa-align-justify"></i>
+                <h4>All Categories</h4>
+              </div>
+              <div class="categories-list">
+                <ul>
+                  <% categories.each do |category| %>	
+	                  <li>
+	                    <a>
+	                      <i class="fa <%= CATEGORY_ICONS[category[0].underscore] %>" aria-hidden="true"></i>
+	                    	<%= category[0] %>
+	                    </a>
+	                  </li>
+	              <% end %>    
+                </ul>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Main container End --> 
