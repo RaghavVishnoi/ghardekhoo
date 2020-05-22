@@ -19,7 +19,7 @@
               <% if retailer_photos.present? %>
                 <% retailer.retailer_photos.each do |retailer_photo| %>
                   <div class="item">
-                    <img src="<%= retailer_photo.photo_url %>" alt="" class="retailer-photo">
+                    <%= image_tag retailer_photo.photo_url, class: 'retailer-photo' %>
                   </div>
                 <% end %>
               <% else %>  

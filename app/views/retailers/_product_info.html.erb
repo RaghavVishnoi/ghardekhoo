@@ -10,7 +10,7 @@
             <div class="item retailer-product">
               <div class="product-item">
                 <div class="carousel-thumb">
-                  <img src="<%= product&.retailer_product_photos&.first&.photo_url %>" alt=""> 
+                  <%= image_tag  product&.retailer_product_photos&.last&.photo_url %>
                 </div>    
                 <%= product.product_name.to_s + "-" + product.sku_code.to_s%>
                 <span class="price">INR <%= product.price %></span>  

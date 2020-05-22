@@ -38,9 +38,9 @@ module ApplicationHelper
 	end
 
 	def retailer_product_sub_categories(retailer)
-		retailer_products = retailer.retailer_products.where(active: true)
+		retailer_products = retailer.retailer_products.where(active: true, status: 1)
 		if retailer_products.present?
-			retailer_products.map{|retailer_product| retailer_product.product_sub_category}.pluck(:name).uniq
+			retailer_products.map{|retailer_product| retailer_product.product_sub_category}.pluck(:p_name).uniq
 		else
 			[]
 		end

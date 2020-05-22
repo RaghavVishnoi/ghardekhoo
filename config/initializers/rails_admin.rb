@@ -100,8 +100,13 @@ RailsAdmin.config do |config|
                    :retailer_products,
                    :retailer_photos,
                    :advertisements,
-                   :retailer_reviews
-                   :country
+                   :retailer_reviews,
+                   :password,
+                   :password_confirmation,
+                   :photo_url,
+                   :lat,
+                   :lng,
+                   :employee
     include_fields :first_name,
                    :last_name,
                    :email,
@@ -112,13 +117,8 @@ RailsAdmin.config do |config|
                    :gst_number,
                    :adhaar_number,
                    :pan_number,
-                   :lat,
-                   :lng,
                    :employee_id,
                    :active,
-                   :password,
-                   :password_confirmation,
-                   :photo_url,
                    :account_type,
                    :account_status,
                    :username,
@@ -128,24 +128,88 @@ RailsAdmin.config do |config|
       field :city do
         partial "city"
       end
+      exclude_fields :username,
+                     :rating,
+                     :password,
+                     :password_confirmation,
+                     :photo_url,
+                     :unlock_token,
+                     :reset_password_sent_at,
+                     :remember_created_at,
+                     :failed_attempts,
+                     :locked_at,
+                     :confirmation_token,
+                     :confirmed_at,
+                     :confirmation_sent_at,
+                     :unconfirmed_email,
+                     :login_histories,
+                     :employee_roles,
+                     :retailer_product_categories,
+                     :product_categories,
+                     :retailer_products,
+                     :retailer_photos,
+                     :advertisements,
+                     :retailer_reviews,
+                     :country,
+                     :lat,
+                     :lng,
+                     :photos,
+                     :token,
+                     :employee
     end 
 
     edit do
       field :city do
         partial "city"
       end
+      exclude_fields :username,
+                     :rating,
+                     :password,
+                     :password_confirmation,
+                     :photo_url,
+                     :unlock_token,
+                     :reset_password_sent_at,
+                     :remember_created_at,
+                     :failed_attempts,
+                     :locked_at,
+                     :confirmation_token,
+                     :confirmed_at,
+                     :confirmation_sent_at,
+                     :unconfirmed_email,
+                     :login_histories,
+                     :employee_roles,
+                     :retailer_product_categories,
+                     :product_categories,
+                     :retailer_products,
+                     :retailer_photos,
+                     :advertisements,
+                     :retailer_reviews,
+                     :country,
+                     :lat,
+                     :lng,
+                     :photos,
+                     :token,
+                     :employee
     end 
 
     field :photos, :multiple_active_storage do 
       delete_method :delete_photos
     end
 
+    show do
+      include_fields :retailer_products
+    end
+
   end
 
   config.model 'RetailerProduct' do
     exclude_fields :retailer_product_photos
-    field :photos, :multiple_active_storage do 
-      delete_method :delete_photos
+    create do
+      exclude_fields :photos
+    end
+
+    edit do
+      exclude_fields :photos
     end
   end
 

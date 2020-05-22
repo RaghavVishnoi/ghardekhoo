@@ -5,17 +5,18 @@ class User < ApplicationRecord
          :recoverable, :rememberable
 
 
-    before_create :create_auth_token
-    before_create :generate_username
 
-    attr_accessor :profile_photo
-    attr_accessor :user_registration
+  before_create :create_auth_token
+  before_create :generate_username
 
-    validates :email, uniqueness: true, if: proc { email.present? }
-    validates :facebook_user_id, uniqueness: true, if: proc { facebook_user_id.present? }
-    validates :google_user_id, uniqueness: true, if: proc { google_user_id.present? }
+  attr_accessor :profile_photo
+  attr_accessor :user_registration
 
-    validates :first_name, presence: true
+  validates :email, uniqueness: true, if: proc { email.present? }
+  validates :facebook_user_id, uniqueness: true, if: proc { facebook_user_id.present? }
+  validates :google_user_id, uniqueness: true, if: proc { google_user_id.present? }
+
+  validates :first_name, presence: true
 	validates :phone, presence: true, if: proc{ user_registration == true }
 	validates_presence_of :password, if: proc{ :password_required? && user_registration == true}
 	validates_confirmation_of :password, if: proc{ :password_required? && user_registration == true}

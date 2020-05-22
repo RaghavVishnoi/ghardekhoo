@@ -19,7 +19,7 @@
                   <% category.product_sub_categories.each do |sub_category| %>
                     <li>
                       <% retailer_count = retailers_count.present? ? retailers_count[sub_category.id]&.pluck(:retailer_id)&.uniq&.count : 0 %>
-                      <a class="pointer" onclick="searchBySubCategory('<%=sub_category.id%>')"><b><%= sub_category.name %></b></a>
+                      <a class="pointer" onclick="searchBySubCategory('<%=sub_category.id%>')"><b><%= sub_category.p_name %></b></a>
                       <sapn class="category-counter"><b><%= retailer_count || 0%></b></sapn>
                     </li>
                   <% end %>  

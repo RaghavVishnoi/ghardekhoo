@@ -5,7 +5,7 @@ $(document).ready(function(){
         var category_id = $('#retailer_search_hidden_fields #category_id').val();
         var city = $('#retailer_search_hidden_fields #city').val();
         var state = $('#retailer_search_hidden_fields #state').val();
-        start_spin('customer-list');
+        start_spinner('customer-list');
         $('#search_retailers_form #search_value').val(search_value);
         $('#search_retailers_form #category_id').val(category_id);
         $('#search_retailers_form #city').val(city);
@@ -24,7 +24,7 @@ $(document).ready(function(){
   })
 
   $('#new_user button').click(function(){
-    start_spin('new_user')
+    start_spinner('new_user')
   })
 
 });
@@ -33,13 +33,13 @@ function get_subcategories(element){
   var category = $(element).val();
   $('#subcategory_form #category_id').val(category);
   $('#subcategory_form #element_id').val('request-sub-category');
-  start_spin('content')
+  start_spinner('content')
   $('#subcategory_form').trigger('submit.rails');
 }
 
 function populateCity(state){
   var selectedState = state.value
-  start_spin('retailer_state')
+  start_spinner('retailer_state')
   $('#retailers_city_list_form #state_name').val(selectedState);
   $('#retailers_city_list_form').trigger('submit.rails')
 }
@@ -47,7 +47,7 @@ function populateCity(state){
 function setLocation(city){
   var selectedCity = city.value
   var selectedState = $('#retailer_state').val();
-  start_spin('retailer_state')
+  start_spinner('retailer_state')
   $('#retailers_set_location_form #retailer_city_name').val(selectedCity);
   $('#retailers_set_location_form #retailer_state_name').val(selectedState);
   $('#retailers_set_location_form').trigger('submit.rails')
@@ -73,7 +73,7 @@ function clearFilter(){
   var category_id = $('#retailer_search_hidden_fields #category_id').val();
   var city = $('#retailer_search_hidden_fields #city').val();
   var state = $('#retailer_search_hidden_fields #state').val();
-  start_spin('customer-list');
+  start_spinner('customer-list');
   $('#search_retailers_form #search_value').val(search_value);
   $('#search_retailers_form #category_id').val(category_id);
   $('#search_retailers_form #city').val(city);
@@ -87,7 +87,7 @@ function applySubCategory(element){
   var category_id = $('#retailer_search_hidden_fields #category_id').val();
   var city = $('#retailer_search_hidden_fields #city').val();
   var state = $('#retailer_search_hidden_fields #state').val();
-  start_spin('customer-list');
+  start_spinner('customer-list');
   $('#search_retailers_form #sub_category_id').val(sub_category_id);
   $('#search_retailers_form #search_value').val(search_value);
   $('#search_retailers_form #category_id').val(category_id);
@@ -102,7 +102,7 @@ function searchBySubCategory(sub_category_id){
   window.location = '/retailers/search?category_id=&state='+state+'&city='+city+'&sub_category_id='+sub_category_id
 }
 
-function start_spin(targetId){
+function start_spinner(targetId){
     var opts = {
       lines: 13, // The number of lines to draw
       length: 15, // The length of each line
@@ -120,7 +120,7 @@ function start_spin(targetId){
       fps: 20, // Frames per second when using setTimeout() as a fallback in IE 9
       zIndex: 2e9, // The z-index (defaults to 2000000000)
       className: 'spinner', // The CSS class to assign to the spinner
-      // top: '50%', // Top position relative to parent
+      top: '25%', // Top position relative to parent
       left: '50%', // Left position relative to parent
       shadow: 'none', // Box-shadow for the lines
       position: 'absolute' // Element positioning
@@ -138,7 +138,7 @@ function stop_spin(){
 function getCities(state){
 	state_code = state.value
 	$('#city_list_form #name').val(state_code);
-  start_spin('categories-homepage')
+  start_spinner('categories-homepage')
 	$('#city_list_form').trigger('submit.rails');
 }
 
@@ -146,7 +146,7 @@ function cityRetailers(city_name){
 	state_code = $('#state-list select').val();
 	$('#city_retailers_form #state_name').val(state_code)
 	$('#city_retailers_form #city_name').val(city_name)
-  start_spin('categories-homepage')
+  start_spinner('categories-homepage')
 	$('#city_retailers_form').trigger('submit.rails')
 }
 

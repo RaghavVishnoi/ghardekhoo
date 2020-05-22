@@ -47,16 +47,22 @@
             <li class="pull-left"><a href="#">Don't have an account?</a></li>
             <li class="pull-right"><a href="#">Lost your password?</a></li>
           </ul>
-          <hr />
-          <div class="facebook" id="facebook">
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size = "large">
-            </fb:login-button>
+          <div class="col-sm-12">
+            <div class="col-sm-6">
+              <%= link_to '/auth/facebook' do%>
+                <div class="btn-lg btn-block btn-social btn-facebook facebook", id="facebook"> 
+                  <i class="fa fa-facebook"></i> <b>Sign in</b>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-sm-6">
+              <div class="google" >
+                <a class="btn btn-block btn-social btn-google social-login-button" href="/auth/google_oauth2">
+                  <span class="fa fa-google"></span><b> Sign in </b>
+                </a>
+              </div>  
+            </div>
           </div>
-          <div class="google" >
-            <a class="btn btn-block btn-social btn-google social-login-button" href="/auth/google_oauth2">
-              <span class="fa fa-google"></span><b> Sign in </b>
-            </a>
-          </div>  
         </div>
       </div>
     </div>

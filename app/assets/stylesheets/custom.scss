@@ -198,9 +198,24 @@ footer{
 }
 
 .facebook{
-	float: left;
-    margin-right: 8px;
-	margin-left: 72px;
+	font-size: 15px;
+  padding-left: 50px !important;
+  padding-top: 12px !important;
+  height: 40px !important;
+}
+
+.google{
+	.btn-social{
+		  height: 40px !important;
+		  padding-top: 12px !important;
+		  span{
+		  	padding-top: 9px !important;
+		  }
+	}
+}
+
+.page-login-form{
+	height: 400px !important;
 }
 
 .btn-social{

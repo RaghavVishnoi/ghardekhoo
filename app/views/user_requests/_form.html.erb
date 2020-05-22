@@ -2,7 +2,7 @@
     <div class="col-sm-6">
       <div class="form-group mb30">
         <label class="control-label">Service Category</label> 
-        <%= f.select :product_category_id, options_for_select(categories), {include_blank: 'Please select'}, class: 'form-control input-md', onchange: 'get_subcategories(this)' %>
+        <%= f.select :product_category_id, options_for_select(categories.pluck(:name, :id)), {include_blank: 'Please select'}, class: 'form-control input-md', onchange: 'get_subcategories(this)' %>
       </div>
     </div>
     <div class="col-sm-6">
