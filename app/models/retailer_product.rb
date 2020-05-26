@@ -12,7 +12,7 @@ class RetailerProduct < ApplicationRecord
 	end
 
 	def name
-		"#{retailer.name} - #{product_name} - #{sku_code}"
+		"#{retailer&.name} - #{product_name} - #{sku_code}"
 	end
 
 	def default_value
