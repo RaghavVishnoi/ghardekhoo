@@ -22,7 +22,7 @@ development:
   # host: <%= Rails.application.secrets.database['host'] %>
   username: postgres #<%= Rails.application.secrets.database['username'] %>
   password: postgres #<%= Rails.application.secrets.database['password'] %>
-  database: ghardekhoo_development
+  database: ghardekhoo-development
 
 production:
   <<: *default 

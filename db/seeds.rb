@@ -76,3 +76,5 @@ states_list.keys.each do |state_code|
 		City.find_or_create_by(state_id: state.id, name: city_name, active: true)
 	end
 end
+
+Admin.find_or_create_by(email: 'admin@ghardekhoo.com', password: 'admin@123')
