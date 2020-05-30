@@ -17,7 +17,7 @@ class UserRequestsController < ApplicationController
 			@user_operation = true
 			flash[:success] = t('users.request_success')
 		else
-			flash[:error] = @user_request.errors.full_messages.join(',')
+			flash[:error] = @user_request.errors.full_messages.join('<br>')
 		end
 	rescue StandardError => ex
 		flash[:error] = ex.message
@@ -33,13 +33,19 @@ class UserRequestsController < ApplicationController
 			flash[:success] = t('users.request_delete')
 			redirect_to user_requests_path
 		else
-			flash[:error] = @user_request.errors.full_messages.join(',')
+			flash[:error] = @user_request.errors.full_messages.join('<br>')
 		end
 	end
 
 	private
 		def user_request_params
-			params.require(:user_request).permit(:product_category_id, :product_sub_category_id, :status, :subject, :description)
+			params.require(:user_request).permit(
+				:product_category_id, 
+				:product_sub_category_id, 
+				:status, 
+				:subject, 
+				:description
+			)
 		end
 
 end

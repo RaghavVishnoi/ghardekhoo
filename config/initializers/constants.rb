@@ -1,3 +1,5 @@
+CONFIG_CONSTANTS = YAML.load_file("#{Rails.root}/config/config_variables.yml")
+EMAIL_SUBJECTS = CONFIG_CONSTANTS['mailer']['subjects']
 PRODUCTS_PER_PAGE=10
 CATEGORY_ICONS = {
 	"construction" => "fa-building",

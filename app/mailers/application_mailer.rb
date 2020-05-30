@@ -1,6 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
   
-  default from: 'info@hardekhoo-staging.herokuapp.com'
+  default from: 'info@ghardekhoo.com'
   layout 'mailer'
 
 
