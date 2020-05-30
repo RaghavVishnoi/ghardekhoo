@@ -227,6 +227,10 @@ class RetailersController < ApplicationController
 	  def set_defaults
 			@states = State.where(active: true).pluck(:name)
 			@cities = []
+			if params[:state].present?
+				state = State.find_by(name: params[:state])
+				@cities = state.cities.pluck(:name)
+			end
 		end
 
 end
