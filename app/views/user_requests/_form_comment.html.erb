@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-12 col-md-10 col-md-offset-1">
+  	<%= form_for user_request_reply, remote: true, id: 'user_request_reply' do |f| %>
+  		<div class="col-sm-12">
+      		<div class="form-group mb30">
+		        <label class="control-label" for="textarea"></label> 
+		        <%= f.text_area :description, class: 'form-control', rows: 4, placeholder: 'Add your comment here'%>
+		        <%= f.hidden_field :user_request_id, value: "#{@user_request.id}"%>
+		        <%= f.hidden_field :replied_by, value: "user"%>
+		    </div>
+		</div>
+		<div class="col-sm-3">
+	      	<div class="form-group mb30">
+	        	<%= f.submit "Submit", class: 'form-control submit-reply-button', onclick: 'start_spinner("comment-form-container")', data: {disable_with: 'Submitting..'}%>
+	      	</div>
+	    </div>    
+    <% end %>
+  </div>
+</div>
