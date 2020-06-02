@@ -182,6 +182,7 @@ footer{
 	padding: 0px !important;
 	.alert{
 		padding: 15px !important;
+		border-radius: 7px !important;
 	}
 }
 
@@ -420,4 +421,8 @@ footer{
 	background-color: #ee8022 !important;
 	font-weight: 600 !important;
 	color: #fff !important;
+}
+.alert-dismissible .close{
+	top: -7px !important;
+
 }

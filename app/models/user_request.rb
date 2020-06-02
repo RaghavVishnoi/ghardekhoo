@@ -28,7 +28,7 @@ class UserRequest < ApplicationRecord
 
 	private
 		def set_email_params
-			if status_changed? && self.old_status.present?
+			if status_changed? && status_was.present?
 				self.is_email_required =  true
 				self.old_status = status_was
 			end
