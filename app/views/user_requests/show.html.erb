@@ -38,6 +38,53 @@
         </div>	
       </div>
     </div>
+    <div class = "row">
+    	<div class="col-sm-12 col-md-10 col-md-offset-1">
+	    	<div id="comments">
+				<div class="inner-box">
+				    <h3>Comments</h3>
+				    <ol class="comments-list">
+				    	<% @user_request.user_request_replies.order('created_at asc').each do |reply| %>
+						    <li>
+						        <div class="media">
+						          <div class="info-body">
+						            <div class="media-heading">
+						              <% if reply.replied_by == 'user' %>	
+						              	<h4 class="name"><%= reply&.user&.name %></h4>
+						              <% else %>
+						              	<h4 class="name">Support Team</h4>
+						              <% end %>	 | 
+						              <span class="comment-date"><%= reply.updated_at.strftime('%b %d, %Y') %></span>
+						            </div> 
+						            <p><%= reply.description %></p>
+						          </div>
+						        </div>
+						    </li>
+						<% end %>    
+				    </ol>
+				</div>
+			</div>
+		</div>	
+	</div>		
+    <div class="row">
+      <div class="col-sm-12 col-md-10 col-md-offset-1">
+      	<%= form_for @user_request_reply, remote: true, id: 'user_request_reply' do |f| %>
+      		<div class="col-sm-12">
+	      		<div class="form-group mb30">
+			        <label class="control-label" for="textarea"></label> 
+			        <%= f.text_area :description, class: 'form-control', rows: 4, placeholder: 'Add your comment here'%>
+			        <%= f.hidden_field :user_request_id, value: "#{@user_request.id}"%>
+			        <%= f.hidden_field :replied_by, value: "user"%>
+			    </div>
+			</div>
+			<div class="col-sm-3">
+		      	<div class="form-group mb30">
+		        	<%= f.submit "Submit", class: 'form-control submit-reply-button', onclick: 'start_spinner("user_request_reply")', data: {disable_with: 'Submitting..'}%>
+		      	</div>
+		    </div>    
+	    <% end %>
+      </div>
+    </div>
   </div>
 </section> 
 <!-- Content section End -->

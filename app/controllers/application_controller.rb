@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def access_denied
   	if current_user.blank?
   		flash[:error] = t('users.access_denied')
-  		redirect_to root_path
+  		redirect_to new_user_session_path
   	end
   end
 

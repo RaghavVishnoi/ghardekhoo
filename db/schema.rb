@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_17_132823) do
+ActiveRecord::Schema.define(version: 2020_06_01_115319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 2020_05_17_132823) do
     t.integer "product_sub_category_id"
     t.text "description"
     t.integer "status", default: 0
+    t.string "unit"
     t.index ["status"], name: "index_retailer_products_on_status"
   end
 
@@ -226,6 +227,16 @@ ActiveRecord::Schema.define(version: 2020_05_17_132823) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_request_replies", force: :cascade do |t|
+    t.integer "user_request_id"
+    t.integer "user_id"
+    t.integer "admin_id"
+    t.string "replied_by"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_requests", id: :serial, force: :cascade do |t|
     t.integer "product_category_id"
     t.integer "product_sub_category_id"
@@ -278,6 +289,9 @@ ActiveRecord::Schema.define(version: 2020_05_17_132823) do
   add_foreign_key "retailer_products", "retailers"
   add_foreign_key "retailer_reviews", "retailers"
   add_foreign_key "retailer_reviews", "users"
+  add_foreign_key "user_request_replies", "admins"
+  add_foreign_key "user_request_replies", "user_requests"
+  add_foreign_key "user_request_replies", "users"
   add_foreign_key "user_requests", "product_categories"
   add_foreign_key "user_requests", "product_sub_categories"
   add_foreign_key "user_requests", "users"

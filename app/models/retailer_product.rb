@@ -1,4 +1,8 @@
 class RetailerProduct < ApplicationRecord
+	
+	attr_accessor :state
+	attr_accessor :city
+
 	belongs_to :retailer
 	belongs_to :product_sub_category
 	has_many :retailer_product_photos
@@ -17,6 +21,18 @@ class RetailerProduct < ApplicationRecord
 
 	def default_value
 		self.status = 0
+	end
+
+	def retailer_state
+		retailer&.state
+	end
+
+	def retailer_city
+		retailer&.city
+	end
+
+	def is_retailer_active
+		retailer&.active ? 'Yes' : 'No'
 	end
 	
 end

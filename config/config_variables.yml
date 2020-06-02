@@ -1,3 +1,6 @@
 mailer:
   subjects:
     submit_request: 'Request submit - #@{request_number}'
+    update_request_status: 'Status update - #@{request_number}'
+    user_reply: '#@{request_number} - @{user_name} replied'
+    support_reply: '#@{request_number} - Support Team replied'

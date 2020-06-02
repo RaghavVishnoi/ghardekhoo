@@ -23,6 +23,7 @@ class Retailer < ApplicationRecord
 
   before_create :create_auth_token
   before_save :unformat_phone
+  after_save :update_retailer_product
   before_create :generate_username
 
   validates :first_name, presence: true
@@ -107,6 +108,10 @@ class Retailer < ApplicationRecord
 private
   def create_auth_token
     self.token ||= Token.new.generate
+  end
+
+  def update_retailer_product
+    # retailer_products.update_all(state: self.state, city: self.city) if retailer_products.present?
   end
   
 end

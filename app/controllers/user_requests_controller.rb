@@ -1,6 +1,6 @@
 class UserRequestsController < ApplicationController
 
-	before_action :access_denied, only: [:index, :new]
+	before_action :access_denied, only: [:index, :new, :show, :create, :destroy]
 
 	def index
 		@requests = current_user.user_requests.where(active: true).order('created_at')
@@ -25,6 +25,7 @@ class UserRequestsController < ApplicationController
 
 	def show
 		@user_request = UserRequest.find_by(id: params[:id])
+		@user_request_reply = UserRequestReply.new
 	end
 
 	def destroy

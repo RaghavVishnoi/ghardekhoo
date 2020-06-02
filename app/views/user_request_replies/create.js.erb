@@ -1,8 +1,8 @@
-<% if @user_operation == true %>
-	window.location = '/user_requests'
-<% else %>
+<% if @error == true %>
 	renderFlash('div.flash_container', $("<%=j render 'layouts/flash_message'%>"));
 	scrollTop()
 	<% flash.discard %>
 	stop_spin();
+<% else %>
+	location.href = '<%= @redirect_path %>'
 <% end %>

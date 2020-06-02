@@ -37,7 +37,7 @@ RailsAdmin.config do |config|
     bulk_delete
     show
     edit do
-      except ['RetailerProductPhoto', 'Advertisement']
+      except ['RetailerProductPhoto', 'Advertisement', 'UserRequestReply']
     end
     upload_photo do
       only ['Retailer', 'RetailerProduct', 'Advertisement']
@@ -211,6 +211,31 @@ RailsAdmin.config do |config|
     edit do
       exclude_fields :photos
     end
+
+    configure :retailer_state do
+      searchable [{Retailer => :state}]
+      sortable true
+      filterable true
+      queryable true
+    end
+
+    configure :retailer_city do
+      searchable [{Retailer => :city}]
+      sortable true
+      filterable true
+      queryable true
+    end
+
+    configure :is_retailer_active do
+      searchable [{Retailer => :active}]
+      sortable true
+      filterable true
+      queryable true
+    end
+
+    list do
+      include_fields :retailer_state, :retailer_city, :is_retailer_active
+    end
   end
 
   config.model 'Advertisement' do
@@ -270,6 +295,38 @@ RailsAdmin.config do |config|
         end
       end
       fields :photo_url, :retailer_product
+    end
+  end
+
+  config.model 'UserRequest' do
+    list do
+      exclude_fields :user_request_replies, :product_category, :active
+      configure :status do
+        searchable true
+        queryable false
+      end
+      configure :product_sub_category do
+        searchable [{ProductSubCategory => :p_name}]
+      end
+      fields :number, :subject, :description, :status, :product_sub_category, :user
+    end
+
+    show do
+      exclude_fields :product_category, :active
+    end
+
+    edit do
+      exclude_fields :user_request_replies, :product_category, :active, :product_sub_category, :subject, :description, :user, :number
+    end
+  end
+
+  config.model 'UserRequestReply' do
+    create do
+      exclude_fields :user, :replied_by
+    end
+
+    edit do
+      exclude_fields :user, :replied_by
     end
   end
 

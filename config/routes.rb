@@ -65,6 +65,7 @@ Rails.application.routes.draw do
   resources :retailer_reviews, only: [:create, :edit, :update]
   resources :users, only: [:new, :create]
   resources :user_requests, only: [:index, :new, :create, :show, :destroy]
+  resources :user_request_replies, only: [:create]
 
   get '/retailers/:username' => 'retailers#show'
   get '/users/facebook_login' => 'users#facebook_login'
