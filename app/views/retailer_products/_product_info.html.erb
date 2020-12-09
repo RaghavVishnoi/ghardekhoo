@@ -1,0 +1,179 @@
+<!-- Start Content -->
+<div id="content">
+  <div class="container">
+    <div class="row">
+      <!-- Product Info Start -->
+      <div class="product-info">
+        <div class="col-sm-8">
+          <div class="inner-box ads-details-wrapper">
+            <h2><%= retailer.name %></h2>
+            <div class="info ratings">
+              <% avg_ratings = 5 %>
+              <%(1...6).each do |index|%>
+                <span class="fa fa-star <%='checked' if index <= avg_ratings.to_i%>"></span>
+              <% end %> 
+              (<b>6</b> )              
+            </div>
+            <div id="owl-demo" class="owl-carousel owl-theme">
+              <% retailer_product_photos = retailer_product.retailer_product_photos %>
+              <% if retailer_product_photos.present? %>
+                <% retailer_product_photos.each do |retailer_product_photo| %>
+                  <div class="item">
+                    <%= image_tag retailer_product_photo.photo_url, class: 'retailer-photo' %>
+                  </div>
+                <% end %>
+              <% else %>  
+                <div class="item">
+                  <img src="/assets/missing_retailer_photo" alt="" class="retailer-photo">
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="box">
+            <h2 class="title-2"><strong>Details</strong></h2>
+              <div class="row">
+              <div class="ads-details-info col-md-7">
+                <p class="mb15"> <%= retailer_product.description %></p>
+                <ul class="list-circle">
+                  <li><i class="fa fa-check-circle"></i> <%= retailer_product.product_type.name %></li>
+                  <li><i class="fa fa-check-circle"></i> <%= number_to_currency(retailer_product.min_price, unit: '₹ ') %> <%= " - #{number_to_currency(retailer_product.max_price, unit: '₹ ' )}" if retailer_product.max_price.present? %></li>
+                </ul>
+                <hr />
+                <div class="ads-action">
+                  <ul class="list-border">
+                    <li>
+                      <i class=" fa fa-phone"></i> <%= retailer_product.retailer&.phone %></li>
+                    <li>
+                      <i class=" fa fa-envelope-o"></i>
+                      <%= retailer_product.retailer&.email %>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <aside class="panel panel-body panel-details">
+                  <ul>
+                    <li>
+                    <p class="no-margin"><strong>Category:</strong> <%= retailer_product.product_sub_category.p_name %></p>
+                    </li>
+                    <li>
+                    <p class="no-margin"><strong>Address:</strong> <%= retailer_product.address %> <!-- <a href="/retailer_location?lat=1212&lng=1212" target="_blank"> <i class="fa fa-street-view" aria-hidden="true"></i></a> --></p>
+                    </li>
+                    <li>
+                    <p class=" no-margin "><strong>City:</strong> <%= retailer_product.city %></p>
+                    </li>
+                    <li>
+                    <p class="no-margin"><strong>State:</strong> <%= retailer_product.state %> </p>
+                    </li>
+                  </ul>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="inner-box">
+            <div class="widget-title">
+              <h4>Advertisement</h4>
+            </div>
+            <a href="#"><img src="<%= profile_advertisement&.photo_url %>" alt=""></a>
+          </div>
+        <div class="col-xs-12">
+          <div class="features-box wow fadeInDownQuick" data-wow-delay="0.3s">
+            <div class="features-icon">
+              <i class="lnr lnr-star">
+              </i>
+            </div>
+            <div class="features-content">
+              <h4>
+                Fraud Protection
+              </h4>
+              <p>
+                We have all the trusted retailers associated with us and providing you the best quality with minimum cost.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="features-box wow fadeInDownQuick" data-wow-delay="0.6s">
+            <div class="features-icon">
+              <i class="lnr lnr-chart-bars"></i>
+            </div>
+            <div class="features-content">
+              <h4>
+                No Extra Fees 
+              </h4>
+              <p>
+                We are not asking to pay extra fee for products and services while delivering to you.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="features-box wow fadeInDownQuick" data-wow-delay="0.9s">
+            <div class="features-icon">
+              <i class="lnr lnr-spell-check"></i>
+            </div>
+            <div class="features-content">
+              <h4>
+                Verified Data/Products
+              </h4>
+              <p>
+                All the retailers and products are verified by our experts to avoid any kind of fraud.
+              </p>
+            </div>
+          </div>
+           </div>
+        <div class="col-xs-12">
+          <div class="features-box wow fadeInDownQuick" data-wow-delay="0.9s">
+            <div class="features-icon">
+              <i class="lnr lnr-smile"></i>
+            </div>
+            <div class="features-content">
+              <h4>
+                Service at your door
+              </h4>
+              <p>
+                When your deadline is non-negotiable, we are providing fast service at your door.
+              </p>
+            </div>
+          </div>
+           </div>
+
+        </div>
+      </div>
+  </div>         
+</div>
+<!-- End Content -->
+
+<!-- Related Products Start -->
+<section class="featured-lis mb30" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 wow fadeIn" data-wow-delay="0.5s">
+        <h3 class="section-title">Nearby Locations</h3>
+        <div id="new-products" class="owl-carousel">
+          <% retailer_product.nearby_locations.each do |retailer_product| %>
+            <a href="/retailer_product/<%= retailer_product.access_token %>">
+              <div class="item retailer-product">
+                <div class="product-item">
+                  <div class="carousel-thumb">
+                    <% retailer_product_photos = retailer_product.retailer_product_photos %>
+                    <% if retailer_product_photos.present? %>
+                      <img src="<%= retailer_product_photos.first.photo_url %>" alt="" class="retailer-product-photo">
+                    <% else %>
+                      <img src="/assets/missing_retailer_photo" alt="" class="retailer-product-photo">
+                    <% end %>
+                  </div>    
+                  <%= retailer_product.product_type&.name %> - <%= retailer_product.retailer&.name %>
+                  <span class="price"><%= number_to_currency(retailer_product.min_price, unit: '₹ ') %> <%= " - #{number_to_currency(retailer_product.max_price, unit: '₹ ' )}" if retailer_product.max_price.present? %></span>  
+                </div>
+              </div>
+            </a>  
+          <% end %>  
+        </div>
+      </div> 
+    </div>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+<%= form_tag '/search_products', method: 'GET', remote: true, id: 'search_products_form' do |f| %>
+	<%= hidden_field_tag :city %>
+	<%= hidden_field_tag :state %>
+	<%= hidden_field_tag :sub_category_id %>
+	<%= hidden_field_tag :category_id %>
+	<%= hidden_field_tag :address %>
+	<%= hidden_field_tag :product_name %>
+	<%= hidden_field_tag :min_price %>
+	<%= hidden_field_tag :max_price %>
+	<%= hidden_field_tag :dealer_name %>
+	<%= hidden_field_tag :product_types %>
+	<%= hidden_field_tag :action_type %>
+	<%= hidden_field_tag :operation %>
+<% end %>

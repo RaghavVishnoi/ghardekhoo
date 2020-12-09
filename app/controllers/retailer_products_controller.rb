@@ -1,6 +1,16 @@
 class RetailerProductsController < ApplicationController
 
 	before_action :find_retailer_product, only: [:upload_photos]
+	before_action :update_session_filter, only: [:search]
+	before_action :set_retailer_product, only: [:show]
+
+	def search
+		@action_type = params[:action_type]
+		@operation = params[:operation]
+		@retailer_products = Search::Products.new(params).fetch_records
+		@retailer_products = @retailer_products.includes(:product_sub_category, :retailer, :product_type).order('upload_date desc')
+		fetch_related_objects
+	end
 
 	def upload_photos
 		if @retailer_product.present?
@@ -28,6 +38,10 @@ class RetailerProductsController < ApplicationController
 		flash[:error] = ex.message
 	end
 
+	def show
+
+	end
+
 	private
 		def find_retailer_product
 			@retailer_product = RetailerProduct.find_by(id: params[:id])
@@ -48,6 +62,21 @@ class RetailerProductsController < ApplicationController
 	  	{url: url_for(result.first), attachment_id: result.first&.id}
 	  rescue StandardError => ex
 			flash[:error] = ex.message
+	  end
+
+	  def update_session_filter
+	  	session[:filter] = params
+	  end
+
+	  def fetch_related_objects
+	  	if @action_type.blank? || @action_type == 'home'
+	  		@product_states = @retailer_products.where(main: true).limit(20).group_by(&:state)
+				@new_products = @retailer_products.where('upload_date >= ?', (Date.current - NEW_PRODUCT_DAYS.days)).group_by(&:state)
+	  	end
+	  end
+
+	  def set_retailer_product
+	  	@retailer_product = RetailerProduct.find_by(access_token: params[:access_token])
 	  end
 
 end

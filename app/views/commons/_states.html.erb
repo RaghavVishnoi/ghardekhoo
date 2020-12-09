@@ -1,1 +1,1 @@
-<%= select_tag :states, options_for_select(states, default_state), {class: 'dropdown-product selectpicker', :prompt => "Select State", onchange: "getCities(this)" }%>  
+<%= select_tag :states, options_for_select(states, (default_state || find_selected_state(session))), {class: 'dropdown-product selectpicker', :prompt => "Select City", onchange: "getCities(this)" }%>  

@@ -52,7 +52,7 @@
 	}
 	.contact-info{
     	font-size: 13px;
-    	margin-bottom: 10px;
+    	margin-bottom: 7px;
     	i{
     		margin-right: 7px;
     	}
@@ -155,6 +155,10 @@ footer{
 	.retailer-photo{
 		height: 350px !important;
 	}
+
+	.retailer-product-photo{
+		height: 120px !important;
+	}
 }
 
 .ads-details-wrapper{
@@ -165,7 +169,7 @@ footer{
 
 .retailer-product{
 	img{
-		height: 120px;
+		height: 120px !important;
 		width: 210px;
 	}
 }
@@ -425,4 +429,14 @@ footer{
 .alert-dismissible .close{
 	top: -7px !important;
 
+}
+
+.reset-filter{
+	text-align: right;
+  cursor: pointer;
+  color: blue;
+}
+
+.main-container{
+	padding: 0px !important;
 }

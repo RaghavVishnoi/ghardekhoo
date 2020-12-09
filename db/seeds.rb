@@ -11,7 +11,8 @@ employee_roles = [
 ]
 
 product_categories = [
-	{name: 'construction'}, {name: 'carpentry'}, {name: 'electric'}, {name: 'paints'}, {name: 'plumbing'}, {name: 'security'}, {name: 'real_estate'}, {name: 'property_dealer'}
+	{name: 'All Residentials'},
+	{name: 'All Commentials'}
 ]
 
 employee_roles.each do |employee_role|
@@ -21,47 +22,20 @@ end
 product_categories.each do |product_category|
 	category = ProductCategory.find_or_create_by(product_category)
 	case product_category[:name]
-	when 'construction'
-		category.product_sub_categories.find_or_create_by(p_name: 'Bricks')
-		category.product_sub_categories.find_or_create_by(p_name: 'Cement')
-		category.product_sub_categories.find_or_create_by(p_name: 'Concrete')
-		category.product_sub_categories.find_or_create_by(p_name: 'Iron Rod')
-		category.product_sub_categories.find_or_create_by(p_name: 'Concrete Mixer Machine')
-		category.product_sub_categories.find_or_create_by(p_name: 'Tiles')
-		category.product_sub_categories.find_or_create_by(p_name: 'Granite')
-		category.product_sub_categories.find_or_create_by(p_name: 'Other')
-	when 'carpentry'
-		category.product_sub_categories.find_or_create_by(p_name: 'Wood')
-		category.product_sub_categories.find_or_create_by(p_name: 'Glass')
-		category.product_sub_categories.find_or_create_by(p_name: 'Steel')
-		category.product_sub_categories.find_or_create_by(p_name: 'Other')
-	when 'electric'
-		category.product_sub_categories.find_or_create_by(p_name: 'Machines & Equipments')
-	when 'paints'
-		category.product_sub_categories.find_or_create_by(p_name: 'Berger Paints')
-		category.product_sub_categories.find_or_create_by(p_name: 'Asian Paints')
-		category.product_sub_categories.find_or_create_by(p_name: 'Other Paints')
-	when 'plumbing'
-		category.product_sub_categories.find_or_create_by(p_name: 'Equipments')
-		category.product_sub_categories.find_or_create_by(p_name: 'Other')
-	when 'security'
-		category.product_sub_categories.find_or_create_by(p_name: 'Body Guard')
-		category.product_sub_categories.find_or_create_by(p_name: 'House Keeping')
-		category.product_sub_categories.find_or_create_by(p_name: 'Camera Installation')
-		category.product_sub_categories.find_or_create_by(p_name: 'Other')
-	when 'real_estate'
-		category.product_sub_categories.find_or_create_by(p_name: 'Rent')
-		category.product_sub_categories.find_or_create_by(p_name: 'Land')
+	when 'All Residentials'
+		category.product_sub_categories.find_or_create_by(p_name: 'Residential Apartment')
+		category.product_sub_categories.find_or_create_by(p_name: 'Independent House/Villa')
 		category.product_sub_categories.find_or_create_by(p_name: 'Plot')
 		category.product_sub_categories.find_or_create_by(p_name: 'Flat')
 		category.product_sub_categories.find_or_create_by(p_name: 'Other')
-	when 'property_dealer'
-		category.product_sub_categories.find_or_create_by(p_name: 'Other')
+	when 'All Commentials'
+		category.product_sub_categories.find_or_create_by(p_name: 'Ready to move office space')
+		category.product_sub_categories.find_or_create_by(p_name: 'Bare shell office space')
 	end
 end
 
 ad_types = [
-	{name: 'WebBanner'}, {name: 'WebHomeListing'}, {name: 'ProfilePage'}, {name: 'WebFooterAds'}, {name: 'MobileBanner'}, {name: 'CustomerAppBanner'}
+	{name: 'WebBanner'}, {name: 'WebSlide'}
 ]
 
 ad_types.each do |ad_type|
@@ -77,4 +51,23 @@ states_list.keys.each do |state_code|
 	end
 end
 
-Admin.find_or_create_by(email: 'admin@ghardekhoo.com', password: 'admin@123')
+product_types = [
+	{name: '1 BHK', active: true},
+	{name: '2 BHK', active: true},
+	{name: '3 BHK', active: true},
+	{name: '4 BHK', active: true},
+	{name: '5 BHK', active: true},
+	{name: '6 BHK', active: true},
+	{name: '7 BHK', active: true},
+	{name: '8 BHK', active: true},
+	{name: '9 BHK', active: true},
+	{name: '9+ BHK', active: true}
+]
+
+product_types.each do |product_type|
+	p_type = ProductType.find_or_initialize_by(name: product_type[:name])
+	p_type.active = true
+	p_type.save
+end
+
+# Admin.find_or_create_by(email: 'admin@ghardekhoo.com', password: 'admin@123')

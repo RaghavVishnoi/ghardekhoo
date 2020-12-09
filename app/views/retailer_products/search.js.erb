@@ -1,0 +1,9 @@
+<% if @action_type.blank? || @action_type == 'home' %>
+	$('#category-container').html('<%=j render partial: "commons/template/categories", locals: {product_states: @product_states, new_products: @new_products}%>')
+<% elsif @action_type == 'list' %>
+	$('#retailer-list').html('<%=j render partial: "retailers/list", locals: {retailer_products: @retailer_products}%>')
+	<% if @operation == 'reset-filter'%>
+		$('#list-filter').html('<%=j render partial: "retailers/filters" %>')
+	<% end %>
+<% end %>
+stop_spin();

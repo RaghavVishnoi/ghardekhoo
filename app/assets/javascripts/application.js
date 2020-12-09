@@ -30,9 +30,11 @@
 //= require jquery_ujs
 //= require spinner
 //= require custom
+//= require slick
 //= require slideshow
 //= require autonumeric
 //= require bootstrap-phone-helper
+//= require dropdown-checkbox
 
 
 

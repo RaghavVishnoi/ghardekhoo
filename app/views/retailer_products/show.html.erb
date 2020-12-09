@@ -1,0 +1,10 @@
+<%# reviews = @retailer.retailer_reviews %>
+<%# ratings = reviews.pluck(:rating).compact.map(&:to_f) %>
+<%# avg_ratings = (ratings.sum/ratings.count).round if ratings.present? %>
+
+
+<%= render 'product_info', retailer_product: @retailer_product, retailer: @retailer_product.retailer %>
+
+<%#= render 'reviews', retailer: @retailer, retailer_review: @retailer_review, reviews: reviews %>
+
+<script type="text/javascript" src="/assets/main.js"></script>

@@ -1,1 +1,27 @@
-<%= select_tag :categories, options_for_select(categories.pluck(:name, :id), default_category), {class: 'dropdown-product selectpicker', :prompt => "Select Category" }%>
+ <% selected_categories = find_selected_categories(session) %>
+<div class="dropdown" id="category-filter">
+  <button class="btn btn-default dropdown-toggle" type="button" 
+          id="dropdownMenu1" data-toggle="dropdown" 
+          aria-haspopup="true" aria-expanded="true">
+    
+    Projects
+  </button>
+  <ul class="dropdown-menu checkbox-menu allow-focus" aria-labelledby="dropdownMenu1">
+  	<% filter_list.each_with_index do |filter, index| %>
+	  	<li>
+	      <label>
+	        <input type="checkbox"  id="category-<%= (index+1) %>" onchange="changeCategory($('#category-<%= (index+1) %>'))"> <%= filter.name %>
+	      </label>
+	      <ul style="margin-left: 20px;">
+	      	<% filter.product_sub_categories.where(active: true).each_with_index do |sub_filter, index_1| %>
+		      	<li>
+				      <label>
+				        <input type="checkbox" class="sub-category-<%= (index+1) %> sub-category" value="<%= sub_filter.id %>" id="sub-category-<%= (index+1) %>-check-<%= (index_1 + 1) %>" <%= 'checked' if selected_categories.include?(sub_filter.id.to_s)%>> <%= sub_filter.p_name %>
+				      </label>
+				    </li>		    
+			    <% end %>	
+			  </ul>
+	    </li>  
+    <% end %> 
+  </ul>
+</div>

@@ -1,0 +1,97 @@
+<div class="col-sm-9 page-content" id="customer-list">
+  <!-- Product filter Start -->
+ <!--  <div class="product-filter">
+    <div class="col-sm-4">
+      <div class="grid-list-count">
+        <a class="list switchToGrid" href="#"><i class="fa fa-list"></i></a>
+        <a class="grid switchToList" href="#"><i class="fa fa-th-large"></i></a>
+      </div>
+    </div>  
+  </div> -->
+  <!-- Product filter End -->
+
+  <!-- Adds wrapper Start -->
+  <div class="adds-wrapper">
+    <% if retailer_products.present? %>
+      <% retailer_products.each do |retailer_product| %>
+          <a href="/retailer_product/38344b381f2bc9ffb48f172b8d62b37bd60136d1">
+            <div class="item-list" id="retailer-card">
+              <div class="col-sm-2 no-padding photobox">
+                <div class="add-image">
+                  <% photo_url = "/assets/user_default.png" %>
+                  <img src="<%= retailer_product&.retailer_product_photos&.first&.photo_url || photo_url %>" />
+                </div>
+              </div>
+              <div class="col-xs-5 col-sm-5 col-md-6 add-desc-box col-sm-offset-1">
+                <div class="add-details">
+                  <h5 class="add-title"><%= retailer_product.product_name %></h5>
+                  <p>
+                    <span class="category btn btn-danger btn-sm">
+                      <%= retailer_product&.product_sub_category&.p_name  %>
+                    </span>
+                  </p>  
+                  <p>
+                    <b><%= number_to_currency(retailer_product.min_price.to_i, unit: '₹ ') %></b> to <b><%= number_to_currency(retailer_product.max_price.to_i, unit: '₹ ') %></b> | <%= retailer_product.unit %> | <%= retailer_product&.product_type&.name %>
+                  </p>
+                  <p>
+                    <span class="item-location">
+                      <%= retailer_product.address %>, <%= retailer_product.city %>, <%= retailer_product.state %>
+                    </span>
+                  </p>
+                  <p>
+                    <%= retailer_product&.retailer&.name %>
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-4 col-xs-4 col-md-3 text-right  price-box">
+                <div class="col-sm-12 padding-0">
+                  <p class="contact-info">
+                    <i class="fa fa-phone"></i><%= retailer_product&.retailer&.phone %>
+                  </p>
+                </div>
+                <% if retailer_product&.retailer&.email.present?%>
+                  <div class="col-sm-12 padding-0">  
+                    <p class="contact-info">
+                      <i class="fa fa-envelope-o"></i><%= retailer_product&.retailer&.email %>
+                    </p>
+                  </div>
+                <% end %>  
+                <div class="info ratings contact-info">
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star checked"></span>
+                  <span class="fa fa-star"></span>
+                  <span class="fa fa-star"></span> (
+                  <b>6 Users</b>)
+                </div>
+                <p class="contact-info">
+                  <a class="btn btn-primary btn-sm review"><i class="fa fa-eye"></i>
+                  <span>Reviews (0)</span></a> 
+                </p>   
+              </div>
+            </div>  
+          </a>  
+        <%end %>
+      <% else %>
+        <div class="card mx-auto my-5">
+          <div class="card-body">
+            <div class="avatar-placeholder placeholder rounded-circle"></div>
+            <p>No property found!</p>
+            <div class="text-placeholder placeholder w-75"></div>
+            <div class="text-placeholder placeholder w-50"></div>
+            <div class="text-placeholder placeholder w-75"></div>
+            <div class="text-placeholder placeholder w-100"></div>
+            <div class="text-placeholder placeholder w-100"></div>
+          </div>
+        </div>
+      <% end %>  
+    </div>
+  <!-- Adds wrapper End -->
+  
+  <!-- Start Pagination -->
+  <div class="pagination-bar pull-right">
+    <%#= paginate retailers %>
+  </div>
+  <!-- End Pagination -->
+</div>
+<%= render 'commons/search_products' %>

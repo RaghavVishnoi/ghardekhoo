@@ -5,13 +5,17 @@
     </div>  
 
     <div class="wrapper">
+
+      <div class="slider-add-container">
+        <%= render 'commons/template/slide_small', urls: web_slides('home') %>
+      </div>
       
       <div id="category-container">
-        <%= render 'commons/template/categories', retailers_count: @retailers_count %>
+        <%= render 'commons/template/categories', product_states: nil %>
       </div>  
 
       <div id="featured_list">
-        <%= render 'commons/template/featured_list', advertisements: @advertisements %>
+        <%#= render 'commons/template/featured_list', advertisements: @advertisements %>
       </div>  
 
       <%= render 'commons/template/features' %>
@@ -20,27 +24,13 @@
 
     </div>
 
-    <%= render 'commons/template/counter' %>
+    <%#= render 'commons/template/counter' %>
 
 <%= render 'commons/hidden_forms' %>
 
-<!-- <script>
-  window.onload = function() {
-    var startPos;
-    var geoSuccess = function(position) {
-      startPos = position;
-      $('#get_location #lat').val(startPos.coords.latitude)
-      $('#get_location #lng').val(startPos.coords.longitude)
-      start_spin('categories-homepage')
-      $('#get_location').trigger('submit.rails');
-    };
-    var geoError = function(error) {
-      console.log('Error occurred. Error code: ' + error.code);
-    };
-    navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
-
-  };
-
-  slideShow('<%=web_banners.count%>')
-
-</script> -->
+<script>
+  $(document).ready(function(){
+    start_spinner('category-container');
+    $('#search_products_form').trigger('submit.rails');
+  })
+</script>

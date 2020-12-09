@@ -5,12 +5,13 @@
 
 <script>
 	$(document).ready(function(){
-		$('#retailer_state').change(function(){
+		$('#retailer_state, #retailer_product_state').change(function(){
 			var url = '/state/'+$(this).val()+'/city_list?retailer_id=<%= params[:id] %>'
 			$.get(url)
 		})
-		if($('#retailer_state').val() != "" || $('#retailer_state').val() != null){
-			var url = '/state/'+$('#retailer_state').val()+'/city_list?retailer_id=<%= params[:id] %>'
+		if($('#retailer_state, #retailer_product_state').val() != "" || $('#retailer_state, #retailer_product_state').val() != null){
+			var state = $('#retailer_state, #retailer_product_state').val();
+			var url = '/state/'+state+'/city_list?retailer_id=<%= params[:id] %>'
 			$.get(url)
 		}
 	})

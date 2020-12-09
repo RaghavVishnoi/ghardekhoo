@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_115319) do
+ActiveRecord::Schema.define(version: 2020_12_08_120057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,13 @@ ActiveRecord::Schema.define(version: 2020_06_01_115319) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_types", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "retailer_photos", id: :serial, force: :cascade do |t|
     t.string "photo_url"
     t.string "lat"
@@ -155,7 +162,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_115319) do
   create_table "retailer_products", id: :serial, force: :cascade do |t|
     t.string "sku_code"
     t.string "product_name"
-    t.decimal "price"
+    t.decimal "min_price"
     t.integer "retailer_id"
     t.boolean "active"
     t.datetime "created_at", null: false
@@ -164,6 +171,15 @@ ActiveRecord::Schema.define(version: 2020_06_01_115319) do
     t.text "description"
     t.integer "status", default: 0
     t.string "unit"
+    t.string "city"
+    t.string "state"
+    t.integer "priority"
+    t.boolean "main", default: false
+    t.integer "max_price"
+    t.datetime "upload_date"
+    t.integer "product_type_id"
+    t.text "address"
+    t.string "access_token"
     t.index ["status"], name: "index_retailer_products_on_status"
   end
 
@@ -206,6 +222,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_115319) do
     t.string "username"
     t.text "about_business"
     t.float "rating"
+    t.string "access_token"
     t.index ["rating"], name: "index_retailers_on_rating"
     t.index ["reset_password_token"], name: "index_retailers_on_reset_password_token", unique: true
   end
@@ -286,6 +303,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_115319) do
   add_foreign_key "retailer_product_categories", "retailers"
   add_foreign_key "retailer_product_photos", "retailer_products"
   add_foreign_key "retailer_products", "product_sub_categories"
+  add_foreign_key "retailer_products", "product_types"
   add_foreign_key "retailer_products", "retailers"
   add_foreign_key "retailer_reviews", "retailers"
   add_foreign_key "retailer_reviews", "users"

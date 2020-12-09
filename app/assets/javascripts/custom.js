@@ -136,6 +136,7 @@ function stop_spin(){
 
 
 function getCities(state){
+  $('#btn-filter').attr('disabled', 'disabled')
 	state_code = state.value
 	$('#city_list_form #name').val(state_code);
   start_spinner('categories-homepage')
@@ -151,8 +152,74 @@ function cityRetailers(city_name){
 }
 
 function search_retailers(){
-  category_id = $('#category-list #categories').val();
-  state = $('#state-list #states').val();
-  city = $('#city-list #cities').val();
-  window.location = "/retailers/search?category_id="+category_id+"&state="+state+"&city="+city
+  if($('#action_type').val() == 'list'){
+    start_spinner('customer-list');
+  }else{
+    start_spinner('category-container');
+  }
+  var category_ids = find_selected_categories().join(',')
+  var state = $('#state-list #states').val();
+  var city = $('#city-list #cities').val();
+  var action_type = $('#action_type').val();
+  var min_price = $('#min_price').val();
+  var max_price = $('#max_price').val();
+  var product_types = find_selected_types().join(',')
+  var dealer_name = $('#dealer_name').val();
+  $('#search_products_form #sub_category_id').val(category_ids)
+  $('#search_products_form #city').val(city)
+  $('#search_products_form #state').val(state)
+  $('#search_products_form #min_price').val(min_price)
+  $('#search_products_form #max_price').val(max_price)
+  $('#search_products_form #product_types').val(product_types)
+  $('#search_products_form #dealer_name').val(dealer_name)
+  $('#search_products_form #action_type').val(action_type)
+  $('#search_products_form').trigger('submit.rails')
+}
+
+function find_selected_categories(){
+  var selected_categories = []
+  $('.sub-category').each(function(){
+    if($(this).prop('checked') == true){
+      selected_categories.push($(this).val());
+    }
+  })
+  return selected_categories
+}
+
+function find_selected_types(){
+  var selected_product_types = []
+  $('.product-types-filter').each(function(){
+    if($(this).prop('checked') == true){
+      selected_product_types.push($(this).val());
+    }
+  })
+  return selected_product_types
+}
+
+function resetFilter(){
+  if($('#action_type').val() == 'list'){
+    start_spinner('customer-list');
+  }else{
+    start_spinner('category-container');
+  }
+  resetSearchFields()
+  var action_type = $('#action_type').val();
+  $('#search_products_form #sub_category_id').val('')
+  $('#search_products_form #city').val('')
+  $('#search_products_form #state').val('')
+  $('#search_products_form #min_price').val('')
+  $('#search_products_form #max_price').val('')
+  $('#search_products_form #product_types').val('')
+  $('#search_products_form #dealer_name').val('')
+  $('#search_products_form #action_type').val(action_type);
+  $('#search_products_form #operation').val('reset-filter')
+  $('#search_products_form').trigger('submit.rails')
+}
+
+function resetSearchFields(){
+  $('.dropdown-menu input').each(function(){
+    $(this).prop('checked', false)
+  })
+  $('#states').val('').change();
+  $('#cities').val('').change();
 }

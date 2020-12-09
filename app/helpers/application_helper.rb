@@ -33,6 +33,16 @@ module ApplicationHelper
 		ad_type.advertisements.where(active: true)
 	end
 
+	def web_slides(screen_name)
+		case screen_name
+		when 'home'
+			ad_type = AdType.find_by(name: 'HomeWebSlide')
+		when 'list'
+			ad_type = AdType.find_by(name: 'ListWebSlide')
+		end
+		ad_type.present? ? ad_type.advertisements.where(active: true).pluck(:photo_url) : []
+	end
+
 	def retailer_address(retailer)
 		"#{retailer.address}, " + "#{retailer.city}, " + "#{retailer.state}, " + "#{retailer.country}"
 	end
@@ -57,6 +67,29 @@ module ApplicationHelper
 
 	def retailer_products(retailer)
 		retailer.retailer_products.where(active: true, status: 1)
+	end
+
+	def filter_list
+		ProductCategory.where(active: true).includes(:product_sub_categories)
+	end
+
+	def list_product_type
+		ProductType.where(active: true)
+	end
+
+	def find_selected_categories(session)
+		filter = session[:filter]
+		filter.present? ? filter['sub_category_id']&.split(',') || [] : []
+	end
+
+	def find_selected_state(session)
+		filter = session[:filter]
+		filter.present? ? filter['state']&.split(',') || [] : []
+	end
+
+	def find_selected_city(session)
+		filter = session[:filter]
+		filter.present? ? filter['city']&.split(',') || [] : []
 	end
 
 end

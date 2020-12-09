@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   get '/retailer_location' => 'retailers#location'
   post '/retailers_city_list' => 'retailers#state_cities'
   post '/set_location' => 'retailers#set_location'
+  get '/retailer_product/:access_token' => 'retailer_products#show'
 
   devise_for :retailers, controllers: {sessions: "retailers", registrations: "retailers"}
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users"}
@@ -83,6 +84,7 @@ Rails.application.routes.draw do
   post '/city_retailers' => 'dropdowns#city_retailers'
   get '/state/:name/city_list' => 'dropdowns#admin_city_list'
   post '/subcategories' => 'dropdowns#subcategories'
+  get '/search_products' => 'retailer_products#search'
   
   devise_for :admin, controllers: {sessions: "admin/sessions"}
   devise_scope :admin do

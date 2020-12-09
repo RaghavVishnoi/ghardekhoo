@@ -56,23 +56,6 @@ class RetailersController < ApplicationController
 	end
 
 	def search
-		@default_category = params[:category_id]
-		@search_value = params[:search_value]
-		@sub_category_id = params[:sub_category_id]
-		@retailers = Retailer
-		@retailers = @retailers.where(state: params[:state]) if params[:state].present?
-		@retailers = @retailers.where(city: params[:city]) if params[:city].present?
-		@retailers = @retailers.where('LOWER(first_name) like ? OR LOWER(last_name) like ?', "%#{@search_value.downcase}%", "%#{@search_value.downcase}%") if params[:search_value].present?
-		retailers_with_main_filter = @retailers
-		if @sub_category_id.blank?
-			@retailers = @retailers.joins(:product_categories).where('product_categories.id = ?', @default_category) if @default_category.present? && @retailers.present?
-		else
-			@retailers = @retailers.joins(:retailer_products).where('retailer_products.product_sub_category_id = ? AND status = ?', @sub_category_id, 1) if @retailers.present?
-		end
-		@retailers = @retailers.page(params[:page]).per(RETAILERS_PER_PAGE)
-		@retailers_count = RetailerProductCategory.joins(:retailer).where('retailers.id IN (?)', retailers_with_main_filter.pluck(:id)).group_by(&:product_category_id)
-	rescue StandardError => ex	
-		flash[:error] = ex.message[0..300]
 	end
 
 	def nearby_retailers

@@ -1,46 +1,51 @@
 <section id="categories-homepage">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <h3 class="section-title">We are providing experties in following areas:</h3>
-      </div> 
-      <% if categories.present? %>
-        <% Array.wrap(categories).each do |category| %>         
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="category-box border-1 wow fadeInUpQuick" data-wow-delay="0.3s">
-              <div class="icon">
-                <a href="#"><i class="fa <%= CATEGORY_ICONS[category.name] %> color-1" aria-hidden="true"></i><!-- <i class="lnr lnr-users color-1"></i> --></a>
-              </div>
-              <div class="category-header">  
-                <a href="#"><h4><%= category.name.camelcase %></h4></a>
-              </div>
-              <div class="category-content">
-                <ul>
-                  <% category.product_sub_categories.each do |sub_category| %>
-                    <li>
-                      <% retailer_count = retailers_count.present? ? retailers_count[sub_category.id]&.pluck(:retailer_id)&.uniq&.count : 0 %>
-                      <a class="pointer" onclick="searchBySubCategory('<%=sub_category.id%>')"><b><%= sub_category.p_name %></b></a>
-                      <sapn class="category-counter"><b><%= retailer_count || 0%></b></sapn>
-                    </li>
-                  <% end %>  
-                </ul>
-              </div>
-            </div>
-          </div>
-        <% end %>  
-      <% else %>
-        <div class="page-content">
-          <div class="adds-wrapper">
-            <div class="fallback-inner blank-retailers-container">
-              <div class="fallback-content">
-                <ul>
-                  Please select your state and city to get instant service!                                    
-                </ul>
+      <div class="col-sm-12"> 
+        <% if product_states.present?%>
+          <% product_states.each do |state, retailer_products|%>  
+            <div class="col-sm-4">       
+              <div class="panel panel-default custom-card">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><b><%= state %></b><a href='/retailers/search?state=<%= state %>'><%= new_products[state]&.count || 0%> New projects</a></h3>
+                </div>
+                <% retailer_products.each do |retailer_product|%>
+                  <div class="panel-body">
+                    <a href='#'>
+                      <label class='title'><%= retailer_product.product_name %></label>
+                      <% if retailer_product.upload_date >= (Date.current - NEW_PRODUCT_DAYS.days) %>
+                        <span class="tag">New</span>
+                      <% end %>  
+                      <span class="price">
+                        <br />
+                        <%= number_to_currency(retailer_product.min_price, unit: '₹ ') %> <%= " - #{number_to_currency(retailer_product.max_price, unit: '₹ ' )}" if retailer_product.max_price.present? %>
+                      </span>  
+                      <p class="category">
+                        <span class="label label-default category"><%= retailer_product.product_sub_category&.p_name %></span> 
+                      </p>
+                    </a>
+                  </div>
+                  <hr />
+                <% end %> 
               </div>
             </div>
+          <% end %> 
+        <% else %>  
+          <div class="card mx-auto my-5">
+            <div class="card-body">
+              <div class="avatar-placeholder placeholder rounded-circle"></div>
+              <p>No property found!</p>
+              <div class="text-placeholder placeholder w-75"></div>
+              <div class="text-placeholder placeholder w-50"></div>
+              <div class="text-placeholder placeholder w-75"></div>
+              <div class="text-placeholder placeholder w-100"></div>
+              <div class="text-placeholder placeholder w-100"></div>
+            </div>
           </div>
-        </div>
-      <% end %>      
+        <% end %>          
+      </div>
     </div>
   </div>
 </section>
+<%= hidden_field_tag :action_type, 'home' %>
+<%= render 'commons/search_products' %>

@@ -108,6 +108,7 @@ class Retailer < ApplicationRecord
 private
   def create_auth_token
     self.token ||= Token.new.generate
+    self.access_token ||= Token.new.generate
   end
 
   def update_retailer_product

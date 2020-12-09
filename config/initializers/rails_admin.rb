@@ -206,10 +206,16 @@ RailsAdmin.config do |config|
     exclude_fields :retailer_product_photos
     create do
       exclude_fields :photos
+      field :city do
+        partial "city"
+      end
     end
 
     edit do
       exclude_fields :photos
+      field :city do
+        partial "city"
+      end
     end
 
     configure :retailer_state do
@@ -249,6 +255,10 @@ RailsAdmin.config do |config|
     edit do
       exclude_fields :photos
     end
+  end
+
+  config.model 'AdType' do
+    exclude_fields :advertisements
   end
 
   config.model 'ProductSubCategory' do
