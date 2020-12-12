@@ -8,7 +8,7 @@ class RetailerProductsController < ApplicationController
 		@action_type = params[:action_type]
 		@operation = params[:operation]
 		@retailer_products = Search::Products.new(params).fetch_records
-		@retailer_products = @retailer_products.includes(:product_sub_category, :retailer, :product_type).order('upload_date desc')
+		@retailer_products = @retailer_products.includes(:product_sub_category, :retailer, :product_type, :retailer_product_reviews).order('upload_date desc')
 		fetch_related_objects
 	end
 
@@ -39,7 +39,7 @@ class RetailerProductsController < ApplicationController
 	end
 
 	def show
-
+		@retailer_product_review = RetailerProductReview.new
 	end
 
 	private

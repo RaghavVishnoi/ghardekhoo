@@ -4,6 +4,7 @@ class RetailerProduct < ApplicationRecord
 	belongs_to :product_sub_category, -> { where(active: true) }
 	belongs_to :product_type, -> { where(active: true) }
 	has_many :retailer_product_photos
+	has_many :retailer_product_reviews
 
 	before_create :default_value
 

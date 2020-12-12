@@ -9,7 +9,8 @@
 		        <div class="media">
 		          <div class="thumb-left">
 		            <a href="#">
-		              <img alt="" src="<%=user.photo_url%>" />
+		              <% photo_url =  user.photo_url.present? ? user.photo_url : '/assets/user_default.png' %>
+		              <img alt="" src="<%= photo_url %>" />
 		            </a>
 		          </div>
 		          <div class="info-body">
@@ -33,12 +34,12 @@
 	    <div id="respond">
 	      <h2 class="respond-title">Add your valuable review</h2>
 	      <%= render 'add_rating' %>
-	      <%= form_for retailer_review do |f|%>
+	      <%= form_for retailer_product_review do |f|%>
 	        <div class="row">
 	          <div class="col-md-12">
 	            <div class="form-group">
 	              <%= f.text_area :review, class: 'form-control', cols: 45, rows: 8, placeholder: "Add review.."%>
-	              <%= f.hidden_field :retailer_id, value: "#{retailer.id}"%>
+	              <%= f.hidden_field :retailer_product_id, value: "#{retailer_product.id}"%>
 	              <%= f.hidden_field :rating %>
 	            </div>
 	            <button type="submit" id="submit" class="btn btn-common">Add Review</button>

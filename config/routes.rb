@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   end
 
   resources :retailer_reviews, only: [:create, :edit, :update]
+  resources :retailer_product_reviews, only: [:create, :edit, :update]
   resources :users, only: [:new, :create]
   resources :user_requests, only: [:index, :new, :create, :show, :destroy]
   resources :user_request_replies, only: [:create]

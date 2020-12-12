@@ -35,21 +35,26 @@ product_categories.each do |product_category|
 end
 
 ad_types = [
-	{name: 'WebBanner'}, {name: 'WebSlide'}
+	{name: 'WebHomeListing'}, 
+	{name: 'WebBanner'}, 
+	{:name: 'HomeWebSlide'}, 
+	{name: 'ListWebSLide'}, 
+	{name: 'ProfilePage'},
+	{name: 'WebFooterAds'}
 ]
 
 ad_types.each do |ad_type|
-	AdType.find_or_create_by(name: ad_type[:name])
+	AdType.find_or_create_by(name: ad_type[:name], active: true)
 end
 
-states_list = {:AN=>"Andaman and Nicobar Islands", :AP=>"Andhra Pradesh", :AR=>"Arunachal Pradesh", :AS=>"Assam", :BR=>"Bihar", :CH=>"Chandigarh", :CT=>"Chhattisgarh", :DD=>"Daman and Diu", :DL=>"Delhi", :DN=>"Dadra and Nagar Haveli", :GA=>"Goa", :GJ=>"Gujarat", :HP=>"Himachal Pradesh", :HR=>"Haryana", :JH=>"Jharkhand", :JK=>"Kashmir", :KA=>"Karnataka", :KL=>"Kerala", :LD=>"Laccadives", :MH=>"Maharashtra", :ML=>"Meghalaya", :MN=>"Manipur", :MP=>"Madhya Pradesh", :MZ=>"Mizoram", :NL=>"Nagaland", :OR=>"Odisha", :PB=>"State of Punjab", :PY=>"Puducherry", :RJ=>"Rajasthan", :SK=>"Sikkim", :TG=>"Telangana", :TN=>"Tamil Nadu", :TR=>"Tripura", :UL=>"Uttarakhand", :UP=>"Uttar Pradesh", :WB=>"West Bengal"}
-states_list.keys.each do |state_code|
-	state = State.find_or_create_by(name: states_list[state_code], active: true)
-	cities_list = CS.cities(state_code , :in)
-	Array.wrap(cities_list).compact.each do |city_name|
-		City.find_or_create_by(state_id: state.id, name: city_name, active: true)
-	end
-end
+# states_list = {:AN=>"Andaman and Nicobar Islands", :AP=>"Andhra Pradesh", :AR=>"Arunachal Pradesh", :AS=>"Assam", :BR=>"Bihar", :CH=>"Chandigarh", :CT=>"Chhattisgarh", :DD=>"Daman and Diu", :DL=>"Delhi", :DN=>"Dadra and Nagar Haveli", :GA=>"Goa", :GJ=>"Gujarat", :HP=>"Himachal Pradesh", :HR=>"Haryana", :JH=>"Jharkhand", :JK=>"Kashmir", :KA=>"Karnataka", :KL=>"Kerala", :LD=>"Laccadives", :MH=>"Maharashtra", :ML=>"Meghalaya", :MN=>"Manipur", :MP=>"Madhya Pradesh", :MZ=>"Mizoram", :NL=>"Nagaland", :OR=>"Odisha", :PB=>"State of Punjab", :PY=>"Puducherry", :RJ=>"Rajasthan", :SK=>"Sikkim", :TG=>"Telangana", :TN=>"Tamil Nadu", :TR=>"Tripura", :UL=>"Uttarakhand", :UP=>"Uttar Pradesh", :WB=>"West Bengal"}
+# states_list.keys.each do |state_code|
+# 	state = State.find_or_create_by(name: states_list[state_code], active: true)
+# 	cities_list = CS.cities(state_code , :in)
+# 	Array.wrap(cities_list).compact.each do |city_name|
+# 		City.find_or_create_by(state_id: state.id, name: city_name, active: true)
+# 	end
+# end
 
 product_types = [
 	{name: '1 BHK', active: true},

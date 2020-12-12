@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_120057) do
+ActiveRecord::Schema.define(version: 2020_12_11_135803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,15 @@ ActiveRecord::Schema.define(version: 2020_12_08_120057) do
     t.integer "attachment_id"
   end
 
+  create_table "retailer_product_reviews", force: :cascade do |t|
+    t.string "review"
+    t.float "rating"
+    t.integer "retailer_product_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "retailer_products", id: :serial, force: :cascade do |t|
     t.string "sku_code"
     t.string "product_name"
@@ -302,6 +311,8 @@ ActiveRecord::Schema.define(version: 2020_12_08_120057) do
   add_foreign_key "retailer_product_categories", "product_categories"
   add_foreign_key "retailer_product_categories", "retailers"
   add_foreign_key "retailer_product_photos", "retailer_products"
+  add_foreign_key "retailer_product_reviews", "retailer_products"
+  add_foreign_key "retailer_product_reviews", "users"
   add_foreign_key "retailer_products", "product_sub_categories"
   add_foreign_key "retailer_products", "product_types"
   add_foreign_key "retailer_products", "retailers"

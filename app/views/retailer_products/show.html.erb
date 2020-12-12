@@ -1,10 +1,10 @@
-<%# reviews = @retailer.retailer_reviews %>
-<%# ratings = reviews.pluck(:rating).compact.map(&:to_f) %>
-<%# avg_ratings = (ratings.sum/ratings.count).round if ratings.present? %>
+<% reviews = @retailer_product.retailer_product_reviews %>
+<% ratings = reviews.pluck(:rating).compact.map(&:to_f) %>
+<% avg_ratings = (ratings.sum/ratings.count).round if ratings.present? %>
 
 
-<%= render 'product_info', retailer_product: @retailer_product, retailer: @retailer_product.retailer %>
+<%= render 'product_info', retailer_product: @retailer_product, retailer: @retailer_product.retailer, reviews: reviews, avg_ratings: avg_ratings %>
 
-<%#= render 'reviews', retailer: @retailer, retailer_review: @retailer_review, reviews: reviews %>
+<%= render 'reviews', retailer_product: @retailer_product, retailer_product_review: @retailer_product_review, reviews: reviews %>
 
 <script type="text/javascript" src="/assets/main.js"></script>

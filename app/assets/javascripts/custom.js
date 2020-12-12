@@ -20,7 +20,7 @@ $(document).ready(function(){
 
   $('.rate input').click(function(){
     var rating  = $('.rate input:checked').val();
-    $('#new_retailer_review #retailer_review_rating').val(rating);
+    $('#new_retailer_product_review #retailer_product_review_rating').val(rating);
   })
 
   $('#new_user button').click(function(){

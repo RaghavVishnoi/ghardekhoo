@@ -14,6 +14,9 @@
   <div class="adds-wrapper">
     <% if retailer_products.present? %>
       <% retailer_products.each do |retailer_product| %>
+          <% reviews = retailer_product.retailer_product_reviews %>
+          <% ratings = reviews.pluck(:rating).compact.map(&:to_f) %>
+          <% avg_ratings = (ratings.sum/ratings.count).round if ratings.present? %>
           <a href="/retailer_product/38344b381f2bc9ffb48f172b8d62b37bd60136d1">
             <div class="item-list" id="retailer-card">
               <div class="col-sm-2 no-padding photobox">
@@ -57,16 +60,15 @@
                   </div>
                 <% end %>  
                 <div class="info ratings contact-info">
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span> (
-                  <b>6 Users</b>)
+                  <% avg_ratings = 5 if avg_ratings.nil? %>
+                  <%(1...6).each do |index|%>
+                    <span class="fa fa-star <%='checked' if index <= avg_ratings.to_i%>"></span>
+                  <% end %>  (
+                  <b><%= reviews&.count || 0%> Users</b>)
                 </div>
                 <p class="contact-info">
                   <a class="btn btn-primary btn-sm review"><i class="fa fa-eye"></i>
-                  <span>Reviews (0)</span></a> 
+                  <span>Reviews (<%= reviews&.count || 0%>)</span></a> 
                 </p>   
               </div>
             </div>  
