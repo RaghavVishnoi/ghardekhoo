@@ -106,7 +106,8 @@ RailsAdmin.config do |config|
                    :photo_url,
                    :lat,
                    :lng,
-                   :employee
+                   :employee,
+                   :access_token
     include_fields :first_name,
                    :last_name,
                    :email,
@@ -202,8 +203,16 @@ RailsAdmin.config do |config|
 
   end
 
+  config.model 'State' do
+    exclude_fields :cities, :retailers
+  end
+
+  config.model 'City' do 
+    exclude_fields :retailers
+  end
+
   config.model 'RetailerProduct' do
-    exclude_fields :retailer_product_photos
+    exclude_fields :retailer_product_photos, :upload_date, :access_token, :retailer_product_reviews
     create do
       exclude_fields :photos
       field :city do
@@ -245,7 +254,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Advertisement' do
-    exclude_fields :photo_url, :retailer, :attachment
+    exclude_fields :photo_url, :retailer, :attachment, :attachment_id
     fields :ad_type_id, :photos, :active
 
     create do

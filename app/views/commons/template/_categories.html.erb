@@ -11,7 +11,7 @@
                 </div>
                 <% retailer_products.each do |retailer_product|%>
                   <div class="panel-body">
-                    <a href='#'>
+                    <a href='/retailer_product/<%= retailer_product.access_token %>'>
                       <label class='title'><%= retailer_product.product_name %></label>
                       <% if retailer_product.upload_date >= (Date.current - NEW_PRODUCT_DAYS.days) %>
                         <span class="tag">New</span>

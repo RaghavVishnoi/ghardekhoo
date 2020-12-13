@@ -38,7 +38,7 @@ ad_types = [
 	{name: 'WebHomeListing'}, 
 	{name: 'WebBanner'}, 
 	{name: 'HomeWebSlide'}, 
-	{name: 'ListWebSLide'}, 
+	{name: 'ListWebSlide'}, 
 	{name: 'ProfilePage'},
 	{name: 'WebFooterAds'}
 ]

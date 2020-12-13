@@ -17,7 +17,7 @@
           <% reviews = retailer_product.retailer_product_reviews %>
           <% ratings = reviews.pluck(:rating).compact.map(&:to_f) %>
           <% avg_ratings = (ratings.sum/ratings.count).round if ratings.present? %>
-          <a href="/retailer_product/38344b381f2bc9ffb48f172b8d62b37bd60136d1">
+          <a href="/retailer_product/<%= retailer_product.access_token %>">
             <div class="item-list" id="retailer-card">
               <div class="col-sm-2 no-padding photobox">
                 <div class="add-image">
