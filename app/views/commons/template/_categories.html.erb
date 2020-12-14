@@ -21,7 +21,12 @@
                         <%= number_to_currency(retailer_product.min_price, unit: '₹ ') %> <%= " - #{number_to_currency(retailer_product.max_price, unit: '₹ ' )}" if retailer_product.max_price.present? %>
                       </span>  
                       <p class="category">
-                        <span class="label label-default category"><%= retailer_product.product_sub_category&.p_name %></span> 
+                        <span class="product-type btn btn-danger btn-sm">
+                          <%= retailer_product&.product_sub_category&.p_name  %>
+                        </span>
+                        <span class="btn btn-primary btn-sm">
+                          <%= retailer_product&.product_operation&.name  %>
+                        </span> 
                       </p>
                     </a>
                   </div>
