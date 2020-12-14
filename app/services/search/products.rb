@@ -12,6 +12,7 @@ class Search::Products
 		search_by_min_price if @params[:min_price].present?
 		search_by_max_price if @params[:max_price].present?
 		search_by_product_type if @params[:product_types].present?
+		search_by_product_operation if @params[:product_operations].present?
 		search_by_dealer_name if @params[:dealer_name].present?
 		@retailer_products
 	end
@@ -42,6 +43,11 @@ class Search::Products
 	def search_by_product_type
 		product_type_ids = @params[:product_types].split(',')
 		@retailer_products = @retailer_products.where(product_type_id: product_type_ids)
+	end
+
+	def search_by_product_operation
+		product_operation_ids = @params[:product_operations].split(',')
+		@retailer_products = @retailer_products.where(product_operation_id: product_operation_ids)
 	end
 
 	def search_by_dealer_name

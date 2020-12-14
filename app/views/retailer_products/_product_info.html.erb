@@ -36,6 +36,7 @@
               <div class="ads-details-info col-md-7">
                 <p class="mb15"> <%= retailer_product.description %></p>
                 <ul class="list-circle">
+                  <li><i class="fa fa-check-circle"></i> <%= retailer_product.product_operation&.name %></li>
                   <li><i class="fa fa-check-circle"></i> <%= retailer_product.product_type.name %></li>
                   <li><i class="fa fa-check-circle"></i> <%= number_to_currency(retailer_product.min_price, unit: '₹ ') %> <%= " - #{number_to_currency(retailer_product.max_price, unit: '₹ ' )}" if retailer_product.max_price.present? %></li>
                 </ul>

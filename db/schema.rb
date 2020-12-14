@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_135803) do
+ActiveRecord::Schema.define(version: 2020_12_14_142213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,13 @@ ActiveRecord::Schema.define(version: 2020_12_11_135803) do
     t.index ["name"], name: "index_product_categories_on_name"
   end
 
+  create_table "product_operations", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "product_sub_categories", id: :serial, force: :cascade do |t|
     t.string "p_name"
     t.boolean "active", default: true
@@ -189,6 +196,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_135803) do
     t.integer "product_type_id"
     t.text "address"
     t.string "access_token"
+    t.integer "product_operation_id"
     t.index ["status"], name: "index_retailer_products_on_status"
   end
 
@@ -313,6 +321,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_135803) do
   add_foreign_key "retailer_product_photos", "retailer_products"
   add_foreign_key "retailer_product_reviews", "retailer_products"
   add_foreign_key "retailer_product_reviews", "users"
+  add_foreign_key "retailer_products", "product_operations"
   add_foreign_key "retailer_products", "product_sub_categories"
   add_foreign_key "retailer_products", "product_types"
   add_foreign_key "retailer_products", "retailers"

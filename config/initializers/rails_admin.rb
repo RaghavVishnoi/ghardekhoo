@@ -61,9 +61,16 @@ RailsAdmin.config do |config|
   # remove fileds with nil value from show mode. set it to false if you want to show empty fields
   config.compact_show_view = true
 
-  config.excluded_models = [ Admin ]
+  config.excluded_models = [ Admin, RetailerProductPhoto, RetailerProductReview, Employee, RetailerPhoto, RetailerReview, Role ]
 
-  # Hide unused fields from user model
+  config.model 'ActiveStorage::Blob' do
+    visible false
+  end
+
+  config.model 'ActiveStorage::Attachment' do
+    visible false
+  end
+
   config.model 'Employee' do
     exclude_fields :unlock_token,
                    :reset_password_sent_at,
@@ -221,7 +228,7 @@ RailsAdmin.config do |config|
     end
 
     edit do
-      exclude_fields :photos
+      exclude_fields :photos, :retailer_product_photos, :upload_date, :access_token, :retailer_product_reviews
       field :city do
         partial "city"
       end
@@ -250,6 +257,11 @@ RailsAdmin.config do |config|
 
     list do
       include_fields :retailer_state, :retailer_city, :is_retailer_active
+      exclude_fields :retailer_product_photos, :access_token, :retailer_product_reviews
+    end
+
+    show do
+      exclude_fields :retailer_product_photos, :access_token, :retailer_product_reviews
     end
   end
 

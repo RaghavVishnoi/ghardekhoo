@@ -164,6 +164,7 @@ function search_retailers(){
   var min_price = $('#min_price').val();
   var max_price = $('#max_price').val();
   var product_types = find_selected_types().join(',')
+  var product_operations = find_selected_operations().join(',')
   var dealer_name = $('#dealer_name').val();
   $('#search_products_form #sub_category_id').val(category_ids)
   $('#search_products_form #city').val(city)
@@ -171,6 +172,7 @@ function search_retailers(){
   $('#search_products_form #min_price').val(min_price)
   $('#search_products_form #max_price').val(max_price)
   $('#search_products_form #product_types').val(product_types)
+  $('#search_products_form #product_operations').val(product_operations)
   $('#search_products_form #dealer_name').val(dealer_name)
   $('#search_products_form #action_type').val(action_type)
   $('#search_products_form').trigger('submit.rails')
@@ -196,6 +198,16 @@ function find_selected_types(){
   return selected_product_types
 }
 
+function find_selected_operations(){
+  var selected_product_operations = []
+  $('.product-operations-filter').each(function(){
+    if($(this).prop('checked') == true){
+      selected_product_operations.push($(this).val());
+    }
+  })
+  return selected_product_operations
+}
+
 function resetFilter(){
   if($('#action_type').val() == 'list'){
     start_spinner('customer-list');
@@ -210,6 +222,7 @@ function resetFilter(){
   $('#search_products_form #min_price').val('')
   $('#search_products_form #max_price').val('')
   $('#search_products_form #product_types').val('')
+  $('#search_products_form #product_operations').val('')
   $('#search_products_form #dealer_name').val('')
   $('#search_products_form #action_type').val(action_type);
   $('#search_products_form #operation').val('reset-filter')

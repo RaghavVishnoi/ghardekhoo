@@ -75,4 +75,15 @@ product_types.each do |product_type|
 	p_type.save
 end
 
+product_operations = [
+	{name: 'Buy', active: true},
+	{name: 'Rent', active: true}
+]
+
+product_operations.each do |product_operation|
+	p_operation = ProductOperation.find_or_initialize_by(name: product_operation[:name])
+	p_operation.active = true
+	p_operation.save
+end
+
 # Admin.find_or_create_by(email: 'admin@ghardekhoo.com', password: 'admin@123')

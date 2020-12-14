@@ -12,7 +12,7 @@ CATEGORY_ICONS = {
 	"property_dealer"  => "fa-user-secret"
 }
 RETAILER_NEAR_BY_RADIUS=50
-RETAILERS_PER_PAGE=10
+PRODUCT_PER_PAGE=10
 UPLOAD_FILE_LIB="active_storage"
 REQUEST_STATUS = [
 	['Pending', 0],

@@ -32,6 +32,9 @@
                     <span class="category btn btn-danger btn-sm">
                       <%= retailer_product&.product_sub_category&.p_name  %>
                     </span>
+                    <span class="btn btn-primary btn-sm">
+                      <%= retailer_product&.product_operation&.name  %>
+                    </span>
                   </p>  
                   <p>
                     <b><%= number_to_currency(retailer_product.min_price.to_i, unit: '₹ ') %></b> to <b><%= number_to_currency(retailer_product.max_price.to_i, unit: '₹ ') %></b> | <%= retailer_product.unit %> | <%= retailer_product&.product_type&.name %>
@@ -74,6 +77,11 @@
             </div>  
           </a>  
         <%end %>
+        <!-- Start Pagination -->
+        <div class="pagination-bar pull-right">
+          <%= paginate retailer_products, remote: true %>
+        </div>
+        <!-- End Pagination -->
       <% else %>
         <div class="card mx-auto my-5">
           <div class="card-body">
@@ -90,10 +98,5 @@
     </div>
   <!-- Adds wrapper End -->
   
-  <!-- Start Pagination -->
-  <div class="pagination-bar pull-right">
-    <%#= paginate retailers %>
-  </div>
-  <!-- End Pagination -->
 </div>
 <%= render 'commons/search_products' %>

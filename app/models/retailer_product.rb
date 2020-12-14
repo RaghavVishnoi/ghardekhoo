@@ -3,6 +3,7 @@ class RetailerProduct < ApplicationRecord
 	belongs_to :retailer
 	belongs_to :product_sub_category, -> { where(active: true) }
 	belongs_to :product_type, -> { where(active: true) }
+	belongs_to :product_operation, -> { where(active: true) }
 	has_many :retailer_product_photos
 	has_many :retailer_product_reviews
 
@@ -16,6 +17,7 @@ class RetailerProduct < ApplicationRecord
 	validates :upload_date, presence: true
 	validates :product_type_id, presence: true
 	validates :retailer_id, presence: true
+	validates :product_operation_id, presence: true
 
 	def status_enum
 	  [['Pending', 0],['Approved',1],['Declined',2]]

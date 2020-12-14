@@ -38,6 +38,34 @@
               </div>
               
               <div class="checkbox-filter">
+                <span data-toggle="collapse" data-target="#filter-4">
+                  <i class="fa fa-fw fa-caret-down parent-expanded"></i>
+                  <i class="fa fa-fw fa-caret-right parent-collapsed"></i>
+                  Operations
+                </span>
+                <div id="filter-4" class="list-group">
+                  <table class="table-responsive">
+                    <tbody>
+                      <% list_product_operations.each_slice(2) do |product_operation|%>
+                        <tr>
+                          <td>
+                            <input type="checkbox" class="custom-control-input product-operations-filter" onchange="search_retailers()" value="<%= product_operation[0]&.id %>">
+                            <label class="custom-control-label" for="check1"><%= product_operation[0]&.name %></label>
+                          </td>
+                          <td>
+                            <% if  product_operation[1].present? %>
+                              <input type="checkbox" class="custom-control-input product-operations-filter" onchange="search_retailers()" value="<%= product_operation[1]&.id %>">
+                              <label class="custom-control-label" for="check1"><%= product_operation[1]&.name %></label>
+                            <% end %>  
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="checkbox-filter">
                 <span data-toggle="collapse" data-target="#filter-2">
                   <i class="fa fa-fw fa-caret-down parent-expanded"></i>
                   <i class="fa fa-fw fa-caret-right parent-collapsed"></i>

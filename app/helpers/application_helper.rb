@@ -77,6 +77,10 @@ module ApplicationHelper
 		ProductType.where(active: true)
 	end
 
+	def list_product_operations
+		ProductOperation.where(active: true)
+	end
+
 	def find_selected_categories(session)
 		filter = session[:filter]
 		filter.present? ? filter['sub_category_id']&.split(',') || [] : []
