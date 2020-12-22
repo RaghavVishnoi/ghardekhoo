@@ -5,6 +5,8 @@ class Employee < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :retailers
+
   def name
   	String(first_name) + String(last_name)
   end

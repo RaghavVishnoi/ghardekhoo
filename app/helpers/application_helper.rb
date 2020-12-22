@@ -13,7 +13,7 @@ module ApplicationHelper
 	end
 
 	def list_states
-		CS.get(:IN).values.sort
+		State.where(active: true).pluck(:name).unshift(["Select State", ""])
 	end
 
 	def categories

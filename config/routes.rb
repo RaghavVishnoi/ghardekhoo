@@ -46,8 +46,6 @@ Rails.application.routes.draw do
       end
   end
 
-  get '/free_listing' => 'retailers#new'
-  get '/advertise' => 'retailers#new'
   get '/retailer_location' => 'retailers#location'
   post '/retailers_city_list' => 'retailers#state_cities'
   post '/set_location' => 'retailers#set_location'
@@ -55,12 +53,19 @@ Rails.application.routes.draw do
 
   devise_for :retailers, controllers: {sessions: "retailers", registrations: "retailers"}
   devise_for :users, controllers: {sessions: "users/sessions", registrations: "users"}
+  devise_for :employees, controllers: {sessions: "employees/sessions"}
 
-  devise_for :employees
   resources :retailers do
     collection do
       get 'search' => 'retailers#search'
     end
+  end
+
+  namespace :employees do
+    get '/retailers/free_listing' => 'retailers#new'
+    get '/retailers/advertise' => 'retailers#new'
+
+    resources :retailers, only: [:index, :create]
   end
 
   resources :retailer_reviews, only: [:create, :edit, :update]

@@ -24,46 +24,22 @@
           <li class="header-button">
             <a class="btn btn-danger" href="/free_listing"><b>Free Listing</b></a>
           </li> -->
-          <% if current_user.blank? %>
-            <li><a href="/users/sign_in"><i class="lnr lnr-enter"></i> Login</a></li>
-            <li><a href="/users/sign_up"><i class="lnr lnr-user"></i> Signup</a></li>
-          <% else %>  
-            <% photo_url = current_user.photo_url %>
-            <% photo_url = photo_url.present? ? photo_url : "/assets/user_default.png"%>
+          <% if current_employee.present? %>
+            <% photo_url = "/assets/user_default.png"%>
             <li class="dropdown profile-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <img src="<%= photo_url %>"/> 
-                    <%= current_user.username %>
+                    <%= current_employee.name %>
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>
-                        <div class="navbar-login">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <p class="text-center">
-                                        <img src="<%= photo_url %>"/> 
-                                    </p>
-                                </div>
-                                <div class="col-lg-8">
-                                    <p class="text-left"><a href="#"><%= current_user.username %></a></p>
-                                    <p class="text-left small"><%= current_user.email %></p>
-                                    <p class="text-left">
-                                        <a href="/user_requests" class="btn btn-danger btn-block btn-sm">
-                                          <span class="fa fa-list-alt"></span>
-                                        List Request</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
                     <li class="divider"></li>
                     <li>
-                        <div class="navbar-login navbar-login-session">
+                        <div class="navbar-login-session">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <p>
-                                      <%= link_to destroy_user_session_path, :method => 'delete', class: 'btn btn-primary btn-block' do %>
+                                      <%= link_to destroy_employee_session_path, :method => 'delete', class: 'btn btn-primary btn-block' do %>
                                          Logout
                                       <% end %>
                                     </p>
@@ -79,5 +55,4 @@
       <!-- Navbar End -->
     </div>
   </nav>
-
 </div>

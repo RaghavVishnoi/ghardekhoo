@@ -12,8 +12,6 @@ class Retailer < ApplicationRecord
   attr_accessor :profile_photo
   attr_accessor :distance
 
-  has_many :retailer_product_categories, dependent: :destroy
-  has_many :product_categories, through: :retailer_product_categories
   belongs_to :employee, optional: true
   has_many :retailer_products, dependent: :destroy
   has_many :retailer_photos, dependent: :destroy
@@ -33,6 +31,7 @@ class Retailer < ApplicationRecord
   validates :city, presence: true
   validates :state, presence: true
   validates_uniqueness_of :phone
+  validates :employee_id, presence: true
 
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?

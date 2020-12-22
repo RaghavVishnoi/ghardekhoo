@@ -61,7 +61,7 @@ RailsAdmin.config do |config|
   # remove fileds with nil value from show mode. set it to false if you want to show empty fields
   config.compact_show_view = true
 
-  config.excluded_models = [ Admin, RetailerProductPhoto, RetailerProductReview, Employee, RetailerPhoto, RetailerReview, Role ]
+  config.excluded_models = [ Admin, RetailerProductPhoto, RetailerProductReview, RetailerPhoto, RetailerReview ]
 
   config.model 'ActiveStorage::Blob' do
     visible false
@@ -82,7 +82,8 @@ RailsAdmin.config do |config|
                    :confirmation_sent_at,
                    :unconfirmed_email,
                    :login_histories,
-                   :employee_roles
+                   :employee_roles,
+                   :roles
   end
 
   config.model 'ProductCategory' do
@@ -113,7 +114,6 @@ RailsAdmin.config do |config|
                    :photo_url,
                    :lat,
                    :lng,
-                   :employee,
                    :access_token
     include_fields :first_name,
                    :last_name,
@@ -131,7 +131,8 @@ RailsAdmin.config do |config|
                    :account_status,
                    :username,
                    :about_business,
-                   :rating
+                   :rating,
+                   :employee
     create do
       field :city do
         partial "city"
@@ -162,8 +163,7 @@ RailsAdmin.config do |config|
                      :lat,
                      :lng,
                      :photos,
-                     :token,
-                     :employee
+                     :token
     end 
 
     edit do
@@ -196,8 +196,7 @@ RailsAdmin.config do |config|
                      :lat,
                      :lng,
                      :photos,
-                     :token,
-                     :employee
+                     :token
     end 
 
     field :photos, :multiple_active_storage do 

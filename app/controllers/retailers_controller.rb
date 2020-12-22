@@ -47,8 +47,8 @@ class RetailersController < ApplicationController
 	end
 
 	def state_cities
-		state_code = CS.get(:in).map{|k,v| k if v==params[:state_name]}.compact.first
-		@cities = CS.cities(state_code , :in)
+		state = State.find_by(name: params[:state_name])
+		@cities = state.cities.where(active: true).pluck(:name)
 	end
 
 	def set_location
