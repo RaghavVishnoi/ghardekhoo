@@ -83,7 +83,8 @@ RailsAdmin.config do |config|
                    :unconfirmed_email,
                    :login_histories,
                    :employee_roles,
-                   :roles
+                   :roles,
+                   :retailers
   end
 
   config.model 'ProductCategory' do
