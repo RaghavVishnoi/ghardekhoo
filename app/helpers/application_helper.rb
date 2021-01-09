@@ -20,7 +20,7 @@ module ApplicationHelper
 		ProductCategory.where(active: true)
 	end
 
-	def category_types(category_id)
+	def category_types(category_id = nil)
 		if category_id.present?
 			ProductSubCategory.where(product_category_id: category_id, active: true).map{|category| [category.name.camelize, category.id]}
 		else

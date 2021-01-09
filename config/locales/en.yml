@@ -61,3 +61,5 @@ en:
     access_denied: Please login before proceed.
     request_delete: Request deleted successfully.
     request_reply_success: You have successfully replied on this request.
+  customers:
+    query_submit: Your query has been successfully submitted, our support team will reach out to you soon.

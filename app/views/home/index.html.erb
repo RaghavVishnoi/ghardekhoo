@@ -28,9 +28,17 @@
 
 <%= render 'commons/hidden_forms' %>
 
+<%= render 'commons/user_details_dialog' %>
+
 <script>
   $(document).ready(function(){
     start_spinner('category-container');
     $('#search_products_form').trigger('submit.rails');
   })
+
+  <% if session[:popup] == true %>
+    $(window).on('load', function() {
+      $('#userDetailsModal').modal('show');
+    });
+  <% end %>  
 </script>

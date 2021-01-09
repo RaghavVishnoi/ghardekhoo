@@ -33,6 +33,7 @@ class HomeController < ApplicationController
 
 		def reset_session_filter
 			session[:filter] = nil
+			session[:popup].blank? ? session[:popup] = true : session[:popup] = false
 		end
 
 end

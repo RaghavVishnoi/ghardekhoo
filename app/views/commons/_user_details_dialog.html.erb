@@ -1,0 +1,50 @@
+<div id="userDetailsModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        		<div class="pop_flash_container">
+			        <%= render 'layouts/popup_flash' %>
+			      </div>
+            <div class="modal-header row">
+            	<div class="col-sm-12">
+            		<div class="col-sm-11">
+              		<h5 class="modal-title">Please write us for your query and our team will reach out to you!</h5>
+              	</div>	
+              	<div class="col-sm-1">
+              		<button type="button" class="close" data-dismiss="modal">&times;</button>
+              	</div>
+              </div>
+            </div>
+            <div class="modal-body">
+            	<%= form_for Customer.new, url: '/customers', remote: true do |f| %>
+            	<div class="form-group">
+            		<div class="row">
+            			<div class="col-sm-12">
+            				<div class="col-sm-6">
+            					<%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
+            				</div>
+            				<div class="col-sm-6">
+            					<%= f.email_field :email, class: 'form-control', placeholder: 'Email'  %>
+            				</div>
+            			</div>
+            		</div>
+
+            		<div class="row">
+            			<div class="col-sm-12">
+            				<div class="col-sm-6">
+            					<%= f.text_field :phone, class: 'form-control bfh-phone', placeholder: 'Phone', data: {format: ' (ddd) ddd-dddd'} %>
+            				</div>
+            				<div class="col-sm-6">
+            					<%= f.select :product_sub_categories_id, options_for_select(filter_list.pluck(:p_name, :id)), {}, class: 'form-control', placeholder: ''  %>
+            				</div>
+            			</div>
+            		</div>
+          			<div class="col-sm-12">
+          				<%= f.button :send, class: 'btn btn-primary send-button', onclick: "start_spinner('userDetailsModal')" %>
+          				<label class="btn btn-primary close-button" data-dismiss="modal">Cancel</label>
+          			</div>
+            	</div>	
+            	<% end %>
+            </div>
+        </div>
+    </div>
+</div>
