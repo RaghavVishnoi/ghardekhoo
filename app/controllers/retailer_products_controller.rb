@@ -59,7 +59,11 @@ class RetailerProductsController < ApplicationController
 	  end
 
 	  def upload_to_active_storage(retailer_photo)
-	  	result = @retailer_product.photos.attach(retailer_photo)
+	  	resized_image = MiniMagick::Image.read(retailer_photo)
+	    resized_image = resized_image.resize "500x500"
+	    v_filename = retailer_photo.original_filename
+	    v_content_type = retailer_photo.content_type
+	    result = @retailer_product.photos.attach(io: File.open(resized_image.path), filename:  v_filename, content_type: v_content_type)
 	  	{url: url_for(result.first), attachment_id: result.first&.id}
 	  rescue StandardError => ex
 			flash[:error] = ex.message
