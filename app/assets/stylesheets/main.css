@@ -888,7 +888,7 @@ nav#menu span.fa.fa-bars:hover {
   right: 0;
   padding: 15px;
   position: absolute;
-  z-index: 9999;
+  z-index: 999;
   cursor: pointer;
 }
 .styled-select .bs-caret {

@@ -438,11 +438,12 @@ footer{
 }
 
 #userDetailsModal{
+	height: 440px !important;
 	.modal-content{
-		height: 280px !important;
+		height: 360px !important;
 		overflow-y: auto;
 		.form-group{
-			input, select{
+			input, select, textarea{
 				margin: 10px;
 				border: 1px solid #CCC;
 				border-radius: 2px;
