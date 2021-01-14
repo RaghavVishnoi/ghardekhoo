@@ -219,7 +219,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'RetailerProduct' do
-    exclude_fields :retailer_product_photos, :upload_date, :access_token, :retailer_product_reviews
+    exclude_fields :retailer_product_photos, :access_token, :retailer_product_reviews
     create do
       exclude_fields :photos
       field :city do
@@ -228,7 +228,7 @@ RailsAdmin.config do |config|
     end
 
     edit do
-      exclude_fields :photos, :retailer_product_photos, :upload_date, :access_token, :retailer_product_reviews
+      exclude_fields :photos, :retailer_product_photos, :access_token, :retailer_product_reviews
       field :city do
         partial "city"
       end
