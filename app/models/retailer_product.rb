@@ -17,6 +17,7 @@ class RetailerProduct < ApplicationRecord
 	validates :product_type_id, presence: true
 	validates :retailer_id, presence: true
 	validates :product_operation_id, presence: true
+	validates :upload_date, presence: true
 
 	def status_enum
 	  [['Pending', 0],['Approved',1],['Declined',2]]
