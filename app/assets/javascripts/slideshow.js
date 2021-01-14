@@ -1,6 +1,6 @@
 function slideShow(number_of_slides){
 	//the slideshow code uses this to determine a few things. Make sure this is set correctly!			
-	const NUMBER_OF_SLIDES = number_of_slides;
+	var NUMBER_OF_SLIDES = number_of_slides;
 
 	//get the width of the side-scrollable area in the 'sldieshow' div and divide by NUMBER_OF_SLIDES so that the 
 	//scrollLeft under setInterval knows by how much to scroll
