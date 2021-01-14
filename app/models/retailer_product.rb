@@ -14,7 +14,6 @@ class RetailerProduct < ApplicationRecord
 	validates :city, presence: true
 	validates :state, presence: true
 	validates :min_price, presence: true
-	validates :upload_date, presence: true
 	validates :product_type_id, presence: true
 	validates :retailer_id, presence: true
 	validates :product_operation_id, presence: true
