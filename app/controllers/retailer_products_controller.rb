@@ -37,6 +37,7 @@ class RetailerProductsController < ApplicationController
 		end
 	rescue StandardError => ex
 		flash[:error] = ex.message
+		Rails.logger.info "****************** #{ex.backtrace} *******************"
 	end
 
 	def show
@@ -67,6 +68,7 @@ class RetailerProductsController < ApplicationController
 	  	{url: url_for(result.first), attachment_id: result.first&.id}
 	  rescue StandardError => ex
 			flash[:error] = ex.message
+		        Rails.logger.info "****************** #{ex.backtrace} *******************"
 	  end
 
 	  def update_session_filter
