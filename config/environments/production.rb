@@ -88,7 +88,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_controller.default_url_options = { host: 'https://ghardekhoo-staging.herokuapp.com' }
+  config.action_controller.default_url_options = { host: 'http://ghardekhoo.com' }
 
   # SMTP settings for gmail
   config.action_mailer.delivery_method = :smtp
