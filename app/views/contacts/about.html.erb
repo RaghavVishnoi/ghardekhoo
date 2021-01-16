@@ -48,11 +48,10 @@
               </div>
               <div class="categories-list">
                 <ul>
-                  <% categories.each do |category| %>	
+                  <% @product_sub_categories.each do |product_category| %>	
 	                  <li>
 	                    <a>
-	                      <i class="fa <%= CATEGORY_ICONS[category[0].underscore] %>" aria-hidden="true"></i>
-	                    	<%= category[0] %>
+	                    	<%= product_category.name %>
 	                    </a>
 	                  </li>
 	              <% end %>    
