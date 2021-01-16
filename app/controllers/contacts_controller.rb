@@ -8,6 +8,7 @@ class ContactsController < ApplicationController
 	end
 
 	def about
+		@product_sub_categories = ProductSubCategory.where(active: true).uniq
 	end
 
 end
