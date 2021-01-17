@@ -771,17 +771,18 @@ nav#menu span.fa.fa-bars:hover {
 }
 .section-intro .main-text .intro-title {
   font-size: 50px;
-  font-weight: 300;
+  font-weight: bold;
   color: #fff;
   white-space: nowrap;
   line-height: 58px;
 }
 .section-intro .main-text .sub-title {
-  font-size: 14px;
+  font-size: 16px;
   color: #fff;
   padding: 15px 0;
   line-height: 24px;
   margin-bottom: 15px;
+  font-weight: bold;
 }
 #search-row-wrapper {
   background: url("../assets/bg/counter-bg.jpg") center center no-repeat;
