@@ -35,9 +35,9 @@ class RetailerProductsController < ApplicationController
 		else
 			flash[:error] = 'Please choose a product to upload photos!'
 		end
-	rescue StandardError => ex
-		flash[:error] = ex.message
-		Rails.logger.info "****************** #{ex.backtrace} *******************"
+# 	rescue StandardError => ex
+# 		flash[:error] = ex.message
+# 		Rails.logger.info "****************** #{ex.backtrace} *******************"
 	end
 
 	def show
@@ -66,9 +66,9 @@ class RetailerProductsController < ApplicationController
 	    v_content_type = retailer_photo.content_type
 	    result = @retailer_product.photos.attach(io: File.open(resized_image.path), filename:  v_filename, content_type: v_content_type)
 	  	{url: url_for(result.first), attachment_id: result.first&.id}
-	  rescue StandardError => ex
-			flash[:error] = ex.message
-		        Rails.logger.info "****************** #{ex.backtrace} *******************"
+# 	  rescue StandardError => ex
+# 			flash[:error] = ex.message
+# 		        Rails.logger.info "****************** #{ex.backtrace} *******************"
 	  end
 
 	  def update_session_filter
