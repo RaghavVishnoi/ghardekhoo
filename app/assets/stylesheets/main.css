@@ -776,6 +776,10 @@ nav#menu span.fa.fa-bars:hover {
   white-space: nowrap;
   line-height: 58px;
 }
+.section-intro .main-text .intro-title span{
+  color: #ee8082;
+  font-family: 'Lobster';
+}
 .section-intro .main-text .sub-title {
   font-size: 16px;
   color: #fff;

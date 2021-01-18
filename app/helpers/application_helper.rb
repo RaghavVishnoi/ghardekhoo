@@ -96,4 +96,14 @@ module ApplicationHelper
 		filter.present? ? filter['city']&.split(',') || [] : []
 	end
 
+	def left_home_slider
+		ad_type = AdType.find_by(name: 'HomeLeftSlider')
+		ad_type.present? ? ad_type.advertisements.where(active: true).pluck(:photo_url) : []
+	end
+
+	def right_home_slider
+		ad_type = AdType.find_by(name: 'HomeRightSlider')
+		ad_type.present? ? ad_type.advertisements.where(active: true).pluck(:photo_url) : []
+	end
+
 end

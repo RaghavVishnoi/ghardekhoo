@@ -2,52 +2,64 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12"> 
-        <% if product_states.present?%>
-          <% product_states.each do |state, retailer_products|%>  
-            <div class="col-sm-4">       
-              <div class="panel panel-default custom-card">
-                <div class="panel-heading">
-                  <h3 class="panel-title"><b><%= state %></b><a href='/retailers/search?state=<%= state %>'><%= new_products[state]&.count || 0%> New projects</a></h3>
-                </div>
-                <% retailer_products.each do |retailer_product|%>
-                  <div class="panel-body">
-                    <a href='/retailer_product/<%= retailer_product.access_token %>'>
-                      <label class='title'><%= retailer_product.product_name %></label>
-                      <% if retailer_product.upload_date >= (Date.current - NEW_PRODUCT_DAYS.days) %>
-                        <span class="tag">New</span>
-                      <% end %>  
-                      <span class="price">
-                        <br />
-                        <%= number_to_currency(retailer_product.min_price, unit: '₹ ') %> <%= " - #{number_to_currency(retailer_product.max_price, unit: '₹ ' )}" if retailer_product.max_price.present? %>
-                      </span>  
-                      <p class="category">
-                        <span class="product-type btn btn-danger btn-sm">
-                          <%= retailer_product&.product_sub_category&.p_name  %>
-                        </span>
-                        <span class="btn btn-primary btn-sm">
-                          <%= retailer_product&.product_operation&.name  %>
-                        </span> 
-                      </p>
-                    </a>
+        <div class="col-sm-2">
+          <% left_home_slider.each do |url| %>
+            <div class="slide"><img src="<%= url %>" height="130"></div> 
+          <% end %>
+        </div>
+        <div class="col-sm-8">
+          <% if product_states.present?%>
+            <% product_states.each do |state, retailer_products|%>  
+              <div class="col-sm-4">       
+                <div class="panel panel-default custom-card">
+                  <div class="panel-heading">
+                    <h3 class="panel-title"><b><%= state %></b><a href='/retailers/search?state=<%= state %>'><%= new_products[state]&.count || 0%> New projects</a></h3>
                   </div>
-                  <hr />
-                <% end %> 
+                  <% retailer_products.each do |retailer_product|%>
+                    <div class="panel-body">
+                      <a href='/retailer_product/<%= retailer_product.access_token %>'>
+                        <label class='title'><%= retailer_product.product_name %></label>
+                        <% if retailer_product.upload_date >= (Date.current - NEW_PRODUCT_DAYS.days) %>
+                          <span class="tag">New</span>
+                        <% end %>  
+                        <span class="price">
+                          <br />
+                          <%= number_to_currency(retailer_product.min_price, unit: '₹ ') %> <%= " - #{number_to_currency(retailer_product.max_price, unit: '₹ ' )}" if retailer_product.max_price.present? %>
+                        </span>  
+                        <p class="category">
+                          <span class="product-type btn btn-danger btn-sm">
+                            <%= retailer_product&.product_sub_category&.p_name  %>
+                          </span>
+                          <span class="btn btn-primary btn-sm">
+                            <%= retailer_product&.product_operation&.name  %>
+                          </span> 
+                        </p>
+                      </a>
+                    </div>
+                    <hr />
+                  <% end %> 
+                </div>
+              </div>
+            <% end %> 
+          <% else %>  
+            <div class="card mx-auto my-5">
+              <div class="card-body">
+                <div class="avatar-placeholder placeholder rounded-circle"></div>
+                <p>No property found!</p>
+                <div class="text-placeholder placeholder w-75"></div>
+                <div class="text-placeholder placeholder w-50"></div>
+                <div class="text-placeholder placeholder w-75"></div>
+                <div class="text-placeholder placeholder w-100"></div>
+                <div class="text-placeholder placeholder w-100"></div>
               </div>
             </div>
-          <% end %> 
-        <% else %>  
-          <div class="card mx-auto my-5">
-            <div class="card-body">
-              <div class="avatar-placeholder placeholder rounded-circle"></div>
-              <p>No property found!</p>
-              <div class="text-placeholder placeholder w-75"></div>
-              <div class="text-placeholder placeholder w-50"></div>
-              <div class="text-placeholder placeholder w-75"></div>
-              <div class="text-placeholder placeholder w-100"></div>
-              <div class="text-placeholder placeholder w-100"></div>
-            </div>
-          </div>
-        <% end %>          
+          <% end %>  
+        </div>
+        <div class="col-sm-2">
+          <% right_home_slider.each do |url| %>
+            <div class="slide"><img src="<%= url %>" height="130"></div> 
+          <% end %>
+        </div>          
       </div>
     </div>
   </div>

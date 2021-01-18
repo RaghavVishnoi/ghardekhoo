@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
 
 	before_action :set_defaults, only: [:index]
-	before_action :reset_session_filter, only: [:index]
 
 	def index
 		ad_type = AdType.find_by(name: 'WebHomeListing')
@@ -29,11 +28,6 @@ class HomeController < ApplicationController
 		def set_defaults
 			@states = State.where(active: true).pluck(:name)
 			@cities = []
-		end
-
-		def reset_session_filter
-			session[:filter] = nil
-			session[:popup].blank? ? session[:popup] = true : session[:popup] = false
 		end
 
 end

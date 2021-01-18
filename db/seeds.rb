@@ -36,11 +36,12 @@ end
 
 ad_types = [
 	{name: 'WebHomeListing'}, 
-	{name: 'WebBanner'}, 
 	{name: 'HomeWebSlide'}, 
 	{name: 'ListWebSlide'}, 
 	{name: 'ProfilePage'},
-	{name: 'WebFooterAds'}
+	{name: 'WebFooterAds'},
+	{name: 'HomeLeftSlider'},
+	{name: 'HomeRightSlider'}
 ]
 
 ad_types.each do |ad_type|
