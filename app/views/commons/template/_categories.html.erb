@@ -10,7 +10,7 @@
         <div class="col-sm-8">
           <% if product_states.present?%>
             <% product_states.each do |state, retailer_products|%>  
-              <div class="col-sm-4">       
+              <div class="col-sm-6">       
                 <div class="panel panel-default custom-card">
                   <div class="panel-heading">
                     <h3 class="panel-title"><b><%= state %></b><a href='/retailers/search?state=<%= state %>'><%= new_products[state]&.count || 0%> New projects</a></h3>
