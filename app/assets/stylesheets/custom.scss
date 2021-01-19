@@ -442,7 +442,7 @@ footer{
 	padding: 0px !important;
 }
 
-#userDetailsModal{
+#userDetailsModal, #retailerDetailsModal{
 	height: 440px !important;
 	.modal-content{
 		height: 360px !important;
@@ -467,11 +467,28 @@ footer{
 	}
 }
 
+#retailerDetailsModal{
+	.modal-content{
+		height: 300px !important;
+	}
+}
+
 .pop_flash_container{
 	#content{
 		padding: 5px !important;
 		.container{
 			width: 100% !important;
 		}	
+	}
+}
+
+.localtion-list{
+	margin-bottom: 10px;
+	.subscribe-us{
+		border-right: 1px solid #ccc;
+	}
+	.our-services{
+		height: 190px;
+		overflow: auto
 	}
 }

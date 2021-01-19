@@ -236,3 +236,9 @@ function resetSearchFields(){
   $('#states').val('').change();
   $('#cities').val('').change();
 }
+
+function setRetailerId(retailer_id){
+  $('#retailerDetailsForm').text('')
+  $('#userDetailsForm').attr('style', 'display: block;')
+  $('#retailerDetailsModal #customer_retailer_id').val(retailer_id)
+}

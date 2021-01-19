@@ -16,7 +16,7 @@ class RetailersController < ApplicationController
 				@retailer = Retailer.new(retailer_params)
 				if @retailer.save
 					@retailer.retailer_product_categories.create(product_category_id: category_id)
-					flash[:success] = t('retailers.signup_success')
+					flash[:success] = t('retailers.account_type.free')
 				else
 					@show_errors = true
 					flash[:error] = @retailer.errors.full_messages.join('<br>')

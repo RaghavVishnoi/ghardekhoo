@@ -4,11 +4,11 @@
 			<div class="pop_flash_container">
 				<%= render 'layouts/popup_flash' %>
 			</div>
-			<div id="userDetailsForm" style="display: none;">
+			<div id="userDetailsForm">
 				<div class="modal-header row">
 					<div class="col-sm-12">
 						<div class="col-sm-11">
-							<h5 class="modal-title">Please write us for your query and our team will reach out to you!</h5>
+							<h5 class="modal-title">Please let us know your details to contact with this dealer</h5>
 						</div>	
 						<div class="col-sm-1">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -17,6 +17,7 @@
 				</div>
 				<div class="modal-body">
 					<%= form_for Customer.new, url: '/customers', remote: true do |f| %>
+						<%= hidden_field_tag :operation, "retailer_details" %>
 						<div class="form-group">
 							<div class="row">
 								<div class="col-sm-12">
@@ -35,7 +36,7 @@
 										<%= f.text_field :phone, class: 'form-control bfh-phone', placeholder: 'Phone', data: {format: ' (ddd) ddd-dddd'} %>
 									</div>
 									<div class="col-sm-6">
-										<%= f.select :product_sub_categories_id, options_for_select(filter_list.pluck(:p_name, :id)), {}, class: 'form-control', placeholder: ''  %>
+										<%= f.select :dealer, options_for_select(CUSTOMER_TYPE), {}, class: 'form-control', placeholder: ''  %>
 									</div>
 								</div>
 							</div>
@@ -48,7 +49,7 @@
 					<% end %>
 				</div>
 			</div>
-			<div id="retailerDetailsForm" style="display: none;">
+			<div id="retailerDetailsForm">
 				
 			</div>
 		</div>

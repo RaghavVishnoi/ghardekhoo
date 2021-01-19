@@ -1,43 +1,22 @@
 <section class="location">
   <div class="container">
     <div class="row localtion-list">
-      <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.5s">
-        <h3 class="title-2"><i class="fa fa-envelope"></i> Subscribe for services</h3>
-      <form id="subscribe" action="/">
+      <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft subscribe-us" data-wow-delay="0.5s">
+        <h3 class="title-2"><i class="fa fa-envelope"></i> Write us</h3>
         <p>Join our 10,000+ subscribers and get access to the latest updates, services, announcements and offers.</p>
         <div class="subscribe">
-          <input class="form-control" name="EMAIL" placeholder="Your email here" required="" type="email">
-          <button class="btn btn-common" type="submit">Subscribe</button>
+          <button class="btn btn-common" type="submit" data-toggle="modal" data-target="#userDetailsModal">Subscribe</button>
         </div>
-      </form>
       </div>
-      <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight" data-wow-delay="1s">
+      <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight our-services" data-wow-delay="1s">
         <h3 class="title-2"><i class="fa fa-search"></i> Popular Services</h3>
-        <ul class="cat-list col-sm-4">
-          <li> <a href="#">real estate</a></li>
-          <li> <a href="#">property dealers</a></li>
-          <li> <a href="#">electrician</a></li>
-          <li> <a href="#">electric</a></li>
-          <li> <a href="#">chair</a></li>
-          <li> <a href="#">carpenter</a></li>
-        </ul>
-        <ul class="cat-list col-sm-4">
-          <li> <a href="#">plumber</a></li>
-          <li> <a href="#">bodyguard</a></li>
-          <li> <a href="#">housekeeping</a></li>
-          <li> <a href="#">interior designer</a></li>
-          <li> <a href="#">wardrobe</a></li>
-          <li> <a href="#">paints</a></li>
-
-        </ul>
-        <ul class="cat-list col-sm-4">
-          <li> <a href="#">burger paints</a></li>
-          <li> <a href="#">bricks</a></li>
-          <li> <a href="#">construction</a></li>
-          <li> <a href="#">rent</a></li>
-          <li> <a href="#">house</a></li>
-          <li> <a href="#">cement</a></li>
-        </ul>
+        <% filter_list.each do |category| %>
+          <ul class="cat-list col-sm-4">
+            <%category.product_sub_categories.where(active: true).each do |sub_category|%>
+              <li> <a><%= sub_category.p_name %></a></li>
+            <% end %>  
+          </ul>
+        <% end %>
       </div>
     </div>
   </div>

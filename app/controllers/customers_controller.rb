@@ -4,7 +4,12 @@ class CustomersController < ApplicationController
 		customer = Customer.find_by(email: customer_params[:email])
 		customer = Customer.new(email: customer_params[:email]) if customer.blank?
 		if customer.update(customer_params)
-			flash[:success] = t('customers.query_submit')
+			if params[:operation] == 'retailer_details'
+				@operation = 'retailer_details'
+				@retailer = Retailer.find_by(id: customer_params[:retailer_id])
+			else
+				flash[:success] = t('customers.query_submit')
+			end
 		else
 			@show_errors = true
 			flash[:error] = customer.errors.full_messages.join('<br>')
@@ -16,7 +21,7 @@ class CustomersController < ApplicationController
 
 	private
 		def customer_params
-			params.require(:customer).permit(:name, :email, :phone, :product_sub_categories_id, :description)
+			params.require(:customer).permit(:name, :email, :phone, :product_sub_categories_id, :description, :dealer, :retailer_id)
 		end
 
 end

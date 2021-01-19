@@ -41,7 +41,7 @@
           <%= f.select :state , options_for_select(list_states), {}, class: 'form-control', placeholder: 'State', onchange: 'populateCity(this)'%>
           <%= f.hidden_field :country,value: "India", class: 'form-control'%>
           <%= f.hidden_field :account_type,value: "#{account_type}", class: 'form-control'%>
-          <%= f.hidden_field :employee_id, class: 'form-control', value: "#{current_employee.id}" %>
+          <%= f.hidden_field :employee_id, class: 'form-control', value: "#{current_employee&.id}" %>
         </div>
       </div> 
     </div>

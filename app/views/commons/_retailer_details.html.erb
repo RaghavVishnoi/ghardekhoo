@@ -10,15 +10,19 @@
 </div>
 <div class="modal-body">
 	<div class="ads-action" style="text-align: center;">
-	  <ul class="list-border">
-	  	<li>Retailer Name</li>
-	    <li>
-	      <i class=" fa fa-phone"></i> 9999999</li>
-	    <li>
-	      <i class=" fa fa-envelope-o"></i>
-	      gmail.com
-	    </li>
-	    <li>address, city, state, country</li>
-	  </ul>
+	  <% if retailer.present? %>	
+		  <ul class="list-border">
+		  	<li><%= retailer.name %></li>
+		    <li>
+		      <i class=" fa fa-phone"></i> <%= retailer.phone %></li>
+		    <li>
+		      <i class=" fa fa-envelope-o"></i>
+		      <%= retailer.email %>
+		    </li>
+		    <li><%= retailer.address %>, <%= retailer.city %>, <%= retailer.state %>, India</li>
+		  </ul>
+		<% else %>  
+			<p> Retailer details not found in our system, our team will connect with you shortly.</p>
+		<% end %>
 	</div>
 </div>	

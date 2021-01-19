@@ -40,7 +40,7 @@ module ApplicationHelper
 		when 'list'
 			ad_type = AdType.find_by(name: 'ListWebSlide')
 		end
-		ad_type.present? ? ad_type.advertisements.where(active: true).pluck(:photo_url) : []
+		ad_type.present? ? ad_type.advertisements.where(active: true).pluck(:photo_url, :retailer_id) : []
 	end
 
 	def retailer_address(retailer)
@@ -98,12 +98,12 @@ module ApplicationHelper
 
 	def left_home_slider
 		ad_type = AdType.find_by(name: 'HomeLeftSlider')
-		ad_type.present? ? ad_type.advertisements.where(active: true).pluck(:photo_url) : []
+		ad_type.present? ? ad_type.advertisements.where(active: true).pluck(:photo_url, :retailer_id) : []
 	end
 
 	def right_home_slider
 		ad_type = AdType.find_by(name: 'HomeRightSlider')
-		ad_type.present? ? ad_type.advertisements.where(active: true).pluck(:photo_url) : []
+		ad_type.present? ? ad_type.advertisements.where(active: true).pluck(:photo_url, :retailer_id) : []
 	end
 
 end

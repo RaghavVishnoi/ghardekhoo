@@ -266,7 +266,7 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Advertisement' do
-    exclude_fields :photo_url, :retailer, :attachment, :attachment_id
+    exclude_fields :photo_url, :attachment, :attachment_id
     fields :ad_type_id, :photos, :active
 
     create do
