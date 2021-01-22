@@ -1,4 +1,6 @@
 class RetailerProduct < ApplicationRecord
+
+	attr_accessor :product_photos
 	
 	belongs_to :retailer
 	belongs_to :product_sub_category, -> { where(active: true) }

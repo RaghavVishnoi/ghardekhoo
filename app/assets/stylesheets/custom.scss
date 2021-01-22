@@ -492,3 +492,30 @@ footer{
 		overflow: auto
 	}
 }
+
+.retailer-action{
+	font-size: 20px;
+	color: #ee8022 !important;
+}
+
+.new-retailer-product{
+	input{
+		padding-left: 10px;
+	}
+	.product-files{
+		height: 30px;
+		padding-top: 5px;
+		margin-top: 5px;
+	}	
+	#frames{
+		margin-top: 10px;
+		width: max-content;
+		img{
+			margin-right: 5px;
+			margin-bottom: 5px;
+		}
+	}
+	button{
+		width: 200px;
+	}
+}

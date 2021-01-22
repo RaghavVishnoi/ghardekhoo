@@ -49,7 +49,7 @@
       <div class="form-group">
         <div class="input-icon">
           <label class="control-label form-label">City</label><span class="mandatory">*</span>
-          <%= f.select :city , options_for_select([]), {}, class: 'form-control', placeholder: 'Cities', id: 'retailer_cities', onchange: 'setLocation(this)'%>
+          <%= f.select :city , options_for_select([]), {}, class: 'form-control', placeholder: 'Cities', id: 'retailer_cities'%>
         </div>
       </div> 
     </div> 
@@ -63,7 +63,7 @@
         </div>
       </div> 
     </div>
-  </div>   
+  </div>  
   <div class="col-sm-12">
   	<div class="col-sm-4">
   		<%= f.submit :register, class: 'btn btn-common log-btn retailer-form-button', onclick: 'start_spin("retailer_form")'%>

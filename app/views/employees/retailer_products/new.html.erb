@@ -1,0 +1,122 @@
+ 
+ <section id="content" class="new-retailer-product">
+	<div class="container">
+	    <div class="row">
+	    	<div class="col-sm-10 col-sm-offset-1">
+	    		<div class="page-login-form">
+	    			<div class="col-sm-12">
+		          		<label class="retailer-form-header">
+		          			Please fill the property details for <b><%= @retailer.name %></b>
+		          		</label>
+		          	</div>	<!-- Product Details -->
+					 <%= form_for @retailer_product, url: '/employees/retailer_products',remote: true, id: "retailer_product_form" do |product_form| %>
+					  <div class="col-sm-12">
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Name</label><span class="mandatory">*</span>
+					          <%= product_form.text_field :product_name , class: 'form-control', placeholder: 'Property name'%>
+					        </div>
+					      </div> 
+					    </div>
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Property Type</label><span class="mandatory">*</span>
+					          <%= product_form.select :product_sub_category_id , options_for_select(category_types) , { include_blank: 'Select property type'}, class: 'form-control'%>
+					        </div>
+					      </div> 
+					    </div>
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Property Size</label>
+					          <%=  product_form.select :product_type_id , options_for_select(list_product_type.pluck(:name, :id)) , { include_blank: 'Select property size'}, class: 'form-control' %>
+					        </div>
+					      </div> 
+					    </div>
+					  </div>
+
+					  <div class="col-sm-12">
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Total area (sq ft.)</label>
+					          <%= product_form.text_field :unit , class: 'form-control', placeholder: 'Total size'%>
+					        </div>
+					      </div> 
+					    </div>
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Property For</label><span class="mandatory">*</span>
+					           <%= product_form.select :product_sub_category_id , options_for_select(list_product_operations.pluck(:name, :id)) , { include_blank: 'Select property for'}, class: 'form-control' %>
+					        </div>
+					      </div> 
+					    </div>
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Description</label>
+					          <%= product_form.text_field :description , class: 'form-control', placeholder: 'Description'%>
+					        </div>
+					      </div> 
+					    </div>
+					  </div>
+
+					  <div class="col-sm-12">
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Address</label><span class="mandatory">*</span>
+					          <%= product_form.text_field :address , class: 'form-control', placeholder: 'Address'%>
+					        </div>
+					      </div> 
+					    </div>
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">State</label><span class="mandatory">*</span>
+					          <%= product_form.select :state , options_for_select(list_states), {}, class: 'form-control', placeholder: 'State', onchange: 'populateCity(this)' %>
+					        </div>
+					      </div> 
+					    </div>
+					    <div class="col-sm-4">
+					        <div class="form-group">
+					          <div class="input-icon">
+					            <label class="control-label form-label">City</label>
+					            <%= product_form.select :city , options_for_select([]), {}, class: 'form-control', placeholder: 'Cities', id: 'retailer_cities'%>
+					          </div>
+					        </div> 
+					    </div>
+					  </div>
+
+					  <div class="col-sm-12">
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Upload photos</label><span class="mandatory">*</span>
+					          <br />
+					          <div class="btn btn-primary btn-file product-files">
+					          	<span class="hidden-xs">Browse</span>
+					          	<%= product_form.file_field :product_photos , multiple: true, id: 'featured-img' %>
+					          </div>
+					          <div id="frames"></div>
+					        </div>
+					      </div> 
+					    </div>
+					  </div>
+					  <div class="col-sm-12">
+					  	<div class="col-sm-4">
+					  		<%= product_form.submit 'Add Property', class: 'btn btn-common log-btn retailer-form-button', onclick: 'start_spin("retailer_product_form")'%>
+					  	</div>
+					  </div>
+					<% end %>
+					<!-- End -->
+				</div>
+	    	</div>
+	    </div>
+	</div>
+</section>
+
+<%= render '/employees/retailers/hidden_form' %> 
