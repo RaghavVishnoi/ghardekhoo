@@ -36,36 +36,46 @@
               <div class="ads-details-info col-md-7">
                 <p class="mb15"> <%= retailer_product.description %></p>
                 <ul class="list-circle">
-                  <li><i class="fa fa-check-circle"></i> <%= retailer_product.product_operation&.name %></li>
+                  <li><i class="fa fa-check-circle"></i> Available for <%= retailer_product.product_operation&.name %></li>
                   <li><i class="fa fa-check-circle"></i> <%= retailer_product.product_type.name %></li>
                   <li><i class="fa fa-check-circle"></i> <%= number_to_currency(retailer_product.min_price, unit: '₹ ') %> <%= " - #{number_to_currency(retailer_product.max_price, unit: '₹ ' )}" if retailer_product.max_price.present? %></li>
+                  <% product_specification = retailer_product.property_specification %>
+                  <% if product_specification.present? %>
+                    <li><i class="fa fa-check-circle"></i> <%= product_specification.bedrooms %> Bedrooms</li>
+                    <li><i class="fa fa-check-circle"></i> <%= product_specification.bathrooms %> Bathrooms</li>
+                    <li><i class="fa fa-check-circle"></i> <%= product_specification.balconies %> Balconies</li>
+                    <% if product_specification.other_rooms.present? %>
+                      <li><i class="fa fa-check-circle"></i> <%= product_specification.other_rooms.join(', ') %></li>
+                    <% end %>
+                    <li><i class="fa fa-check-circle"></i> <%= product_specification.furnishing %> </li>
+                    <li><i class="fa fa-check-circle"></i> <%= product_specification.covered_parking %> Covered Parking</li>
+                    <li><i class="fa fa-check-circle"></i> <%= product_specification.open_parking %> Open Parking</li>
+                    <li><i class="fa fa-check-circle"></i> <%= product_specification.availability_status %> Status</li>
+                    <li><i class="fa fa-check-circle"></i> Possession by <%= product_specification.possession_by_month %>, <%= product_specification.possession_by_year %></li>
+                    <li><i class="fa fa-check-circle"></i> <%= product_specification.ownership %> </li>
+                  <% end %>  
                 </ul>
                 <hr />
-                <div class="ads-action">
-                  <ul class="list-border">
-                    <li>
-                      <i class=" fa fa-phone"></i> <%= retailer_product.retailer&.phone %></li>
-                    <li>
-                      <i class=" fa fa-envelope-o"></i>
-                      <%= retailer_product.retailer&.email %>
-                    </li>
-                  </ul>
-                </div>
               </div>
+              <br />
               <div class="col-md-5">
                 <aside class="panel panel-body panel-details">
                   <ul>
                     <li>
-                    <p class="no-margin"><strong>Category:</strong> <%= retailer_product.product_sub_category.p_name %></p>
+                      <p class="no-margin"> <i class=" fa fa-phone"></i> <%= retailer_product.retailer&.phone %></li></p>
                     </li>
                     <li>
-                    <p class="no-margin"><strong>Address:</strong> <%= retailer_product.address %> <!-- <a href="/retailer_location?lat=1212&lng=1212" target="_blank"> <i class="fa fa-street-view" aria-hidden="true"></i></a> --></p>
+                      <p class="no-margin"> <i class=" fa fa-envelope-o"></i>
+                        <%= retailer_product.retailer&.email %></p>
+                    </li>
+                   <!--  <li>
+                      <p class="no-margin"><strong>Category:</strong> <%= retailer_product.product_sub_category.p_name %></p>
+                    </li> -->
+                    <li>
+                      <p class="no-margin"><%= retailer_product.address %> <!-- <a href="/retailer_location?lat=1212&lng=1212" target="_blank"> <i class="fa fa-street-view" aria-hidden="true"></i></a> --></p>
                     </li>
                     <li>
-                    <p class=" no-margin "><strong>City:</strong> <%= retailer_product.city %></p>
-                    </li>
-                    <li>
-                    <p class="no-margin"><strong>State:</strong> <%= retailer_product.state %> </p>
+                    <p class=" no-margin "><%= retailer_product.city %>, <%= retailer_product.state %></p>
                     </li>
                   </ul>
                 </aside>

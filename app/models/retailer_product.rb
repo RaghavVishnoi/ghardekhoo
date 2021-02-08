@@ -1,4 +1,6 @@
 class RetailerProduct < ApplicationRecord
+
+	attr_accessor :product_photos
 	
 	belongs_to :retailer
 	belongs_to :product_sub_category, -> { where(active: true) }
@@ -6,6 +8,7 @@ class RetailerProduct < ApplicationRecord
 	belongs_to :product_operation, -> { where(active: true) }
 	has_many :retailer_product_photos
 	has_many :retailer_product_reviews
+	has_one :property_specification
 
 	before_create :default_value
 
@@ -58,6 +61,28 @@ class RetailerProduct < ApplicationRecord
 
 	def nearby_locations
 		RetailerProduct.where('active = ? AND (city = ? OR state = ?) AND id != ?', true, city, state, id).order('priority asc, upload_date desc')
+	end
+
+	def upload_to_aws(retailer_photo, index)
+		file_path = "retailers_products/#{self.id}/product_photo_#{index+1}"
+		result = FileUpload.new.upload(file_path, retailer_photo)
+		if result[:status] == 200
+			{url: result[:file_url]}
+		else
+			flash[:error] = result[:message]
+		end
+	end
+
+	def upload_to_active_storage(retailer_photo)
+		resized_image = MiniMagick::Image.read(retailer_photo)
+		resized_image = resized_image.resize "500x500"
+		v_filename = retailer_photo.original_filename
+		v_content_type = retailer_photo.content_type
+		result = self.photos.attach(io: File.open(resized_image.path), filename:  v_filename, content_type: v_content_type)
+		{url: url_for(result.first), attachment_id: result.first&.id}
+	rescue StandardError => ex
+		flash[:error] = ex.message
+		Rails.logger.info "****************** #{ex.backtrace} *******************"
 	end
 	
 end

@@ -19,6 +19,8 @@ class Retailer < ApplicationRecord
   has_many_attached :photos
   has_many :retailer_reviews
 
+  accepts_nested_attributes_for :retailer_products
+
   before_create :create_auth_token
   before_save :unformat_phone
   after_save :update_retailer_product
@@ -101,6 +103,10 @@ class Retailer < ApplicationRecord
 
   def sub_categories
     retailer_products.includes(:product_sub_category).map{|c| c.product_sub_category.p_name}.uniq
+  end
+
+  def active_products
+    retailer_products.where(status: 1, active: true)
   end
 
 private

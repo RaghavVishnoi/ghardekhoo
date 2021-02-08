@@ -3,7 +3,7 @@ class Employees::RetailersController < Employees::ApplicationController
 	layout 'employee'
 
 	def index
-		@retailers = current_employee.retailers.page(params[:page]).per(RETAILERS_PER_PAGE)
+		@retailers = current_employee.retailers.includes(:retailer_products).page(params[:page]).per(RETAILERS_PER_PAGE)
 	end
 
 	def new

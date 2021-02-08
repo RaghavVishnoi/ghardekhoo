@@ -27,6 +27,13 @@ $(document).ready(function(){
     start_spinner('new_user')
   })
 
+  $('.new-retailer-product #featured-img').change(function(){
+      $(".new-retailer-product #frames").html('');
+      for (var i = 0; i < $(this)[0].files.length; i++) {
+          $(".new-retailer-product #frames").append('<img src="'+window.URL.createObjectURL(this.files[i])+'" width="100px" height="100px"/>');
+      }
+  });
+
 });
 
 function get_subcategories(element){

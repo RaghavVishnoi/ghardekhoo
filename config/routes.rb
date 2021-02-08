@@ -66,6 +66,8 @@ Rails.application.routes.draw do
     get '/retailers/advertise' => 'retailers#new'
 
     resources :retailers, only: [:index, :create]
+    resources :retailer_products, only: [:create]
+    get '/:access_token/retailer_products/new' => 'retailer_products#new'
   end
 
   resources :retailer_reviews, only: [:create, :edit, :update]

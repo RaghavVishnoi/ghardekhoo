@@ -7,6 +7,7 @@ class RetailersController < ApplicationController
 		@action = request.url.split('/').last
 		@account_type = @action == 'advertise' ? 'premium' : 'free'
 		@retailer = Retailer.new
+		@retailer.retailer_products.build
 	end
 
 	def create
