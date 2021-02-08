@@ -361,6 +361,14 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'PropertySpecification' do
+    include_fields :bedrooms, :bathrooms, :balconies
+    field :other_rooms do
+      partial "property_specification/other_rooms"
+    end
+    include_fields :furnishing, :covered_parking, :open_parking, :availability_status, :possession_by_year, :possession_by_month, :ownership, :retailer_product
+  end
+
 
 
 end

@@ -19,9 +19,9 @@ class RetailerProductsController < ApplicationController
 			if retailer_photos.present?
 				retailer_photos.each_with_index do |retailer_photo, index|
 					if UPLOAD_FILE_LIB == 'active_storage'
-						upload_photo_result = upload_to_active_storage(retailer_photo)
+						upload_photo_result = @retailer_product.upload_to_active_storage(retailer_photo)
 					elsif UPLOAD_FILE_LIB == 'aws'						
-						upload_photo_result = upload_to_aws(retailer_photo, index)
+						upload_photo_result = @retailer_product.upload_to_aws(retailer_photo, index)
 					end
 					@retailer_product.retailer_product_photos.find_or_create_by(
 						retailer_product_id: @retailer_product.id, 
@@ -48,28 +48,6 @@ class RetailerProductsController < ApplicationController
 		def find_retailer_product
 			@retailer_product = RetailerProduct.find_by(id: params[:id])
 		end
-
-		def upload_to_aws(retailer_photo, index)
-	  	file_path = "retailers_products/#{@retailer.id}/product_photo_#{index+1}"
-      result = FileUpload.new.upload(file_path, retailer_photo)
-      if result[:status] == 200
-      	{url: result[:file_url]}
-      else
-      	flash[:error] = result[:message]
-      end
-	  end
-
-	  def upload_to_active_storage(retailer_photo)
-	  	resized_image = MiniMagick::Image.read(retailer_photo)
-	    resized_image = resized_image.resize "500x500"
-	    v_filename = retailer_photo.original_filename
-	    v_content_type = retailer_photo.content_type
-	    result = @retailer_product.photos.attach(io: File.open(resized_image.path), filename:  v_filename, content_type: v_content_type)
-	  	{url: url_for(result.first), attachment_id: result.first&.id}
-	  rescue StandardError => ex
-			flash[:error] = ex.message
-		        Rails.logger.info "****************** #{ex.backtrace} *******************"
-	  end
 
 	  def update_session_filter
 	  	session[:filter] = params

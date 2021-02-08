@@ -105,6 +105,10 @@ class Retailer < ApplicationRecord
     retailer_products.includes(:product_sub_category).map{|c| c.product_sub_category.p_name}.uniq
   end
 
+  def active_products
+    retailer_products.where(status: 1, active: true)
+  end
+
 private
   def create_auth_token
     self.token ||= Token.new.generate

@@ -9,7 +9,8 @@
 		          			Please fill the property details for <b><%= @retailer.name %></b>
 		          		</label>
 		          	</div>	<!-- Product Details -->
-					 <%= form_for @retailer_product, url: '/employees/retailer_products',remote: true, id: "retailer_product_form" do |product_form| %>
+					 <%= form_for @retailer_product, url: '/employees/retailer_products',remote: true, id: "retailer_product_form", authenticity_token: true do |product_form| %>
+					  <%= product_form.hidden_field :retailer_id, value: "#{@retailer.id}" %>
 					  <div class="col-sm-12">
 					    <div class="col-sm-4">
 					      <div class="form-group">
@@ -68,6 +69,34 @@
 					    <div class="col-sm-4">
 					      <div class="form-group">
 					        <div class="input-icon">
+					          <label class="control-label form-label">Min price</label>
+					          <span class="mandatory">*</span>
+					          <%= product_form.number_field :min_price , class: 'form-control', placeholder: 'Min price'%>
+					        </div>
+					      </div> 
+					    </div>
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Max price</label><span class="mandatory">*</span>
+					          <%= product_form.number_field :max_price , class: 'form-control', placeholder: 'Max price'%>
+					        </div>
+					      </div> 
+					    </div>
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
+					          <label class="control-label form-label">Upload date</label>
+					          <%= product_form.date_field :upload_date , class: 'form-control'%>
+					        </div>
+					      </div> 
+					    </div>
+					  </div>
+
+					  <div class="col-sm-12">
+					    <div class="col-sm-4">
+					      <div class="form-group">
+					        <div class="input-icon">
 					          <label class="control-label form-label">Address</label><span class="mandatory">*</span>
 					          <%= product_form.text_field :address , class: 'form-control', placeholder: 'Address'%>
 					        </div>
@@ -108,7 +137,7 @@
 					  </div>
 					  <div class="col-sm-12">
 					  	<div class="col-sm-4">
-					  		<%= product_form.submit 'Add Property', class: 'btn btn-common log-btn retailer-form-button', onclick: 'start_spin("retailer_product_form")'%>
+					  		<%= product_form.submit 'Add Property', class: 'btn btn-common log-btn retailer-product-form-button', onclick: 'start_spin("retailer_product_form")'%>
 					  	</div>
 					  </div>
 					<% end %>

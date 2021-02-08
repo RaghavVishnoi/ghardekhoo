@@ -30,6 +30,7 @@
 		                  <th>Status</th>
 		                  <th>Account Type</th>
 		                  <th>Added On</th>
+		                  <th>Active Properties</th>
 		                  <th>Action</th>
 		                </tr>
 		              </thead>
@@ -42,6 +43,7 @@
 			                  <td align="center"><%= retailer.account_status_enum[retailer.account_status.to_i].first %></td>
 			                  <td><%= retailer.account_type.upcase %></td>
 			                  <td><%= retailer.created_at.strftime('%b, %d %Y') %></td>
+			                  <td><%= retailer.active_products.count %></td>
 			                  <td align="center">
 			                  	<a href="/employees/<%= retailer.access_token %>/retailer_products/new" class="retailer-action">
 				            		<span class="fa fa-plus-circle"></span>
