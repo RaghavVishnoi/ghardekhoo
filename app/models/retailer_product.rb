@@ -10,17 +10,22 @@ class RetailerProduct < ApplicationRecord
 	has_many :retailer_product_reviews
 	has_one :property_specification
 
+	accepts_nested_attributes_for :property_specification
+
 	before_create :default_value
 
 	has_many_attached :photos
 
-	validates :city, presence: true
-	validates :state, presence: true
-	validates :min_price, presence: true
-	validates :product_type_id, presence: true
+	validates :product_name, presence: { message: '^ Please select property name.' }
+	validates :city, presence: { message: '^ Please select property city.' }
+	validates :state, presence: { message: '^ Please select property state.' }
+	validates :min_price, presence: { message: '^ Please select property min price.' }
+	validates :max_price, presence: { message: '^ Please select property max price.' }
+	validates :product_type_id, presence: { message: '^ Please select property size.' }
+	validates :product_sub_category_id, presence: { message: '^ Please select property type.' }
 	validates :retailer_id, presence: true
-	validates :product_operation_id, presence: true
-	validates :upload_date, presence: true
+	validates :product_operation_id, presence: { message: '^ Please select property for.' }
+	validates :upload_date, presence: { message: '^ Please select upload date.' }
 
 	def status_enum
 	  [['Pending', 0],['Approved',1],['Declined',2]]
@@ -41,6 +46,7 @@ class RetailerProduct < ApplicationRecord
 	def default_value
 		self.status = 0
 		self.access_token = Token.new.generate
+		self.active = true
 	end
 
 	def retailer_state
@@ -73,16 +79,5 @@ class RetailerProduct < ApplicationRecord
 		end
 	end
 
-	def upload_to_active_storage(retailer_photo)
-		resized_image = MiniMagick::Image.read(retailer_photo)
-		resized_image = resized_image.resize "500x500"
-		v_filename = retailer_photo.original_filename
-		v_content_type = retailer_photo.content_type
-		result = self.photos.attach(io: File.open(resized_image.path), filename:  v_filename, content_type: v_content_type)
-		{url: url_for(result.first), attachment_id: result.first&.id}
-	rescue StandardError => ex
-		flash[:error] = ex.message
-		Rails.logger.info "****************** #{ex.backtrace} *******************"
-	end
 	
 end
