@@ -16,7 +16,7 @@ class Employees::RetailersController < Employees::ApplicationController
 		ActiveRecord::Base.transaction do
 			@retailer = Retailer.new(retailer_params)
 			if @retailer.save
-				flash[:success] = t('retailers.signup_success')
+				@redirect_url = '/employees/'+@retailer.access_token+'/retailer_products/new'
 			else
 				@show_errors = true
 				flash[:error] = @retailer.errors.full_messages.join('<br>')
