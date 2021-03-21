@@ -24,16 +24,14 @@ class Employees::RetailerProductsController < Employees::ApplicationController
 							photo_url: upload_photo_result[:url], 
 							attachment_id: upload_photo_result[:attachment_id])
 					end
-					@redirect_url = current_employee ? '/employees/retailers' : '/'
-					flash[:success] = 'Property added successfully.'
-					respond_to do |format|
-						format.html { redirect_to @redirect_url }
-						format.js
-					end
-				else
-					@show_errors = true
-					flash[:error] = 'Please choose photos to upload!'
 				end
+				@redirect_url = current_employee ? '/employees/retailers' : '/'
+				flash[:success] = 'Property added successfully.'
+				respond_to do |format|
+					format.html { redirect_to @redirect_url }
+					format.js
+				end
+				
 			else
 				@show_errors = true
 				flash[:error] = Errors.customize(@retailer_product.errors.full_messages).reverse.join('<br>')
