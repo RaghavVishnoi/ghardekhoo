@@ -6,17 +6,6 @@ class PropertySpecification < ApplicationRecord
 	  model.other_rooms.reject!(&:blank?)
 	end
 
-	validates :bedrooms, presence: { message: '^ Please select no of bedrooms.' }
-	validates :bathrooms, presence: { message: '^ Please select no of bathrooms.' }
-	validates :balconies, presence: { message: '^ Please select no of balconies.' }
-	validates :furnishing, presence: { message: '^ Please select furnishing.' }
-	validates :covered_parking, presence: { message: '^ Please select no of covered parkings.' }
-	validates :open_parking, presence: { message: '^ Please select no of open parkings.' }
-	validates :availability_status, presence: { message: '^ Please select availability.' }
-	validates :possession_by_year, presence: { message: '^ Please select possession year.' }
-	validates :possession_by_month, presence: { message: '^ Please select possession month' }
-	validates :ownership, presence: { message: '^ Please select ownership.' }
-
 	def bedrooms_enum
 		ROOM_COUNTS
 	end
