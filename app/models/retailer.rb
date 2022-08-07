@@ -30,7 +30,6 @@ class Retailer < ApplicationRecord
   validates :last_name, presence: true
   validates :city, presence: true
   validates :state, presence: true
-  validates_uniqueness_of :phone
 
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
