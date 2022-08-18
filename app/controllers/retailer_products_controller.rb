@@ -19,7 +19,7 @@ class RetailerProductsController < ApplicationController
 			if retailer_photos.present?
 				retailer_photos.each_with_index do |retailer_photo, index|
 					if UPLOAD_FILE_LIB == 'active_storage'
-						upload_photo_result = @retailer_product.upload_to_active_storage(retailer_photo)
+						upload_photo_result = upload_to_active_storage(retailer_photo)
 					elsif UPLOAD_FILE_LIB == 'aws'						
 						upload_photo_result = @retailer_product.upload_to_aws(retailer_photo, index)
 					end
@@ -62,6 +62,13 @@ class RetailerProductsController < ApplicationController
 
 	  def set_retailer_product
 	  	@retailer_product = RetailerProduct.find_by(access_token: params[:access_token])
+	  end
+
+	  def upload_to_active_storage(retailer_photo)
+	  	result = @retailer_product.photos.attach(retailer_photo)
+	  	{url: url_for(result.first), attachment_id: result.first&.id}
+	  rescue StandardError => ex
+			flash[:error] = ex.message
 	  end
 
 end
